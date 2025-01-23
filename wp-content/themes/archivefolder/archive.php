@@ -2,7 +2,7 @@
 
 get_header();
 
-echo "This is archive page ";
+echo "This is home page ";
 
 
 get_footer();

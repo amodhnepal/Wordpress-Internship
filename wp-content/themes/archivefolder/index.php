@@ -1,7 +1,7 @@
 <?php
 
 get_header();
- echo " This is index.php  ";
+ echo " This is index.php archive ";
 while(have_posts()){
     the_post();
     the_title();
