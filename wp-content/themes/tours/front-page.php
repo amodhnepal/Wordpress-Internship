@@ -54,6 +54,11 @@ if ( $the_query->have_posts() ) {
 wp_reset_postdata();
 ?>
 
+
+
+
+
+
     <!-- banner section -->
     <!-- <div class="slideshow">
         <div class="holder">
@@ -160,6 +165,13 @@ wp_reset_postdata();
     <!-- //booking form section -->
 
     
+
+
+
+
+
+
+
     <!-- about section -->
     <?php
 $args = array(
@@ -188,8 +200,11 @@ if ( $the_query->have_posts() ) {
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
+                <div class="title-main">
+                        <p><?php echo get_the_title() ?></p>
+                    </div>
                     <?php echo get_the_content()  ?>
-                </div>
+                <!-- </div>
                 <div class="col-lg-6 ps-xl-5 ps-lg-4 mt-lg-0 mt-5">
                     <div class="title-main">
                         <p><?php echo get_the_title() ?></p>
@@ -199,16 +214,17 @@ if ( $the_query->have_posts() ) {
                     <p class="mt-3">Lorem ipsum viverra feugiat. Pellen tesque libero ut justo,
                         ultrices in ligula. Semper at tempufddfel. Lorem ipsum dolor sit amet consectetur adipisicing
                         elit.</p>
-                    <ul class="mt-4 list-style-lis">
-                        <li><i class="fas fa-check-circle"></i>2000+ Our Worldwide Guide</li>
-                        <li class="mt-2"><i class="fas fa-check-circle"></i>100% Trusted Tour Agency</li>
-                        <li class="mt-2"><i class="fas fa-check-circle"></i>24+ Years of Experience</li>
-                        <li class="mt-2"><i class="fas fa-check-circle"></i>100% Travelers are Happy</li>
-                    </ul>
-                    <a href="contact.html" class="btn btn-style mt-5">Booking Now</a>
+                        
+                        <ul class="mt-4 list-style-lis">
+                            <li><i class="fas fa-check-circle"></i>2000+ Our Worldwide Guide</li>
+                            <li class="mt-2"><i class="fas fa-check-circle"></i>100% Trusted Tour Agency</li>
+                            <li class="mt-2"><i class="fas fa-check-circle"></i>24+ Years of Experience</li>
+                            <li class="mt-2"><i class="fas fa-check-circle"></i>100% Travelers are Happy</li>
+                        </ul> 
+                         <a href="contact.html" class="btn btn-style mt-5">Booking Now</a>
+                    </div> -->
                 </div>
             </div>
-        </div>
     </section>
     <?php
 		// echo '<li>' . esc_html( get_the_title() ) . '</li>';
@@ -223,6 +239,11 @@ if ( $the_query->have_posts() ) {
 // Restore original Post Data.
 wp_reset_postdata();
 ?>
+
+
+
+
+
 
 
 
@@ -273,15 +294,17 @@ $the_query = new WP_Query( $args );
 
 // The Loop.
 if ( $the_query->have_posts() ) {
-	// echo '<ul>';
-     echo '<section class="w3l-index5 pb-5 pt-4">
+	// echo '<ul>';?>
+     <section class="w3l-index5 pb-5 pt-4">
     <div class="container-fluid py-lg-5 py-md-4 py-2">
         <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:600px;">
             <p>Featured tours</p>
-            <h3 class="title-style"><?php echo get_the_title()  ?></h3>
+            <h3 class="title-style">Most Popular tours</h3>
         </div>
         <div class="inner-sec-w3layouts pb-4">
             <div class="owl-three owl-carousel owl-theme">';
+
+            <?php
 	while ( $the_query->have_posts() ) {
 		$the_query->the_post();
         ?>
@@ -297,8 +320,8 @@ if ( $the_query->have_posts() ) {
                                     <li><i class="fas fa-star-half-alt"></i></li>
                                     <li class="ms-1">4.07</li>
                                 </ul>
-                                <a href="tours.html" class="to-title">Discovery Best Tours</a>
-                                <p class="mt-1"><i class="fas fa-map-marker-alt me-1"></i>Central Park West NY, USA</p>
+                                <a href="tours.html" class="to-title"><?php echo get_the_excerpt()  ?></a>
+                                <p class="mt-1"><i class="fas fa-map-marker-alt me-1"></i><?php echo get_the_tag_list()  ?></p>
                                 <div class="to-price mt-2">
                                     <label>From</label> <span>$39.00</span>
                                 </div>
@@ -326,6 +349,12 @@ echo '   </div>
 // Restore original Post Data.
 wp_reset_postdata();
 ?>
+
+
+
+
+
+
 
 
 
@@ -502,8 +531,59 @@ wp_reset_postdata();
     </section>
     <!-- //tours slider section -->
 
+
+
+
+
+
+
+
+
+
     <!-- stats section -->
-    <section class="w3_stats py-5" id="stats">
+     
+
+    <?php
+        $args = array(
+            'post_type' => 'post',
+            'post_status' => 'publish',
+            'posts_per_page' => '1',
+        // 'catagory_name' => 'slider',
+        'tax_query' => array(
+                array(
+                    'taxonomy' => 'category',
+                    'field'    => 'slug',
+                    'terms'    => 'stat',
+                ),
+            ),
+        );
+        // The Query.
+        $the_query = new WP_Query( $args );
+        echo'<section class="w3_stats py-5" id="stats">';
+            echo'<div class="container py-lg-5 py-md-4 py-2">';
+             echo'    <div class="title-main text-center mx-auto mb-5" style="max-width:600px;">';
+                echo"<p>". get_the_title()."</p>";
+                echo '<h3 class="title-style text-white">'. get_the_excerpt().'</h3>
+            </div>';
+                        // The Loop.
+        if ( $the_query->have_posts() ) {
+        ?> <?php echo get_the_content()?>
+        <?php
+        echo ' </div>
+        </div>
+    </section> ';
+        } else {
+            esc_html_e( 'Sorry, no posts matched your criteria.' );
+        }
+        // Restore original Post Data.
+        wp_reset_postdata();
+    ?>
+
+
+
+
+
+    <!-- <section class="w3_stats py-5" id="stats">
         <div class="container py-lg-5 py-md-4 py-2">
             <div class="title-main text-center mx-auto mb-5" style="max-width:600px;">
                 <p>Statistics</p>
@@ -554,17 +634,52 @@ wp_reset_postdata();
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
+    
+    
+    
+    
     <!-- //stats section -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <!-- services section -->
+
+    <?php
+        $args = array(
+            'post_type' => 'post',
+            'post_status' => 'publish',
+            'posts_per_page' => '1',
+        // 'catagory_name' => 'slider',
+        'tax_query' => array(
+                array(
+                    'taxonomy' => 'category',
+                    'field'    => 'slug',
+                    'terms'    => 'service',
+                ),
+            ),
+        );
+    ?>
     <!-- services section -->
     <section class="w3l-grids-block py-5">
         <div class="container py-lg-5 py-md-4 py-2">
             <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:600px;">
-                <p>Our Services</p>
-                <h3 class="title-style">Our Amazing Services for your Travel</h3>
+                <p><?php echo get_the_title()?></p>
+                <h3 class="title-style"><?php echo get_the_excerpt()?></h3>
             </div>
-            <div class="row text-center justify-content-center">
+            <?php echo get_the_content()?>
+            <!-- <div class="row text-center justify-content-center">
                 <div class="col-lg-4 col-md-6 col-sm-10">
                     <div class="bottom-block">
                         <a href="tours.html" class="d-block">
@@ -595,7 +710,7 @@ wp_reset_postdata();
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
     <!-- //services section -->
