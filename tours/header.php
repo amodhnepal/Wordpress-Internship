@@ -20,27 +20,22 @@
                     <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
                     <span class="navbar-toggler-icon fa icon-close fa-times"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarScroll">
-                    <ul class="navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="<?php echo '/';?>">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo get_permalink(get_page_by_path('about')); ?>">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo get_permalink(get_page_by_path('tours')); ?>">Tours</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo get_permalink(get_page_by_path('contact')); ?>">Contact</a>
-                        </li>
-                    </ul>
-                    <form action="#search" method="GET" class="d-flex search-header ms-lg-2">
+                <?php
+                    wp_nav_menu([
+                        'menu' => 'menu-1',
+                        'menu_class' => 'navbar-nav ms-auto my-2 my-lg-0 navbar-nav-scroll',
+                        'container' => 'div',
+                        'container_class' => 'collapse navbar-collapse',
+                        'container_id' => 'navbarScroll',
+                        'walker' => new Travel_Menu_Walker()
+                    ]);
+                ?>
+                <form action="#search" method="GET" class="d-flex search-header ms-lg-2">
                         <input class="form-control" type="search" placeholder="Enter Keyword..." aria-label="Search"
                             required>
                         <button class="btn btn-style" type="submit"><i class="fas fa-search"></i></button>
                     </form>
-                </div>
+        
                 <!-- toggle switch for light and dark theme -->
                 <div class="cont-ser-position">
                     <nav class="navigation">
