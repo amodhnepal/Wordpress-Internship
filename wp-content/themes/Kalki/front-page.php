@@ -373,7 +373,38 @@ add_action('init', 'create_testimonial_post_type');
 </section>
 
 
+<!-- Contact Section -->
 
+<section class="contact-section">
+    <div class="contact-container">
+        <?php
+        $args = array(
+            'post_type'      => 'post',
+            'name'           => 'contact-us', // 'postname' should be 'name' and use the slug
+            'posts_per_page' => 1,
+            'post_status'    => 'publish',
+            'tax_query'      => array(
+                array(
+                    'taxonomy' => 'category',
+                    'field'    => 'slug',
+                    'terms'    => 'Contact',
+                ),
+            ),
+        );
+        $new_page_query = new WP_Query($args);
+        if ($new_page_query->have_posts()) :
+        ?>
+            <?php while ($new_page_query->have_posts()) : $new_page_query->the_post(); ?>
+                <div class="contact">
+                    <?php the_content(); ?>
+                </div>
+            <?php endwhile;
+            wp_reset_postdata(); ?>
+        <?php else : ?>
+            <p class="no-content">No content found.</p>
+        <?php endif; ?>
+    </div>
+</section>
 
     <?php
     get_footer(); 
