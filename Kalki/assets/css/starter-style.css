@@ -3,109 +3,124 @@
     padding: 0;
 }
 
-/* Full-screen banner section */
 .banner-section {
     height: 100vh; /* Full viewport height */
-    /* overflow: hidden;  */
+    overflow: hidden;
     position: relative;
-    background: rgba(46, 82, 250, 0.5) /* Black with 50% transparency */
-
+    background: rgba(60, 90, 251, 0.45);
 }
-
 /* Banner image to cover the screen */
 .banner-image {
     position: absolute;
     width: 100%;
     height: 100%;
-    object-fit: cover; 
-    z-index: -1; 
-    
-    /* background-image: linear-gradient(left,#2e52fb,#6c87fa) !important; */
+    object-fit: cover;
+    z-index: -1;
 }
-
+/* Centered banner content */
 .banner-content {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    z-index:2;
-    /* box-shadow: 0px 8px 20px rgba(10, 10, 10, 0.3); */
-    background-color: #00000080;
-    padding: 30px 100px 30px 100px;
-
-    /* transform: skew(-10deg); */
-    /* clip-path: polygon(10% 0, 110% 0, 90% 100%, 0% 100%); */
-
+    z-index: 2;
 }
-
-.banner-content h1 {
-    font-size: 3rem;
-    color: #fff;
-    margin-bottom: 20px;
-    
-}
-
-.banner-content .btn {
+/* Rectangle with skew effect */
+.rectangle {
     display: inline-block;
+    background-color: rgba(0, 0, 0, 0.7); /* Solid black background */
+    padding: 20px 40px;
+    transform: skewX(-15deg); /* Tilt the rectangle */
+    transform-origin: center;
+    border: none;
+    margin-bottom: 20px;
+    position: relative; /* Required for button positioning */
+}
+/* Text inside the rectangle */
+.rectangle h1 {
+    color: white;
+    margin: 0;
+    font-size: 3rem;
+    transform: skewX(15deg); /* Counter-skew the text */
+    display: inline-block;
+    line-height: 1.2;
+    font-weight: normal;
+}
+.bold {
+    font-weight: bold;
+    width: auto;
+}
+/* Button styles */
+.btn {
+    display: block;
+    background-color: #007BFF;
+    color: white;
     padding: 10px 20px;
-    background-color: #0073e6;
-    color: #fff;
     text-decoration: none;
     font-size: 1rem;
-    border-radius: 5px;
+    margin-top: 20px;
+    position: absolute;
+    bottom: -20px; /* Adjust to touch the bottom of the rectangle */
+    left: 50%;
+    transform: translateX(-50%) skewX(15deg); /* Center and skew the button */
+    text-align: center;
+    border-radius: 5px; /* Optional: Add rounded corners */
 }
-
-
-
-
-
-/* Page content below the banner */
-.page-content {
-    /* padding: 40px; */
-    background-color: #f9f9f9;
-    position: relative;
-    z-index: -1; 
-    
-}
-
 /* Fixed navigation menu at the bottom right */
 .main-nav {
-    /* position: absolute; */
+    position: sticky;
     bottom: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.7); 
-    z-index: 2; 
-    
-    text-align: right; 
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    text-align: right;
     width: 100%;
+    padding: 0;
+    /* padding: 10px 20PX; */
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 109px;
+}
+.nav-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+.logo {
+    margin-right: 20px;
     
 }
-
 /* Navigation menu list */
 .nav-menu {
     list-style: none;
     margin: 0;
     padding: 20px;
-    display: inline-flex; 
-    gap: 20px; 
+    display: inline-flex;
+    gap: 20px;
     padding-top: 30px;
 }
-
 .nav-menu li {
     margin: 0;
+    display: inline;
 }
-
 .nav-menu a {
     color: #fff;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
+    font-weight: normal;
+}
+.nav-menu a:hover {
+    color: #F0F0F0;
 }
 
-.nav-menu a:hover {
-    color: #f0f0f0;
-}
+
+
+
 
 
 /* Achievement */
@@ -169,6 +184,7 @@
     background-color: #FEFEFE;
     color: rgb(0, 0, 0);
     border-radius: 50%;
+    flex-direction: column;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -176,25 +192,554 @@
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5); /* Stronger shadow */
     position: absolute;
 }
+.circle:hover {
+    background-color: #3498DB; /* Light blue color */
+}
 /* Positioning the Circles - Adjusted for Bigger Size */
 .circle-top {
     top: -10px; /* Moves it higher */
     left: 60%;
     transform: translateX(-50%);
 }
+
+.circle-top i {
+    font-size: 18px; /* Adjust icon size */
+    margin-bottom: 5px; /* Spacing below the icon */
+}
+.circle-top h2 {
+    font-size: 18px;
+    margin: 5px 0;
+}
+.circle-top h3 {
+    font-size: 14px;
+    font-weight: normal;
+}
 .circle-bottom {
     bottom: -250px; /* Moves it lower */
     left: 70%;
     transform: translateX(-50%);
+}
+/* Bottom Circle Icon */
+.circle-bottom i {
+    font-size: 18px;  /* Make the icon bigger */
+    margin-bottom: 10px; /* Space below the icon */
+}
+/* Title in Bottom Circle */
+.circle-bottom h1 {
+    font-size: 18px; /* Adjust the size of the title */
+    margin: 5px 0;
+}
+.circle-bottom h3 {
+    font-size: 14px; /* Adjust size of the description */
+    font-weight: normal;
 }
 .circle-left {
     left: -120px; /* Moves it left */
     top: 90%;
     transform: translateY(-50%);
 }
+.circle-left i {
+    font-size: 30px;  /* Make the icon bigger */
+    margin-bottom: 10px; /* Space below the icon */
+}
+/* Title in Left Circle */
+.circle-left h1 {
+    font-size: 18px; /* Adjust the size of the title */
+    margin: 5px 0;
+}
+/* Description in Left Circle */
+.circle-left h3 {
+    font-size: 14px;
+    font-weight: normal;
+}
 .circle-right {
     right: -200px; /* Moves it right */
     top: 80%;
     transform: translateY(-50%);
 }
+/* Right Circle Icon */
+.circle-right i {
+    font-size: 30px;  /* Make the icon bigger */
+    margin-bottom: 10px; /* Space below the icon */
+}
+/* Title in Right Circle */
+.circle-right h1 {
+    font-size: 18px; /* Adjust the size of the title */
+    margin: 5px 0;
+}
+/* Description in Right Circle */
+.circle-right h3 {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+
+/* Carousel */
+.featured-projects {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 50px;
+    background: #fff;
+}
+.content {
+    width: 30%;
+}
+.content h2 {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+.content span {
+    color: blue;
+}
+.view-all {
+    background: blue;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.nav-buttons button {
+    background: none;
+    border: 2px solid #000;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.slider-container {
+    width: 65%;
+    overflow: hidden;
+    position: relative;
+}
+.slider {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s;
+}
+.slide {
+    min-width: 30%;
+    background: #f4f4f4;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+.slide img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+
+/* Testimonial */
+.testimonials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 500px; /* Increase height */
+    background: #f5f5f5;
+    padding: 0;
+}
+
+.blue-text {
+    color: blue;
+}
+.testimonial-wrapper {
+    display: flex;
+    align-items: stretch; /* Ensures all child elements have the same height */
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    max-width: 800px;
+    /* height: 100%;  */
+}
+
+.arrow {
+    flex: 0 0 30%; /* Same width as image */
+    height: 270px; /* Increases height */
+    background: blue;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+
+.arrow img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.4;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.arrow span {
+    position: relative;
+    z-index: 2;
+    font-size: 2rem;
+    color: white;
+    font-weight: bold;
+}
+
+.testimonial-content {
+    flex-grow: 1;
+    background: white;
+    /* border-radius: 10px; */
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-width: 500px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-slider {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.testimonial-slide {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.testimonial-img {
+     flex: 0 0 20%;/* Image takes up 40% */
+    height: 100%;
+    overflow: hidden;
+}
+
+.testimonial-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* border-radius: 10px 0 0 10px;  */
+}
+
+.testimonial-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    padding: 40px;
+}
+
+.testimonial-text p {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.testimonial-text h3 {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
+
+/* Counter */
+.counter-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 100px;
+    padding: 100px ;
+}
+
+.counter-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.counter-box h2 {
+    font-size: 48px;
+    font-weight: bold;
+    color: black;
+}
+
+.counter-box p {
+    font-size: 16px;
+    color: gray;
+    margin-top: 5px;
+}
+
+.blue {
+    color: blue;
+    font-weight: bold;
+}
+
+/* Add dividers */
+.counter-box:not(:last-child)::after {
+    content: "";
+    width: 2px;
+    height: 50px;
+    background-color: lightgray;
+    position: absolute;
+    right: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Recent Post */
+.recent-posts {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.recent-posts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.posts-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.post-card {
+    width: 300px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.post-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.post-content {
+    padding: 15px;
+}
+
+.post-content h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.post-content p {
+    font-size: 14px;
+    color: gray;
+}
+
+/* Contact Form */
+
+.contact-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 0; /* Increased padding for top & bottom spacing */
+    margin-top: 50px; /* Adds extra space from the top */
+    background-color: #F5F5F5; /* Set background color for the entire section */
+    width: 100%; /* Ensures the section fills the width */
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    padding-bottom: 0;
+}
+/* Inner Container */
+.contact-container {
+    width: 100%; /* Make the container fill the full width */
+    max-width: 1600px; /* Increase max-width for a wider container */
+    background: #FFFFFF; /* White background for the container */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-align: center;
+}
+/* Heading */
+.contact h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 15px;
+}
+/* Paragraph/Text */
+.contact p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+/* Links Inside Content */
+.contact a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+.contact a:hover {
+    text-decoration: underline;
+}
+/* Category Styling */
+.contact .post-categories {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #777;
+}
+/* No Content Message */
+.no-content {
+    text-align: center;
+    font-size: 18px;
+    color: #999;
+    padding: 20px;
+}
+/* Responsive */
+@media (max-width: 768px) {
+    .contact-container {
+        width: 100%; /* Ensure container stretches full width on mobile */
+        padding: 30px;
+    }
+    .contact h2 {
+        font-size: 24px;
+    }
+    .contact p {
+        font-size: 14px;
+    }
+}
+/* Contact Form Styling */
+/* Make the Contact Section Wider */
+.wpcf7 {
+    max-width: 800px; /* Adjust width */
+    margin: auto;
+}
+/* Flexbox Layout for Two-Column Fields */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+/* Individual Field Styling */
+.form-group {
+    width: 100%;
+    margin-bottom: 20px;
+}
+/* Set Width for Left & Right Columns */
+.form-group.left,
+.form-group.right {
+    width: 48%;
+}
+/* Remove Box Styling & Keep Only Underline */
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid black;
+    background: transparent;
+    padding: 10px 5px;
+    font-size: 16px;
+    outline: none;
+}
+/* Make Textarea Behave Like a Single Line */
+.form-group textarea {
+    height: 40px;
+    resize: none;
+}
+/* Style the Placeholder */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: black;
+    opacity: 0.7;
+    font-size: 16px;
+}
+/* Submit Button Styling */
+.form-group [type="submit"] {
+    background: black;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 0;
+    /* transition: background 0.3s; */
+}
+.form-group [type="submit"]:hover {
+    background: #333;
+
+}
+
+/* footer */
+.site-footer {
+    background: #000;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.footer-logo {
+    flex: 0 0 auto; /* Keep logo size fixed */
+}
+
+.footer-logo img {
+    max-width: 100px; /* Adjust logo size */
+    height: auto;
+}
+
+.footer-content {
+    flex: 1; /* Allow content to take up remaining space */
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-links, .footer-contact {
+    text-align: left;
+}
+
+.footer-menu li {
+    list-style: none;
+}
+
+.footer-menu a, .social-links a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-bottom {
+    margin-top: 10px;
+    border-top: 1px solid #444;
+    padding-top: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer-bottom a {
+    text-decoration: none;
+    color: #fff;
+}
+
+
 
