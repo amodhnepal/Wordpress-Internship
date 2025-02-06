@@ -3,109 +3,124 @@
     padding: 0;
 }
 
-/* Full-screen banner section */
 .banner-section {
     height: 100vh; /* Full viewport height */
-    /* overflow: hidden;  */
+    overflow: hidden;
     position: relative;
-    background: rgba(46, 82, 250, 0.5) /* Black with 50% transparency */
-
+    background: rgba(60, 90, 251, 0.45);
 }
-
 /* Banner image to cover the screen */
 .banner-image {
     position: absolute;
     width: 100%;
     height: 100%;
-    object-fit: cover; 
-    z-index: -1; 
-    
-    /* background-image: linear-gradient(left,#2e52fb,#6c87fa) !important; */
+    object-fit: cover;
+    z-index: -1;
 }
-
+/* Centered banner content */
 .banner-content {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    z-index:2;
-    /* box-shadow: 0px 8px 20px rgba(10, 10, 10, 0.3); */
-    background-color: #00000080;
-    padding: 30px 100px 30px 100px;
-
-    /* transform: skew(-10deg); */
-    /* clip-path: polygon(10% 0, 110% 0, 90% 100%, 0% 100%); */
-
+    z-index: 2;
 }
-
-.banner-content h1 {
-    font-size: 3rem;
-    color: #fff;
-    margin-bottom: 20px;
-    
-}
-
-.banner-content .btn {
+/* Rectangle with skew effect */
+.rectangle {
     display: inline-block;
+    background-color: rgba(0, 0, 0, 0.7); /* Solid black background */
+    padding: 20px 40px;
+    transform: skewX(-15deg); /* Tilt the rectangle */
+    transform-origin: center;
+    border: none;
+    margin-bottom: 20px;
+    position: relative; /* Required for button positioning */
+}
+/* Text inside the rectangle */
+.rectangle h1 {
+    color: white;
+    margin: 0;
+    font-size: 3rem;
+    transform: skewX(15deg); /* Counter-skew the text */
+    display: inline-block;
+    line-height: 1.2;
+    font-weight: normal;
+}
+.bold {
+    font-weight: bold;
+    width: auto;
+}
+/* Button styles */
+.btn {
+    display: block;
+    background-color: #007BFF;
+    color: white;
     padding: 10px 20px;
-    background-color: #0073e6;
-    color: #fff;
     text-decoration: none;
     font-size: 1rem;
-    border-radius: 5px;
+    margin-top: 20px;
+    position: absolute;
+    bottom: -20px; /* Adjust to touch the bottom of the rectangle */
+    left: 50%;
+    transform: translateX(-50%) skewX(15deg); /* Center and skew the button */
+    text-align: center;
+    border-radius: 5px; /* Optional: Add rounded corners */
 }
-
-
-
-
-
-/* Page content below the banner */
-.page-content {
-    /* padding: 40px; */
-    background-color: #f9f9f9;
-    position: relative;
-    z-index: -1; 
-    
-}
-
 /* Fixed navigation menu at the bottom right */
 .main-nav {
-    /* position: absolute; */
+    position: sticky;
     bottom: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.7); 
-    z-index: 2; 
-    
-    text-align: right; 
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    text-align: right;
     width: 100%;
+    padding: 0;
+    /* padding: 10px 20PX; */
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 109px;
+}
+.nav-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+.logo {
+    margin-right: 20px;
     
 }
-
 /* Navigation menu list */
 .nav-menu {
     list-style: none;
     margin: 0;
     padding: 20px;
-    display: inline-flex; 
-    gap: 20px; 
+    display: inline-flex;
+    gap: 20px;
     padding-top: 30px;
 }
-
 .nav-menu li {
     margin: 0;
+    display: inline;
 }
-
 .nav-menu a {
     color: #fff;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
+    font-weight: normal;
+}
+.nav-menu a:hover {
+    color: #F0F0F0;
 }
 
-.nav-menu a:hover {
-    color: #f0f0f0;
-}
+
+
+
 
 
 /* Achievement */
@@ -329,6 +344,9 @@
     padding: 0;
 }
 
+.blue-text {
+    color: blue;
+}
 .testimonial-wrapper {
     display: flex;
     align-items: stretch; /* Ensures all child elements have the same height */
@@ -675,7 +693,7 @@
 .footer-container {
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Ensure elements align properly */
+    align-items: center;
     max-width: 1200px;
     margin: auto;
     padding: 20px;
@@ -683,31 +701,25 @@
 
 .footer-logo {
     flex: 0 0 auto; /* Keep logo size fixed */
-    
-    
 }
 
 .footer-logo img {
     max-width: 100px; /* Adjust logo size */
     height: auto;
-    
 }
 
 .footer-content {
     flex: 1; /* Allow content to take up remaining space */
     display: flex;
     justify-content: space-between;
-    
 }
 
 .footer-links, .footer-contact {
     text-align: left;
-    
 }
 
 .footer-menu li {
     list-style: none;
-    
 }
 
 .footer-menu a, .social-links a {
@@ -723,9 +735,11 @@
     display: flex;
     justify-content: space-around;
 }
-.footer-bottom a{
+
+.footer-bottom a {
     text-decoration: none;
     color: #fff;
 }
+
 
 
