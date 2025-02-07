@@ -8,32 +8,6 @@
 <!-- <div id="primary" class="content-area"> -->
     <!-- <main id="main" class="site-main"> -->
         <!-- Banner Section -->
-        <section class="banner-section">
-    <?php $banner_image = get_template_directory_uri() . '/assets/img/banner.png'; ?>
-    <img src="<?php echo esc_url($banner_image); ?>" alt="Banner Image" class="banner-image">
-    <div class="banner-content">
-        <div class="rectangle">
-            <h1>Automate<br><span class="bold">Workflow</span> With Us</h1>
-            <a href="#" class="btn">VIEW MORE</a>
-        </div>
-    </div>
-</section>
-
-<!-- Navigation Menu -->
-<nav class="main-nav">
-    <div class="nav-container">
-        <div class="logo">
-            <?php if (function_exists('the_custom_logo')) the_custom_logo(); ?>
-        </div>
-        <?php
-        wp_nav_menu([
-            'menu' => 'kalki_menu',
-            'menu_class' => 'nav-menu',
-            'container' => false
-        ]);
-        ?>
-    </div>
-</nav>
 
 <div class="container-achieve">
     <?php
@@ -56,27 +30,58 @@
 <!-- Service Section -->
 <hr>
 <div class="container-mata-service serv">
-    <?php
-    $args = ['post_type' => 'page', 'pagename' => 'service', 'posts_per_page' => 1];
-    $new_page_query = new WP_Query($args);
-
-    if ($new_page_query->have_posts()) :
-        while ($new_page_query->have_posts()) : $new_page_query->the_post();
-            ?>
-            <div class="service"><?php the_content(); ?></div>
             <?php
-        endwhile;
-        wp_reset_postdata();
-    else :
-        echo '<p>No content found.</p>';
-    endif;
-    ?>
+            // Get category details
+            $category_slug = 'service'; // Change this to your actual category slug
+            $category = get_term_by('slug', $category_slug, 'category');
+            if ($category) {
+                $category_id = $category->term_id;
+                $category_name = $category->name;
+                $category_description = $category->description;
+                // Explode the category name into two words
+                $category_name_parts = explode('_', $category_name);
+                $first_word = isset($category_name_parts[0]) ? ucfirst($category_name_parts[0]) : ''; // Capitalize the first word
+                $second_word = isset($category_name_parts[1]) ? ucfirst($category_name_parts[1]) : ''; // Capitalize the second word
+                // Fetch category image from custom field
+                $category_image = get_option('z_taxonomy_image' . $category_id);
+                // $default_image = get_template_directory_uri() . '/assets/img/default-service.jpg';
+                // $category_image = (!empty($category_image)) ? esc_url($category_image) : $default_image;
+            ?>
+                <!-- Updated Category Section -->
+                <div class="service">
+                    <div class="wp-block-media-text">
+                        <figure class="wp-block-media-text__media">
+                            <img src="<?php echo esc_url($category_image); ?>" alt="<?php echo esc_attr($category_name); ?>">
+                        </figure>
+                        <div class="wp-block-media-text__content">
+                            <h1>
+                                <span style="color: black;"><?php echo $first_word; ?></span>
+                                <span style="color: #007BFF;"><?php echo $second_word; ?></span>
+                            </h1>
+                            <p><?php echo esc_html($category_description); ?></p>
+                            <div class="view-all-button">
+                            <a href="<?php echo get_category_link(get_cat_ID('Our service')); ?>" class="button">
+                                View All
+                            </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } else {
+                echo '<p>Category not found.</p>';
+            } ?>
 
     <!-- Dynamic Circles in Plus Formation -->
     <div class="circle-container">
         <?php
-        $circle_args = ['category_name' => 'serv', 'posts_per_page' => 4];
+        // Fetch 4 posts from 'service' category for circles
+        $circle_args = [
+            'category_name'  => 'service', 
+            'posts_per_page' => 4,
+            'post__not_in'   => [get_the_ID()] // Exclude "Our Services" from circles
+        ];
         $circle_query = new WP_Query($circle_args);
+
         $circle_classes = ['circle-top', 'circle-left', 'circle-right', 'circle-bottom'];
         $icons = ['fa-gem', 'fa-layer-group', 'fa-desktop', 'fa-gear'];
 
@@ -95,11 +100,13 @@
             endwhile;
             wp_reset_postdata();
         else :
-            echo '<p>No service sections found in this category.</p>';
+            echo '<p>No service sections found.</p>';
         endif;
         ?>
     </div>
 </div>
+
+
 
 <!-- Featured Projects Section -->
 <section class="featured-projects">

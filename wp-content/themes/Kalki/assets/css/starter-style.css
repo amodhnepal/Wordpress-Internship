@@ -146,6 +146,7 @@
 }
 
 /* Service */
+/* Update service section to position image on the right */
 .serv{
     display: flex;
     justify-content: center;
@@ -166,6 +167,60 @@
     margin-left: 0; /* Aligns the div to the left */
     margin-right: auto;
 }
+/* Ensures the service section aligns properly */
+.container-mata-service .service {
+    display: flex;
+    flex-direction: row; /* Make sure the flex direction is row */
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    max-width: 1500px;
+    margin-left: 0;
+    margin-right: auto;
+}
+.container-mata-service .wp-block-media-text {
+    display: flex;
+    flex-direction: row-reverse; /* Reverse the order so image is on the right */
+    align-items: center;
+    justify-content: flex-start;
+}
+.container-mata-service .wp-block-media-text__media img {
+    border-radius: 50%; /* Make the image round */
+    object-fit: cover;  /* Ensure the image fills the container */
+    width: 200px;       /* Adjust the image size */
+    height: 200px;      /* Maintains aspect ratio */
+    position: relative;
+}
+.container-mata-service .wp-block-media-text__content {
+    padding-left: 20px;
+}
+.container-mata-service .wp-block-media-text__content h1 {
+    font-size: 36px; /* Increase category name size */
+    font-weight: bold;
+}
+.container-mata-service .wp-block-media-text__content p {
+    font-size: 18px; /* Increase category description size */
+}
+.view-all-button .button {
+    background-color: #007BFF; /* Blue background */
+    color: white;              /* White text */
+    padding: 12px 25px;        /* Adjust padding for larger button */
+    font-size: 18px;           /* Make the button text bigger */
+    border: none;              /* Remove the border */
+    border-radius: 5px;        /* Rounded corners */
+    text-decoration: none;     /* Remove underline */
+    display: inline-block;     /* Ensure it aligns properly */
+    transition: background-color 0.3s ease; /* Smooth background change on hover */
+}
+.view-all-button .button:hover {
+    background-color: #0056B3; /* Darker blue on hover */
+}
+
+
+
+
+
+
 /* Circle Container - Move Circles Above the Image */
 .circle-container {
     position: absolute;
@@ -273,14 +328,18 @@
     font-weight: normal;
 }
 
+ 
+
+
+
 
 /* Carousel */
 .featured-projects {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
-    padding: 50px;
+
+    padding: 100px 0px;
     background: #fff;
 }
 .content {
@@ -742,4 +801,90 @@
 }
 
 
+
+
+/* Archive Page */
+/* Container for the service category page */
+.service-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Page title */
+.service-page-title {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* Grid layout for the services */
+.service-items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 20px;
+}
+
+/* Individual service item */
+.individual-service-item {
+    background-color: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effect on service items */
+.individual-service-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Image styling */
+.individual-service-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+/* Service item title with text decoration */
+.individual-service-item h2 {
+    font-size: 1.8em;
+    margin: 0;
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: underline; /* Add underline to the title */
+}
+
+/* Excerpt styling with optional text decoration */
+.individual-service-item p {
+    font-size: 1em;
+    color: #555;
+    margin-top: 10px;
+    text-decoration: italic; /* Add italic style to the text */
+}
+
+/* Pagination */
+.service-pagination {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.service-pagination .page-numbers {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none; /* Ensure no text decoration by default */
+    border-radius: 5px;
+}
+
+.service-pagination .page-numbers:hover {
+    background-color: #0056b3;
+    text-decoration: underline; /* Add underline on hover for pagination */
+}
 
