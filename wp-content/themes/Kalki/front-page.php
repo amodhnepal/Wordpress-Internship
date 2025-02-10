@@ -31,7 +31,7 @@
 <hr>
 <div class="container-mata-service serv">
             <?php
-            // Get category details
+           // Get category details
             $category_slug = 'service'; // Change this to your actual category slug
             $category = get_term_by('slug', $category_slug, 'category');
             if ($category) {
@@ -208,7 +208,11 @@
     </div>
     <div class="posts-grid">
         <?php
-        $args = ['post_type' => 'recent_post', 'posts_per_page' => 3, 'orderby' => 'date', 'order' => 'DESC'];
+        $args = ['post_type' => 'recent_post', 
+        'posts_per_page' => 3, 
+        'orderby' => 'date', 
+        'order' => 'DESC'
+    ];
         $recent_posts = new WP_Query($args);
 
         if ($recent_posts->have_posts()) :
@@ -242,7 +246,7 @@
         <?php
         $args = array(
             'post_type'      => 'post',
-            'name'           => 'contact-us', // 'postname' should be 'name' and use the slug
+            'name'           => 'contact-us', 
             'posts_per_page' => 1,
             'post_status'    => 'publish',
             'tax_query'      => array(

@@ -332,14 +332,13 @@
 
 
 
-
 /* Carousel */
 .featured-projects {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 100px 0px;
+    padding: 100px 30px;
     background: #fff;
 }
 .content {
@@ -888,3 +887,186 @@
     text-decoration: underline; /* Add underline on hover for pagination */
 }
 
+
+
+
+/* Single-service */
+.single-service-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.service-icon i {
+    font-size: 40px;
+    color: #007bff;
+}
+
+.service-image img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.service-description {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.back-to-services {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+/* About Us */
+/* General container styling */
+.about-us-container {
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+
+/* General spacing for content elements */
+.about-page-content > * {
+    margin-bottom: 20px; /* Adjust the value as needed */
+}
+
+/* Specific spacing for lists */
+.about-page-content ul,
+.about-page-content ol {
+    margin-bottom: 20px; /* Adjust the value as needed */
+}
+
+/* Specific spacing for paragraphs */
+.about-page-content p {
+    margin-bottom: 20px; /* Adjust the value as needed */
+}
+
+/* Specific spacing for images */
+.about-page-content img {
+    margin-bottom: 20px; /* Adjust the value as needed */
+}
+
+/* About Posts Section */
+.about-posts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 20px; /* Adjust the value as needed */
+    margin-bottom: 40px; /* Adjust the value as needed */
+}
+
+.about-post-item {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.about-post-item h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.about-post-excerpt {
+    font-size: 16px;
+    color: #666;
+}
+
+/* Team Member Section */
+.team-section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+    background-color: #f5f5f5f5;
+}
+
+.team-member-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.team-member {
+    display: none;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.team-member.active {
+    display: flex;
+}
+
+.team-member-image {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.team-member-image img {
+    width: 30%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.team-member-details {
+    flex: 2;
+}
+
+.team-thumbnails {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    width: 50%;
+}
+
+.team-thumbnail {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
+
+.team-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-slider-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.team-slider-controls button {
+    padding: 10px 15px;
+    border: none;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.team-slider-controls button:hover {
+    background: #0056b3;
+}

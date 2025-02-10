@@ -81,3 +81,48 @@ document.addEventListener("DOMContentLoaded", function () {
         window.scrollTo({ top: 0, behavior: "smooth" });
     });
 });
+
+
+
+// About us page slider
+document.addEventListener('DOMContentLoaded', function () {
+    const prevButton = document.querySelector('.prev-slide');
+    const nextButton = document.querySelector('.next-slide');
+    const slider = document.querySelector('.team-member-display');
+    const slides = document.querySelectorAll('.team-member');
+
+    // Debugging statements to check if elements are selected correctly
+    console.log('prevButton:', prevButton);
+    console.log('nextButton:', nextButton);
+    console.log('slider:', slider);
+    console.log('slides:', slides);
+
+    if (!prevButton || !nextButton || !slider || slides.length === 0) {
+        console.error('One or more elements are missing. Slider functionality will not work.');
+        return;
+    }
+
+    let currentIndex = 0;
+
+    function showSlide(index) {
+        console.log('Showing slide:', index); // Debugging statement
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+    }
+
+    prevButton.addEventListener('click', function () {
+        console.log('Previous button clicked'); // Debugging statement
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : slides.length - 1;
+        showSlide(currentIndex);
+    });
+
+    nextButton.addEventListener('click', function () {
+        console.log('Next button clicked'); // Debugging statement
+        currentIndex = (currentIndex < slides.length - 1) ? currentIndex + 1 : 0;
+        showSlide(currentIndex);
+    });
+
+    // Initialize the first slide
+    showSlide(currentIndex);
+});
