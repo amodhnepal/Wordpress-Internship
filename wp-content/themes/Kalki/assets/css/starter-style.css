@@ -940,6 +940,7 @@
 }
 
 /* General spacing for content elements */
+/* General spacing for content elements */
 .about-page-content > * {
     margin-bottom: 20px; /* Adjust the value as needed */
 }
@@ -989,84 +990,125 @@
 /* Team Member Section */
 .team-section {
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    width: 80%;
+    max-width: 1200px;
+    margin: auto;
+}
+/* Layout: Image on Left, Text on Right */
+.team-container {
+    display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    align-items: center;
-    background-color: #f5f5f5f5;
-}
-
-.team-member-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    gap: 30px;
     width: 100%;
-    margin-bottom: 20px;
+    background-color: #f5f5f5;
 }
-
-.team-member {
-    display: none;
-    flex-direction: row;
-    align-items: flex-start;
-    width: 100%;
-}
-
-.team-member.active {
-    display: flex;
-}
-
-.team-member-image {
+.team-main {
     flex: 1;
-    margin-right: 20px;
 }
-
-.team-member-image img {
-    width: 30%;
-    height: auto;
+.team-main img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
     border-radius: 10px;
 }
-
-.team-member-details {
-    flex: 2;
+.team-info {
+    flex: 1;
 }
-
+.team-member-text {
+    display: none;
+}
+.team-member-text.active {
+    display: block;
+}
+/* Navigation Arrows */
+.team-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+button {
+    background: #333;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+button:hover {
+    background: #555;
+}
 .team-thumbnails {
     display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-    width: 50%;
-}
-
-.team-thumbnail {
-    width: 100px;
-    height: 100px;
-    overflow: hidden;
-}
-
-.team-thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.team-slider-controls {
-    display: flex;
+    flex-direction: row; /* Horizontal alignment */
     justify-content: center;
     gap: 10px;
     margin-top: 20px;
 }
-
-.team-slider-controls button {
-    padding: 10px 15px;
-    border: none;
-    background: #007bff;
-    color: white;
+.team-thumb {
     cursor: pointer;
-    font-size: 16px;
+    border: 2px solid transparent;
+    padding: 5px;
+    transition: 0.3s;
+}
+.team-thumb.selected {
+    border: 2px solid blue;
     border-radius: 5px;
 }
+.team-thumb img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.team-member-large {
+    display: none; /* Hide all images initially */
+}
+.team-member-large.active {
+    display: block; /* Show only the active member */
+}
 
-.team-slider-controls button:hover {
-    background: #0056b3;
+
+
+
+
+/* Service Page */
+.service-page-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+}
+
+/* Ensure the title appears above the text, not above the image */
+.service-content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure images in the content appear before the text */
+.service-content img {
+    order: -1; /* Moves images above other content */
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+/* Move the title after the image and above the text */
+.service-page-content h1 {
+    order: -2; /* Ensures the title is above paragraphs, but not above images */
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Style for text content */
+.service-content p {
+    font-size: 1rem;
+    line-height: 1.6;
 }

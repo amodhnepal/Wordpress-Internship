@@ -30,19 +30,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const nextImage = document.getElementById("nextImage");
 
     let currentIndex = 0;
-
     function updateSlider() {
         slides.forEach((slide, index) => {
             slide.style.transform = `translateX(-${currentIndex * 100}%)`;
         });
-
+    
         const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
         const nextIndex = (currentIndex + 1) % slides.length;
-
-        prevImage.src = slides[prevIndex].querySelector(".testimonial-img img").src;
-        nextImage.src = slides[nextIndex].querySelector(".testimonial-img img").src;
+    
+        // Ensure prevImage and nextImage exist before updating src
+        if (prevImage && nextImage) {
+            prevImage.src = slides[prevIndex].querySelector(".testimonial-img img").src;
+            nextImage.src = slides[nextIndex].querySelector(".testimonial-img img").src;
+        }
     }
-
     prevBtn.addEventListener("click", function () {
         currentIndex = (currentIndex - 1 + slides.length) % slides.length;
         updateSlider();
@@ -85,44 +86,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // About us page slider
-document.addEventListener('DOMContentLoaded', function () {
-    const prevButton = document.querySelector('.prev-slide');
-    const nextButton = document.querySelector('.next-slide');
-    const slider = document.querySelector('.team-member-display');
-    const slides = document.querySelectorAll('.team-member');
+document.addEventListener("DOMContentLoaded", function () {
+    const teamContainer = document.querySelector(".team-container");
+    if (!teamContainer) return;
 
-    // Debugging statements to check if elements are selected correctly
-    console.log('prevButton:', prevButton);
-    console.log('nextButton:', nextButton);
-    console.log('slider:', slider);
-    console.log('slides:', slides);
+    let teamMembers = teamContainer.querySelectorAll(".team-member-large");
+    let teamTexts = teamContainer.querySelectorAll(".team-member-text");
+    let teamThumbnails = teamContainer.querySelectorAll(".team-thumb");
+    let prevTeamBtn = teamContainer.querySelector("#prev-btn");
+    let nextTeamBtn = teamContainer.querySelector("#next-btn");
 
-    if (!prevButton || !nextButton || !slider || slides.length === 0) {
-        console.error('One or more elements are missing. Slider functionality will not work.');
-        return;
+    let teamCurrentIndex = 0;
+
+    function updateActiveTeamMember(index) {
+        teamMembers.forEach(member => member.classList.remove("active"));
+        teamTexts.forEach(text => text.classList.remove("active"));
+        teamThumbnails.forEach(thumb => thumb.classList.remove("selected"));
+
+        teamMembers[index]?.classList.add("active");
+        teamTexts[index]?.classList.add("active");
+        teamThumbnails[index]?.classList.add("selected");
     }
 
-    let currentIndex = 0;
+    // Handle Thumbnail Clicks
+    teamThumbnails.forEach((thumb, index) => {
+        thumb.addEventListener("click", function () {
+            teamCurrentIndex = index; 
+            updateActiveTeamMember(teamCurrentIndex);
+        });
+    });
 
-    function showSlide(index) {
-        console.log('Showing slide:', index); // Debugging statement
-        slides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === index);
+    // ✅ Ensure `prevTeamBtn` and `nextTeamBtn` exist before adding event listeners
+    if (prevTeamBtn && nextTeamBtn) {
+        prevTeamBtn.addEventListener("click", function () {
+            teamCurrentIndex = (teamCurrentIndex - 1 + teamMembers.length) % teamMembers.length;
+            updateActiveTeamMember(teamCurrentIndex);
+        });
+
+        nextTeamBtn.addEventListener("click", function () {
+            teamCurrentIndex = (teamCurrentIndex + 1) % teamMembers.length;
+            updateActiveTeamMember(teamCurrentIndex);
         });
     }
 
-    prevButton.addEventListener('click', function () {
-        console.log('Previous button clicked'); // Debugging statement
-        currentIndex = (currentIndex > 0) ? currentIndex - 1 : slides.length - 1;
-        showSlide(currentIndex);
-    });
-
-    nextButton.addEventListener('click', function () {
-        console.log('Next button clicked'); // Debugging statement
-        currentIndex = (currentIndex < slides.length - 1) ? currentIndex + 1 : 0;
-        showSlide(currentIndex);
-    });
-
-    // Initialize the first slide
-    showSlide(currentIndex);
+    updateActiveTeamMember(teamCurrentIndex);
 });

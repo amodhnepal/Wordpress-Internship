@@ -11,7 +11,10 @@
 
 <div class="container-achieve">
     <?php
-    $args = ['post_type' => 'page', 'pagename' => 'Achievement', 'posts_per_page' => 1];
+    $args = ['post_type' => 'page',
+     'pagename' => 'Achievement', 
+     'posts_per_page' => 1
+    ];
     $new_page_query = new WP_Query($args);
 
     if ($new_page_query->have_posts()) :
@@ -114,8 +117,8 @@
         <h2>Featured <span>Projects</span></h2>
         <button class="view-all">View All</button>
         <div class="nav-buttons">
-            <button id="prev">&#8592;</button>
-            <button id="next">&#8594;</button>
+            <button id="prev"><-</button>
+            <button id="next">-></button>
         </div>
     </div>
     <div class="slider-container">
