@@ -1077,38 +1077,248 @@ button:hover {
 
 
 /* Service Page */
-.service-page-content {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 20px;
+.service-sec {
+    display: grid;
+    grid-template-columns: 1fr; /* Each post takes one full row */
+    gap: 40px; /* Space between items */
 }
 
-/* Ensure the title appears above the text, not above the image */
-.service-content {
-    display: flex;
-    flex-direction: column;
+.service-post-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    align-items: center;
+    gap: 30px;
 }
 
-/* Ensure images in the content appear before the text */
-.service-content img {
-    order: -1; /* Moves images above other content */
-    max-width: 100%;
+/* Image on Left, Content on Right */
+.service-post-item.image-left .service-post-thumbnail {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.service-post-item.image-left .service-post-content {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+/* Image on Right, Content on Left */
+.service-post-item.image-right .service-post-thumbnail {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.service-post-item.image-right .service-post-content {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+/* Ensure images are responsive */
+.service-post-thumbnail img {
+    width: 100%;
     height: auto;
-    margin-bottom: 15px;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
-/* Move the title after the image and above the text */
-.service-page-content h1 {
-    order: -2; /* Ensures the title is above paragraphs, but not above images */
-    font-size: 2rem;
+/* Content styling */
+.service-post-content h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.service-post-excerpt {
+    font-size: 16px;
+    color: #666;
+}
+
+
+.service-title{
+    font-size: 50px;
+    padding: 40px;
+    font-weight: 600;
+ 
+}
+
+
+/* Blog  */
+.blog-container {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Two posts per row */
+    gap: 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.blog-post {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    text-align: center;
+    max-width: 400px; /* Ensures content width does not exceed image */
+    margin: auto;
+}
+
+.blog-post:hover {
+    transform: translateY(-5px);
+}
+
+/* Ensures image does not take full width */
+.blog-thumbnail img {
+    width: 100%; /* Image will fit the container */
+    max-width: 350px; /* Medium-sized image */
+    height: auto;
+    border-radius: 10px;
+    display: block;
+    margin: auto;
+}
+
+.blog-title {
+    font-size: 20px;
+    margin: 15px 0;
     font-weight: bold;
+}
+
+.blog-excerpt {
+    font-size: 14px;
+    color: #777;
+    margin-top: 10px;
+    max-width: 350px; /* Ensures text doesn’t go wider than the image */
+    margin: auto;
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 30px;
+}
+
+.page-title{
+    font-size: 60px;
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+
+
+/* Single-post */
+/* General styling for single post */
+.single-post-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Post Title */
+.post-title {
+    font-size: 32px;
+    color: #333;
+    text-align: center;
     margin-bottom: 10px;
 }
 
-/* Style for text content */
-.service-content p {
-    font-size: 1rem;
-    line-height: 1.6;
+/* Post Meta (Date & Author) */
+.post-meta {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin-bottom: 20px;
 }
+
+/* Post Image */
+.post-image {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.post-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Post Content */
+.post-content {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #444;
+}
+
+/* Categories and Tags */
+.post-categories, .post-tags {
+    font-size: 14px;
+    color: #777;
+    margin-top: 20px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+.post-categories strong, .post-tags strong {
+    color: #222;
+}
+
+/* Back to Blogs Button */
+.back-to-blogs {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.back-to-blogs a {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background: #0073e6;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+
+.back-to-blogs a:hover {
+    background: #005bb5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .single-post-container {
+        max-width: 95%;
+        padding: 15px;
+    }
+
+    .post-title {
+        font-size: 28px;
+    }
+
+    .post-content {
+        font-size: 16px;
+    }
+}
+
+
+
+
+.read-more-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #0073e6;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+
+.read-more-btn:hover {
+    background-color: #005bb5;
+}
+

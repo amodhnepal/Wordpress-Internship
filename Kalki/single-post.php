@@ -5,30 +5,33 @@
         <article class="single-post-content">
             <h1 class="post-title"><?php the_title(); ?></h1>
 
-            
             <?php if (get_post_type() == 'post') : ?>
                 <p class="post-meta">Published on <?php echo get_the_date(); ?> by <?php the_author(); ?></p>
             <?php endif; ?>
 
-            
             <?php if (has_post_thumbnail()) : ?>
                 <div class="post-image">
                     <?php the_post_thumbnail('large'); ?>
                 </div>
             <?php endif; ?>
 
-            
             <div class="post-content">
                 <?php the_content(); ?>
             </div>
 
-            
             <?php if (get_post_type() == 'post') : ?>
                 <div class="post-categories">
                     <strong>Categories:</strong> <?php the_category(', '); ?>
                 </div>
+                <div class="post-tags">
+                    <strong>Tags:</strong> <?php the_tags('', ', ', ''); ?>
+                </div>
             <?php endif; ?>
 
+
+            <div class="back-to-blogs">
+                <a href="<?php echo site_url('/blogs'); ?>">← Back to Blogs</a>
+            </div>
 
         </article>
     <?php endwhile; endif; ?>
