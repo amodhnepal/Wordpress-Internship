@@ -1,31 +1,23 @@
 <?php get_header(); ?>
 
-<div class="single-service-container">
+<div class="container">
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-        <div class="single-service-content">
-            <h1 class="service-title"><?php the_title(); ?></h1>
-
-            <!-- Optional: Service Icon -->
-            <div class="service-icon">
-                <i class="fas fa-gem"></i> <!-- You can change this dynamically -->
-            </div>
+        <article class="single-post">
+            <h1><?php the_title(); ?></h1>
+            <p class="post-meta">Published on <?php echo get_the_date(); ?> by <?php the_author(); ?></p>
 
             <!-- Featured Image -->
             <?php if (has_post_thumbnail()) : ?>
-                <div class="service-image">
-                    <?php the_post_thumbnail('large'); ?>
-                </div>
+                <img src="<?php the_post_thumbnail_url('large'); ?>" alt="<?php the_title(); ?>">
             <?php endif; ?>
 
-            <!-- Service Description -->
-            <div class="service-description">
+            <div class="post-content">
                 <?php the_content(); ?>
-                <?php the_excerpt(); ?>
             </div>
 
-            <!-- Back to Services Button -->
-            <a href="<?php echo get_post_type_archive_link('service'); ?>" class="back-to-services">Back to Services</a>
-        </div>
+            <!-- Back to Blog Button -->
+            <a href="<?php echo get_permalink(get_option('page_for_posts')); ?>" class="back-button">Back to Blogs</a>
+        </article>
     <?php endwhile; endif; ?>
 </div>
 

@@ -1,10 +1,10 @@
-    <?php
-    /*
-    Template Name: Front Page
-    */
+<?php
+/*
+Template Name: Front Page
+*/
+get_header(); 
+?>
 
-        get_header(); 
-    ?>
 <!-- <div id="primary" class="content-area"> -->
     <!-- <main id="main" class="site-main"> -->
         <!-- Banner Section -->
@@ -47,8 +47,8 @@
                 $second_word = isset($category_name_parts[1]) ? ucfirst($category_name_parts[1]) : ''; // Capitalize the second word
                 // Fetch category image from custom field
                 $category_image = get_option('z_taxonomy_image' . $category_id);
-                // $default_image = get_template_directory_uri() . '/assets/img/default-service.jpg';
-                // $category_image = (!empty($category_image)) ? esc_url($category_image) : $default_image;
+                
+                
             ?>
                 <!-- Updated Category Section -->
                 <div class="service">
