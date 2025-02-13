@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<?php get_header(); ?>
+
 
 <?php if (is_front_page()) : ?>
     <!-- Banner Section -->

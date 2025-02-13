@@ -1322,3 +1322,153 @@ button:hover {
     background-color: #005bb5;
 }
 
+
+/* ============================= */
+/* MAIL FORM SECTION STYLING */
+/* ============================= */
+
+/* Main container for the entire section */
+.container {
+    margin-top:40px;
+    background-color: #f5f5f5; /*Light grey background color*/
+    width: 100%; /* Full width */
+    padding: 40px; /* Add padding for space inside */
+    box-sizing: border-box; /* Ensures padding is included in width */
+}
+
+/* Blog after pagination styling */
+.blog-after-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+/* Left Header (h1) */
+.left-header h1 {
+    font-size: 40px;
+    margin: 0;
+    padding: 30px;
+    color: #333;
+}
+
+/* Right Header (h5) */
+.right-header h5 {
+    font-size: 20px;
+    color: #666;
+    padding:45px 30px 0px 0px ;
+    word-wrap: break-word; /* Ensures long text wraps inside the box */
+    max-width: 500px; /* Optional: restricts text width */
+    text-align: right; /* Aligns to the right */
+}
+
+/* Form container styling */
+.form-style {
+    margin-top: 20px;
+}
+
+/* Styling for form fields inside Contact Form 7 */
+.wpcf7 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Styling for input fields */
+.wpcf7 input[type="email"], .wpcf7 input[type="text"], .wpcf7 textarea {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px; /* Space between fields */
+    width: 100%; /* Ensure input takes up full width */
+    box-sizing: border-box;
+}
+
+/* Submit button aligned to the right */
+.wpcf7 input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    align-self: flex-end; /* Align button to the right */
+}
+
+.wpcf7 input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+
+/* Single posts */
+/* Title */
+/* Title */
+.post-title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    padding: 10px 0;
+    text-align: center;
+}
+
+/* Author & Date */
+.post-meta {
+    font-size: 1rem;
+    color: #555;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Content */
+.post-content {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    text-align: justify; /* Justify the text */
+    max-width: 800px; /* Constrain width for better readability */
+    margin: 0 auto; /* Center content */
+    padding: 20px;
+}
+
+/* Recommended Posts Section */
+.related-posts {
+    margin-top: 40px;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+/* Recommended Posts Grid */
+.related-posts-grid {
+    display: flex;
+    gap: 20px;
+}
+
+/* Individual Recommended Post */
+.related-post-item {
+    flex: 1;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Image for Recommended Posts */
+.related-post-thumbnail img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Excerpt */
+.related-excerpt {
+    font-size: 1rem;
+    color: #666;
+    margin-top: 10px;
+}
+
+
+
+
