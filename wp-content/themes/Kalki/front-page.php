@@ -31,48 +31,48 @@ get_header();
 </div>
 
 <!-- Service Section -->
-<hr>
+
 <div class="container-mata-service serv">
-            <?php
-           // Get category details
-            $category_slug = 'service'; // Change this to your actual category slug
-            $category = get_term_by('slug', $category_slug, 'category');
-            if ($category) {
-                $category_id = $category->term_id;
-                $category_name = $category->name;
-                $category_description = $category->description;
-                // Explode the category name into two words
-                $category_name_parts = explode('_', $category_name);
-                $first_word = isset($category_name_parts[0]) ? ucfirst($category_name_parts[0]) : ''; // Capitalize the first word
-                $second_word = isset($category_name_parts[1]) ? ucfirst($category_name_parts[1]) : ''; // Capitalize the second word
-                // Fetch category image from custom field
-                $category_image = get_option('z_taxonomy_image' . $category_id);
-                
-                
-            ?>
-                <!-- Updated Category Section -->
-                <div class="service">
-                    <div class="wp-block-media-text">
-                        <figure class="wp-block-media-text__media">
-                            <img src="<?php echo esc_url($category_image); ?>" alt="<?php echo esc_attr($category_name); ?>">
-                        </figure>
-                        <div class="wp-block-media-text__content">
-                            <h1>
-                                <span style="color: black;"><?php echo $first_word; ?></span>
-                                <span style="color: #007BFF;"><?php echo $second_word; ?></span>
-                            </h1>
-                            <p><?php echo esc_html($category_description); ?></p>
-                            <div class="view-all-button">
-                            <a href="<?php echo get_category_link(get_cat_ID('Our service')); ?>" class="button">
-                                View All
-                            </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <?php } else {
-                echo '<p>Category not found.</p>';
-            } ?>
+<?php
+    // Get category details for the 'Our Service' category
+    $category_slug = 'service'; // Change this to your actual category slug
+    $category = get_term_by('slug', $category_slug, 'category');
+    if ($category) {
+        $category_id = $category->term_id;
+        $category_name = $category->name;
+        $category_description = $category->description;
+        // Explode the category name into two words
+        $category_name_parts = explode('_', $category_name);
+        $first_word = isset($category_name_parts[0]) ? ucfirst($category_name_parts[0]) : ''; // Capitalize the first word
+        $second_word = isset($category_name_parts[1]) ? ucfirst($category_name_parts[1]) : ''; // Capitalize the second word
+        // Fetch category image from custom field
+        $category_image = get_option('z_taxonomy_image' . $category_id);
+?>
+
+<!-- Updated Category Section -->
+<div class="service">
+    <div class="wp-block-media-text">
+        <figure class="wp-block-media-text__media">
+            <img src="<?php echo esc_url($category_image); ?>" alt="<?php echo esc_attr($category_name); ?>">
+        </figure>
+        <div class="wp-block-media-text__content">
+            <h1>
+                <span style="color: black;"><?php echo $first_word; ?></span><br>
+                <span style="color: #007BFF;"><?php echo $second_word; ?></span>
+            </h1>
+            <p><?php echo nl2br(esc_html($category_description)); ?></p>
+            <div class="view-all-button">
+                <a href="<?php echo get_category_link(get_cat_ID('Our service')); ?>" class="button">
+                    View All
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php } else {
+    echo '<p>Category not found.</p>';
+} ?>
 
     <!-- Dynamic Circles in Plus Formation -->
     <div class="circle-container">
@@ -116,15 +116,20 @@ get_header();
     <div class="content">
         <h2>Featured <span>Projects</span></h2>
         <button class="view-all">View All</button>
+        <br>
         <div class="nav-buttons">
-            <button id="prev"><-</button>
-            <button id="next">-></button>
-        </div>
+        <button id="prev"><-</button>
+        <button id="next">-></button>
+    </div>
     </div>
     <div class="slider-container">
         <div class="slider">
             <?php
-            $args = ['post_type' => 'post', 'posts_per_page' => 3, 'category_name' => 'Slider'];
+            $args = [
+            'post_type' => 'post', 
+            'posts_per_page' => 3,
+            'category_name' => 'Slider'
+            ];
             $query = new WP_Query($args);
 
             if ($query->have_posts()) :
@@ -152,7 +157,10 @@ get_header();
 <!-- Testimonials Section -->
 <section class="testimonials">
     <div class="testimonial-wrapper">
-        <button id="prevTestimonial" class="arrow left"><span>&#8592;</span></button>
+    <button id="prevTestimonial" class="arrow left">
+    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/arrow-left.png'); ?>" alt="Previous">
+    <span>&#8592;</span>
+</button>
         <div class="testimonial-content">
             <div class="testimonial-slider">
                 <?php
