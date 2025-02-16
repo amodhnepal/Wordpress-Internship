@@ -41,6 +41,7 @@
                     <h2><?php the_title(); ?></h2>
                     <div class="service-post-excerpt">
                         <?php the_content(); ?>
+                        <a href="<?php the_permalink(); ?>" class="read-more-btn">Read More</a>
                     </div>
                     
                 </div>

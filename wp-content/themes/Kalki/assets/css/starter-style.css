@@ -3,13 +3,15 @@
     padding: 0;
 }
 
+/* Banner Section */
 .banner-section {
     height: 100vh; /* Full viewport height */
     overflow: hidden;
     position: relative;
-    background: rgba(60, 90, 251, 0.45);
+    background: rgba(60, 90, 251, 0.25);
 }
-/* Banner image to cover the screen */
+
+/* Banner image */
 .banner-image {
     position: absolute;
     width: 100%;
@@ -17,7 +19,46 @@
     object-fit: cover;
     z-index: -1;
 }
-/* Centered banner content */
+
+/* Vector Images */
+.banner-vector {
+    position: absolute;
+    z-index: 1;
+}
+
+/* Vector 1 & 2: Top right, diagonal */
+.top-right {
+    /* transform: rotate(45deg); Diagonal rotation */
+}
+
+/* Vector 1 Position: Top Right */
+.vector1 {
+    /* top: 10; */
+    right: 150;
+    /* width: 150px; Adjust size */
+    height: auto;
+}
+
+/* Vector 2 Position: Top Right */
+.vector2 {
+    top: -233px;
+    right: 29px;
+    width: 112px;
+    height: 450px;
+    transform: rotate(28deg);
+}
+
+
+/* Vector 3: Starts from the logo skew area */
+.start-from-logo {
+    top: 25%; /* Adjust the starting position */
+    left: 10%; /* Position relative to the logo */
+    width: 180px; /* Adjust size */
+    height: auto;
+    transform: rotate(-45deg); /* Diagonal rotation */
+}
+
+/* Banner Content */
 .banner-content {
     position: absolute;
     top: 50%;
@@ -26,6 +67,7 @@
     text-align: center;
     z-index: 2;
 }
+
 /* Rectangle with skew effect */
 .rectangle {
     display: inline-block;
@@ -37,6 +79,7 @@
     margin-bottom: 20px;
     position: relative; /* Required for button positioning */
 }
+
 /* Text inside the rectangle */
 .rectangle h1 {
     color: white;
@@ -47,10 +90,11 @@
     line-height: 1.2;
     font-weight: normal;
 }
+
 .bold {
     font-weight: bold;
-    width: auto;
 }
+
 /* Button styles */
 .btn {
     display: block;
@@ -61,39 +105,44 @@
     font-size: 1rem;
     margin-top: 20px;
     position: absolute;
-    bottom: -20px; /* Adjust to touch the bottom of the rectangle */
+    bottom: -20px;
     left: 50%;
-    transform: translateX(-50%) skewX(15deg); /* Center and skew the button */
+    transform: translateX(-50%) skewX(15deg);
     text-align: center;
-    border-radius: 5px; /* Optional: Add rounded corners */
 }
-/* Fixed navigation menu at the bottom right */
+
+/* Navigation menu styles (unchanged) */
 .main-nav {
+    height: 100px;
     position: sticky;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
-    z-index: 10;
-    text-align: right;
-    width: 100%;
-    padding: 0;
-    /* padding: 10px 20PX; */
+    top: 0;
+    left: 0;
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    height: 109px;
+    background-color: rgb(1, 15, 47);
+    padding: 40px 0px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: -10px;
+    overflow: hidden;
+    z-index: 999;
 }
+
 .nav-container {
     display: flex;
     align-items: center;
     width: 100%;
     justify-content: space-between;
 }
+
 .logo {
     margin-right: 20px;
-    
+    background-color: white;
+    transform: skew(340deg);
+    margin-left: -17px;
 }
+
 /* Navigation menu list */
 .nav-menu {
     list-style: none;
@@ -122,18 +171,18 @@
 
 
 
-
 /* Achievement */
 /* Achievement Section */
 .container-achieve {
     display: flex;
     justify-content: center; 
     align-items: center; 
-    min-height: 100%; 
+    /* min-height: 20%;  */
     /* text-align: center;*/
     background-color: #f9f9f9; 
     margin: 0; 
-    padding: 50px; 
+    /* padding: 50px;  */
+    padding-top: 80px;
 }
 
 .achieve {
@@ -184,25 +233,9 @@
     align-items: center;
     justify-content: flex-start;
 }
-.container-mata-service .wp-block-media-text__media img {
-    border-radius: 50%; /* Make the image round */
-    object-fit: cover;  /* Ensure the image fills the container */
-    width: 200px;       /* Adjust the image size */
-    height: 200px;      /* Maintains aspect ratio */
-    position: relative;
-}
-.container-mata-service .wp-block-media-text__content {
-    padding-left: 20px;
-}
-.container-mata-service .wp-block-media-text__content h1 {
-    font-size: 36px; /* Increase category name size */
-    font-weight: bold;
-}
-.container-mata-service .wp-block-media-text__content p {
-    font-size: 18px; /* Increase category description size */
-}
 .view-all-button .button {
-    background-color: #007BFF; /* Blue background */
+    background-color: #007BFF; 
+    margin-top: 20px;
     color: white;              /* White text */
     padding: 12px 25px;        /* Adjust padding for larger button */
     font-size: 18px;           /* Make the button text bigger */
@@ -337,27 +370,63 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 100px 30px;
-    background: #fff;
+    background-color: #f5f5f5;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
 }
+
+/* Rectangle Image */
+.background-rectangle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%; /* Adjust based on your design */
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the area */
+    z-index: 1; /* Behind the content and slider */
+}
+
 .content {
     width: 30%;
+    z-index: 2; /* Above the rectangle */
 }
-.content h2 {
-    font-size: 2.5em;
-    font-weight: bold;
+
+.slider-container {
+    width: 65%;
+    overflow: hidden;
+    position: relative;
+    z-index: 2; /* Above the rectangle */
 }
-.content span {
-    color: blue;
+
+.slider {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease-in-out;
 }
-.view-all {
-    background: blue;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
+
+.slide {
+    min-width: calc(33.33% - 20px); /* Adjust based on the number of slides and gap */
+    background: #f4f4f4;
+    text-align: center;
+    padding-bottom: 20px;
+    margin-left: 40px;
+    flex-shrink: 0; /* Prevent slides from shrinking */
 }
+
+.slide img {
+    width: 100%;
+    height: auto;
+}
+
+/* Arrow Buttons */
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
 .nav-buttons button {
     background: none;
     border: 2px solid #000;
@@ -366,31 +435,14 @@
     height: 40px;
     font-size: 20px;
     cursor: pointer;
-}
-.slider-container {
-    width: 65%;
-    overflow: hidden;
-    position: relative;
-}
-.slider {
     display: flex;
-    gap: 20px;
-    transition: transform 0.5s;
+    align-items: center;
+    justify-content: center;
 }
-.slide {
-    min-width: 30%;
-    background: #f4f4f4;
-    text-align: center;
-    padding-bottom: 20px;
-    /* margin-right: 30px; */
-    margin-left: 40px;
-    
-    /* border-radius: 10px; */
-}
-.slide img {
-    width: 100%;
-    height: auto;
-    /* border-radius: 10px; */
+
+.nav-buttons button img {
+    width: 20px; /* Adjust based on your arrow image size */
+    height: 20px;
 }
 
 
@@ -400,48 +452,35 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 500px; /* Increase height */
+    height: 500px;
     background: #f5f5f5;
     padding: 0;
+    background-color: #fff;
 }
 
 .blue-text {
     color: blue;
 }
+
 .testimonial-wrapper {
     display: flex;
-    align-items: stretch; /* Ensures all child elements have the same height */
-    position: relative;
     align-items: center;
     justify-content: center;
     width: 80%;
-    max-width: 800px;
-    /* height: 100%;  */
+    max-width: 900px;
+    position: relative;
 }
 
 .arrow {
-    flex: 0 0 30%;
-    height: 270px;
+    flex: 0 0 150px; /* Increased width */
+    height: 300px; /* Increased height */
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    overflow: hidden;
     position: relative;
-    background: none; /* Remove solid blue background */
-}
-
-/* Add an overlay with transparency */
-.arrow::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 255, 0.5); /* Semi-transparent blue */
-    z-index: 1;
+    overflow: hidden;
 }
 
 .arrow img {
@@ -451,12 +490,22 @@
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 0; /* Ensure it's behind the overlay */
+    filter: brightness(70%); /* Makes the image darker */
+}
+
+.arrow .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 255, 0.5); /* Semi-transparent blue overlay */
+    z-index: 1;
 }
 
 .arrow span {
     position: relative;
-    z-index: 2; /* Ensure arrow symbol is on top */
+    z-index: 2;
     font-size: 2rem;
     color: white;
     font-weight: bold;
@@ -465,14 +514,13 @@
 .testimonial-content {
     flex-grow: 1;
     background: white;
-    /* border-radius: 10px; */
     padding: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    min-width: 500px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    min-width: 600px; /* Adjusted for better layout */
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .testimonial-slider {
@@ -491,7 +539,7 @@
 }
 
 .testimonial-img {
-     flex: 0 0 20%;/* Image takes up 40% */
+    flex: 0 0 20%;
     height: 100%;
     overflow: hidden;
 }
@@ -500,7 +548,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* border-radius: 10px 0 0 10px;  */
 }
 
 .testimonial-text {
@@ -533,6 +580,7 @@
     text-align: center;
     gap: 100px;
     padding: 100px ;
+    background-color: #f6f6f6;
 }
 
 .counter-box {
@@ -573,21 +621,54 @@
 
 /* Recent Post */
 .recent-posts {
-    text-align: center;
+    text-align: center; /* Center content */
     padding: 40px 0;
 }
 
 .recent-posts-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Align the title and button on the same row */
     align-items: center;
     margin-bottom: 20px;
+    width: 100%; /* Make sure it takes up the full width */
+    max-width: 1200px; /* Optional: limit max width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.recent-posts h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.recent-posts h2 span {
+    color: #0073e6;
+}
+
+.view-all {
+    text-decoration: none;
+    color: #0073e6;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: 2px solid #0073e6;
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.view-all:hover {
+    background: #0073e6;
+    color: white;
 }
 
 .posts-grid {
     display: flex;
     gap: 20px;
     justify-content: center;
+    margin-top: 20px;
+    max-width: 1200px; /* Optional: limit max width */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .post-card {
@@ -599,16 +680,32 @@
     text-align: left;
 }
 
+.post-image {
+    position: relative;
+}
+
 .post-image img {
     width: 100%;
     height: 200px;
     object-fit: cover;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.post-card:hover .post-image img {
+    transform: scale(1.05);
 }
 
 .post-content {
     padding: 15px;
+    position: relative;
+    z-index: 1;
+    margin-left: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    border-left: 4px solid blue;
+    background: white;
+    border-radius: 10px;
 }
 
 .post-content h3 {
@@ -623,17 +720,20 @@
 }
 
 
+
+
 /* Contact Form */
 
 .contact-section {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Align items to the start (not centered) */
     margin-top: 50px; /* Adds extra space from the top */
     background-color: #F5F5F5; /* Set background color for the entire section */
     width: 100%; /* Ensures the section fills the width */
     box-sizing: border-box; /* Ensures padding doesn't affect width */
 }
+
 /* Inner Container */
 .contact-container {
     width: 100%; /* Make the container fill the full width */
@@ -642,19 +742,38 @@
     padding-right: 30px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     text-align: center;
-    
-}
-.contact img{
-    width: 100%;
-    height: 100%;
 }
 
-/* Heading */
-.contact h2 {
-    font-size: 28px;
+/* Ensure the image stays where it is */
+.contact img {
+    width: 100%;
+    height: auto; /* Ensure proper aspect ratio */
+}
+
+/* Contact Header (Moved to the top, no overlap with form) */
+.contact-header {
+    margin-bottom: 20px; /* Space between title and content */
+    position: relative;
+    z-index: 10; /* Ensure title stays above any image if there's overlap */
+    text-align: center;
+}
+
+.contact h1 {
+    font-size: 32px; /* Slightly larger for the title */
     color: #333;
     margin-bottom: 15px;
 }
+
+.contact h1 span {
+    color: blue;
+}
+
+/* Form Section (Content) */
+.contact {
+    padding: 20px; /* Add padding to make it look spacious */
+    background-color: #fff; /* Form background color */
+}
+
 /* Paragraph/Text */
 .contact p {
     font-size: 16px;
@@ -662,6 +781,7 @@
     line-height: 1.6;
     margin-bottom: 20px;
 }
+
 /* Links Inside Content */
 .contact a {
     color: #007BFF;
@@ -671,12 +791,14 @@
 .contact a:hover {
     text-decoration: underline;
 }
+
 /* Category Styling */
 .contact .post-categories {
     margin-top: 10px;
     font-size: 14px;
     color: #777;
 }
+
 /* No Content Message */
 .no-content {
     text-align: center;
@@ -684,19 +806,26 @@
     color: #999;
     padding: 20px;
 }
+
 /* Responsive */
 @media (max-width: 768px) {
     .contact-container {
         width: 100%; /* Ensure container stretches full width on mobile */
         padding: 30px;
     }
-    .contact h2 {
-        font-size: 24px;
+    .contact h1 {
+        font-size: 28px; /* Adjust title size on mobile */
     }
     .contact p {
         font-size: 14px;
     }
 }
+
+
+
+
+
+
 /* Contact Form Styling */
 /* Make the Contact Section Wider */
 .wpcf7 {
@@ -1166,9 +1295,9 @@ button:hover {
 
 .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Two posts per row */
-    gap: 30px;
-    max-width: 1200px;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); /* Two posts per row */
+    gap: 10px;
+    max-width: 1010px;
     margin: auto;
 }
 

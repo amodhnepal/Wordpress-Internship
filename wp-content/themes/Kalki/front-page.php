@@ -2,23 +2,24 @@
 /*
 Template Name: Front Page
 */
+require get_template_directory() . '/banner.php';
 get_header(); 
 ?>
 
 <!-- <div id="primary" class="content-area"> -->
     <!-- <main id="main" class="site-main"> -->
         <!-- Banner Section -->
+        <div class="container-achieve">
+            <?php
+    $args = [
+        'post_type' => 'page',
+        'pagename' => 'Achievement', 
+        'posts_per_page' => 1
+];
+$new_page_query = new WP_Query($args);
 
-<div class="container-achieve">
-    <?php
-    $args = ['post_type' => 'page',
-     'pagename' => 'Achievement', 
-     'posts_per_page' => 1
-    ];
-    $new_page_query = new WP_Query($args);
-
-    if ($new_page_query->have_posts()) :
-        while ($new_page_query->have_posts()) : $new_page_query->the_post();
+if ($new_page_query->have_posts()) :
+    while ($new_page_query->have_posts()) : $new_page_query->the_post();
             ?>
             <div class="achieve"><?php the_content(); ?></div>
             <?php
@@ -34,41 +35,47 @@ get_header();
 
 <div class="container-mata-service serv">
 <?php
-    // Get category details for the 'Our Service' category
-    $category_slug = 'service'; // Change this to your actual category slug
-    $category = get_term_by('slug', $category_slug, 'category');
-    if ($category) {
-        $category_id = $category->term_id;
-        $category_name = $category->name;
-        $category_description = $category->description;
-        // Explode the category name into two words
-        $category_name_parts = explode('_', $category_name);
-        $first_word = isset($category_name_parts[0]) ? ucfirst($category_name_parts[0]) : ''; // Capitalize the first word
-        $second_word = isset($category_name_parts[1]) ? ucfirst($category_name_parts[1]) : ''; // Capitalize the second word
-        // Fetch category image from custom field
-        $category_image = get_option('z_taxonomy_image' . $category_id);
+// Get the 'service' category details
+$category = get_term_by('slug', 'service', 'category');
+
+if ($category) {
+    $category_name = $category->name;
+    $category_description = $category->description;
+    $category_image = get_option('z_taxonomy_image' . $category->term_id); // Custom category image
+    $category_link = get_category_link($category->term_id);
+
+    // Split the category name by space into words
+    $category_words = explode(' ', trim($category_name));
+
+    // Assign first and second words
+    $first_word = !empty($category_words[0]) ? esc_html($category_words[0]) : '';
+    $second_word = !empty($category_words[1]) ? esc_html($category_words[1]) : '';
 ?>
 
-<!-- Updated Category Section -->
+<!-- Category Section -->
 <div class="service">
     <div class="wp-block-media-text">
+        <!-- Image on the right -->
         <figure class="wp-block-media-text__media">
-            <img src="<?php echo esc_url($category_image); ?>" alt="<?php echo esc_attr($category_name); ?>">
+            <img src="<?php echo esc_url($category_image); ?>" alt="<?php echo esc_attr($category_name); ?>" class="category-image">
         </figure>
+
+        <!-- Content on the left -->
         <div class="wp-block-media-text__content">
             <h1>
-                <span style="color: black;"><?php echo $first_word; ?></span><br>
-                <span style="color: #007BFF;"><?php echo $second_word; ?></span>
+                <span style="color: black;"><?php echo $first_word; ?></span>
+                <?php if ($second_word) : ?>
+                    <br><span style="color: #007BFF;"><?php echo $second_word; ?></span>
+                <?php endif; ?>
             </h1>
-            <p><?php echo nl2br(esc_html($category_description)); ?></p>
+            <p class="category-description"><?php echo nl2br(esc_html($category_description)); ?></p>
             <div class="view-all-button">
-                <a href="<?php echo get_category_link(get_cat_ID('Our service')); ?>" class="button">
-                    View All
-                </a>
+                <a href="<?php echo esc_url($category_link); ?>" class="button">View All</a>
             </div>
         </div>
     </div>
 </div>
+
 
 <?php } else {
     echo '<p>Category not found.</p>';
@@ -113,22 +120,30 @@ get_header();
 
 <!-- Featured Projects Section -->
 <section class="featured-projects">
+    <!-- Rectangle Image -->
+    <img src="/wp-content/themes/kalki/assets/img/featured-rectangle.png" alt="Featured Rectangle" class="background-rectangle">
+
     <div class="content">
         <h2>Featured <span>Projects</span></h2>
         <button class="view-all">View All</button>
         <br>
         <div class="nav-buttons">
-        <button id="prev"><-</button>
-        <button id="next">-></button>
+            <button id="prev">
+                <img src="/wp-content/themes/kalki/assets/img/arrow-left.png" alt="Previous">
+            </button>
+            <button id="next">
+                <img src="/wp-content/themes/kalki/assets/img/arrow-right.png" alt="Next">
+            </button>
+        </div>
     </div>
-    </div>
+
     <div class="slider-container">
         <div class="slider">
             <?php
             $args = [
-            'post_type' => 'post', 
-            'posts_per_page' => 3,
-            'category_name' => 'Slider'
+                'post_type' => 'post',
+                'posts_per_page' => 3,
+                'category_name' => 'Slider'
             ];
             $query = new WP_Query($args);
 
@@ -157,10 +172,12 @@ get_header();
 <!-- Testimonials Section -->
 <section class="testimonials">
     <div class="testimonial-wrapper">
-    <button id="prevTestimonial" class="arrow left">
-    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/arrow-left.png'); ?>" alt="Previous">
-    <span>&#8592;</span>
-</button>
+        <button id="prevTestimonial" class="arrow left">
+            <img id="prevImage" src="" alt="Previous Testimonial">
+            <div class="overlay"></div>
+            <span>&#8592;</span>
+        </button>
+
         <div class="testimonial-content">
             <div class="testimonial-slider">
                 <?php
@@ -200,9 +217,15 @@ get_header();
                 ?>
             </div>
         </div>
-        <button id="nextTestimonial" class="arrow right"><span>&#8594;</span></button>
+
+        <button id="nextTestimonial" class="arrow right">
+            <img id="nextImage" src="" alt="Next Testimonial">
+            <div class="overlay"></div>
+            <span>&#8594;</span>
+        </button>
     </div>
 </section>
+
 
 <!-- Counter -->
 <section class="counter-section">
@@ -223,12 +246,12 @@ get_header();
         'posts_per_page' => 3, 
         'orderby' => 'date', 
         'order' => 'DESC'
-    ];
+        ];
         $recent_posts = new WP_Query($args);
 
         if ($recent_posts->have_posts()) :
             while ($recent_posts->have_posts()) : $recent_posts->the_post();
-                ?>
+        ?>
                 <article class="post-card">
                     <div class="post-image">
                         <img src="<?php the_post_thumbnail_url('large'); ?>" alt="<?php the_title(); ?>">
@@ -238,7 +261,7 @@ get_header();
                         <p>Admin | <?php echo get_the_date('d M, Y'); ?></p>
                     </div>
                 </article>
-                <?php
+        <?php
             endwhile;
             wp_reset_postdata();
         else :
@@ -247,6 +270,7 @@ get_header();
         ?>
     </div>
 </section>
+
 
 
 
@@ -270,11 +294,25 @@ get_header();
         );
         $new_page_query = new WP_Query($args);
         if ($new_page_query->have_posts()) :
-        ?>
-            <?php while ($new_page_query->have_posts()) : $new_page_query->the_post(); ?>
-                <div class="contact">
-                    <?php the_content(); ?>
-                </div>
+            while ($new_page_query->have_posts()) : $new_page_query->the_post();
+            
+            // Split the title at the "?" 
+            $title_parts = explode("?", get_the_title());
+            ?>
+            <div class="contact-header">
+                <h1 class="contact-title">
+                    <?php 
+                    echo $title_parts[0];
+
+                    if (isset($title_parts[1])) {
+                        echo ' <span style="color: blue;">?' . $title_parts[1] . '</span>';
+                    }
+                    ?>
+                </h1>
+            </div>
+            <div class="contact">
+                <?php the_content(); ?>
+            </div>
             <?php endwhile;
             wp_reset_postdata(); ?>
         <?php else : ?>
@@ -282,6 +320,8 @@ get_header();
         <?php endif; ?>
     </div>
 </section>
+
+
 
     <?php
     get_footer(); 

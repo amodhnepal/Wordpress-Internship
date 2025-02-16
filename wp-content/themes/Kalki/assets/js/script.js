@@ -30,20 +30,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const nextImage = document.getElementById("nextImage");
 
     let currentIndex = 0;
+
     function updateSlider() {
         slides.forEach((slide, index) => {
             slide.style.transform = `translateX(-${currentIndex * 100}%)`;
         });
-    
+
         const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
         const nextIndex = (currentIndex + 1) % slides.length;
-    
-        // Ensure prevImage and nextImage exist before updating src
-        if (prevImage && nextImage) {
-            prevImage.src = slides[prevIndex].querySelector(".testimonial-img img").src;
-            nextImage.src = slides[nextIndex].querySelector(".testimonial-img img").src;
-        }
+
+        // Update the images inside the prev/next buttons
+        prevImage.src = slides[prevIndex].querySelector(".testimonial-img img").src;
+        nextImage.src = slides[nextIndex].querySelector(".testimonial-img img").src;
     }
+
     prevBtn.addEventListener("click", function () {
         currentIndex = (currentIndex - 1 + slides.length) % slides.length;
         updateSlider();
@@ -54,8 +54,10 @@ document.addEventListener("DOMContentLoaded", function () {
         updateSlider();
     });
 
+    // Initialize first images
     updateSlider();
 });
+
 
 
 
