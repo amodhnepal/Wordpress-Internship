@@ -1,14 +1,22 @@
 <?php
 function kalki_theme_styles() {
-    wp_enqueue_script('slider-script', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), null, true);
+    // Enqueue Swiper.js CSS
+    wp_enqueue_style('swiper-css', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', array(), '11.0.0');
+
+    // Enqueue Swiper.js JavaScript
+    wp_enqueue_script('swiper-js', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', array(), '11.0.0', true);
+
+    // Enqueue custom slider script (with Swiper.js as dependency)
+    wp_enqueue_script('slider-script', get_template_directory_uri() . '/assets/js/script.js', array('swiper-js'), null, true);
+
     // Enqueue Font Awesome
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', array(), null, 'all');
-   
+
     // Enqueue custom styles
     wp_enqueue_style('kalki-starter-style', get_template_directory_uri() . '/assets/css/starter-style.css', array(), '1.0.0');
 }
 add_action('wp_enqueue_scripts', 'kalki_theme_styles');
-add_theme_support('post-thumbnails');
+
 
 
 // For logo
@@ -75,77 +83,45 @@ function zGetAttachmentIdByUrl($image_src) {
     return (!empty($id)) ? $id : NULL;
 }
 
+// CPT recent post
+
+function register_recent_posts_cpt() {
+    // Register the Recent Posts Custom Post Type
+    $args = array(
+        'label'               => 'Recent Posts', 
+        'description'         => 'Post type for recent posts',
+        'public'              => true, 
+        'show_ui'             => true, 
+        'show_in_menu'        => true, 
+        'query_var'           => true, 
+        'rewrite'             => array('slug' => 'recent-posts'), // Custom URL slug
+        'capability_type'     => 'post',
+        'has_archive'         => true, 
+        'hierarchical'        => false, 
+        'show_in_rest'        => true, 
+        'menu_icon'           => 'dashicons-admin-post', 
+        'taxonomies'          => array('category'), 
+        'supports'            => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'), // Enable necessary features including thumbnail (featured image)
+    );
+    
+    // Register the custom post type
+    register_post_type('recent_posts', $args);
+}
+
+add_action('init', 'register_recent_posts_cpt');
+function redirect_custom_post_type_to_single_post($template) {
+    // Check if it's a single post of the 'recent_posts' custom post type
+    if (is_singular('recent_posts')) {
+        // Force it to use single-post.php
+        $template = get_template_directory() . '/single-post.php';
+    }
+    return $template;
+}
+add_filter('template_include', 'redirect_custom_post_type_to_single_post');
 
 
+add_theme_support('post-thumbnails'); // Enable featured images for posts
 
 // footer registration
 
-
-
-
-
-// Register footer settings in the WordPress admin
-function register_footer_settings() {
-    add_option('footer_logo', ''); // Footer logo URL
-    add_option('footer_address', ''); // Footer address
-    add_option('footer_facebook', ''); // Facebook link
-    add_option('footer_twitter', ''); // Twitter link
-    add_option('footer_linkedin', ''); // LinkedIn link
-    register_setting('footer_settings_group', 'footer_logo');
-    register_setting('footer_settings_group', 'footer_address');
-    register_setting('footer_settings_group', 'footer_facebook');
-    register_setting('footer_settings_group', 'footer_twitter');
-    register_setting('footer_settings_group', 'footer_linkedin');
-}
-add_action('admin_init', 'register_footer_settings');
-
-// Add footer settings page to WordPress admin menu
-function footer_settings_page() {
-    add_menu_page(
-        'Footer Settings',        // Page title
-        'Footer Settings',        // Menu title
-        'manage_options',         // Capability required
-        'footer-settings',        // Menu slug
-        'footer_settings_page_callback'  // Callback function to render the settings page
-    );
-}
-add_action('admin_menu', 'footer_settings_page');
-
-// Footer settings page callback function
-function footer_settings_page_callback() {
-    ?>
-    <div class="wrap">
-        <h1>Footer Settings</h1>
-        <form method="post" action="options.php">
-            <?php settings_fields('footer_settings_group'); ?>
-            <?php do_settings_sections('footer_settings_group'); ?>
-
-            <table class="form-table">
-                <tr>
-                    <th><label for="footer_logo">Footer Logo URL</label></th>
-                    <td><input type="text" name="footer_logo" id="footer_logo" value="<?php echo esc_url(get_option('footer_logo')); ?>" class="regular-text"></td>
-                </tr>
-                <tr>
-                    <th><label for="footer_address">Footer Address</label></th>
-                    <td><textarea name="footer_address" id="footer_address" rows="4" class="large-text"><?php echo esc_textarea(get_option('footer_address')); ?></textarea></td>
-                </tr>
-                <tr>
-                    <th><label for="footer_facebook">Facebook URL</label></th>
-                    <td><input type="url" name="footer_facebook" id="footer_facebook" value="<?php echo esc_url(get_option('footer_facebook')); ?>" class="regular-text"></td>
-                </tr>
-                <tr>
-                    <th><label for="footer_twitter">Twitter URL</label></th>
-                    <td><input type="url" name="footer_twitter" id="footer_twitter" value="<?php echo esc_url(get_option('footer_twitter')); ?>" class="regular-text"></td>
-                </tr>
-                <tr>
-                    <th><label for="footer_linkedin">LinkedIn URL</label></th>
-                    <td><input type="url" name="footer_linkedin" id="footer_linkedin" value="<?php echo esc_url(get_option('footer_linkedin')); ?>" class="regular-text"></td>
-                </tr>
-            </table>
-
-            <?php submit_button(); ?>
-        </form>
-    </div>
-    <?php
-}
 ?>

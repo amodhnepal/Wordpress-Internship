@@ -1,24 +1,18 @@
-
-const slider = document.querySelector('.slider');
-const prevBtn = document.getElementById('prev');
-const nextBtn = document.getElementById('next');
-let scrollAmount = 0;
-
-nextBtn.addEventListener('click', () => {
-    scrollAmount += slider.children[0].offsetWidth + 20;
-    if (scrollAmount >= slider.scrollWidth - slider.offsetWidth) {
-        scrollAmount = 0;
-    }
-    slider.style.transform = `translateX(-${scrollAmount}px)`;
+document.addEventListener("DOMContentLoaded", function () {
+    var swiper = new Swiper(".swiper-container", {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        effect: "slide",
+        speed: 500,
+    });
 });
 
-prevBtn.addEventListener('click', () => {
-    scrollAmount -= slider.children[0].offsetWidth + 20;
-    if (scrollAmount < 0) {
-        scrollAmount = slider.scrollWidth - slider.offsetWidth;
-    }
-    slider.style.transform = `translateX(-${scrollAmount}px)`;
-});
+
 
 
 // Testimonial
@@ -66,24 +60,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // foooter js
 
-document.addEventListener("DOMContentLoaded", function () {
-    const scrollToTop = document.createElement("button");
-    scrollToTop.innerText = "↑";
-    scrollToTop.id = "scrollToTop";
-    document.body.appendChild(scrollToTop);
+// document.addEventListener("DOMContentLoaded", function () {
+//     const scrollToTop = document.createElement("button");
+//     scrollToTop.innerText = "↑";
+//     scrollToTop.id = "scrollToTop";
+//     document.body.appendChild(scrollToTop);
 
-    window.addEventListener("scroll", function () {
-        if (window.scrollY > 200) {
-            scrollToTop.style.display = "block";
-        } else {
-            scrollToTop.style.display = "none";
-        }
-    });
+//     window.addEventListener("scroll", function () {
+//         if (window.scrollY > 200) {
+//             scrollToTop.style.display = "block";
+//         } else {
+//             scrollToTop.style.display = "none";
+//         }
+//     });
 
-    scrollToTop.addEventListener("click", function () {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-});
+//     scrollToTop.addEventListener("click", function () {
+//         window.scrollTo({ top: 0, behavior: "smooth" });
+//     });
+// });
 
 
 

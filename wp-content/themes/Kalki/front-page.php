@@ -114,60 +114,71 @@ if ($category) {
         endif;
         ?>
     </div>
-</div>
-
-
-
-<!-- Featured Projects Section -->
-<section class="featured-projects">
-    <!-- Rectangle Image -->
-    <img src="/wp-content/themes/kalki/assets/img/featured-rectangle.png" alt="Featured Rectangle" class="background-rectangle">
-
-    <div class="content">
-        <h2>Featured <span>Projects</span></h2>
-        <button class="view-all">View All</button>
-        <br>
-        <div class="nav-buttons">
-            <button id="prev">
-                <img src="/wp-content/themes/kalki/assets/img/arrow-left.png" alt="Previous">
-            </button>
-            <button id="next">
-                <img src="/wp-content/themes/kalki/assets/img/arrow-right.png" alt="Next">
-            </button>
-        </div>
     </div>
 
-    <div class="slider-container">
-        <div class="slider">
-            <?php
-            $args = [
-                'post_type' => 'post',
-                'posts_per_page' => 3,
-                'category_name' => 'Slider'
-            ];
-            $query = new WP_Query($args);
 
-            if ($query->have_posts()) :
-                while ($query->have_posts()) : $query->the_post();
-                    ?>
-                    <div class="slide">
-                        <?php if (has_post_thumbnail()) : ?>
-                            <img src="<?php the_post_thumbnail_url('large'); ?>" alt="<?php the_title(); ?>">
-                        <?php endif; ?>
-                        <h3><?php the_content(); ?></h3>
-                        <h3><?php the_title(); ?></h3>
-                        <p><?php the_excerpt(); ?></p>
-                    </div>
+<!-- Featured  -->
+<section class="featured-projects">
+    <div class="container">
+        <!-- Left Column (Title, Buttons) -->
+        <div class="left-column">
+            <h2>Featured <span>Projects</span></h2>
+<!-- View All Button -->
+<a href="<?php echo get_category_link(get_cat_ID('Slider')); ?>" class="view-all">View All</a>
+            <div class="swiper-navigation">
+                <button class="swiper-button-prev"></button>
+                <button class="swiper-button-next"></button>
+            </div>
+
+            <!-- Navigation Buttons -->
+        </div>
+        
+        <!-- Right Column (Slider) -->
+        <div class="right-column">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
                     <?php
-                endwhile;
-                wp_reset_postdata();
-            else :
-                echo '<p>No slides available.</p>';
-            endif;
-            ?>
+                    // Query to get posts for the slider
+                    $args = [
+                        'post_type' => 'post',
+                        'posts_per_page' => 4, // Limit to 4 slides
+                        'category_name' => 'Slider' // Adjust to the category of your posts
+                    ];
+                    $query = new WP_Query($args);
+
+                    if ($query->have_posts()) :
+                        while ($query->have_posts()) : $query->the_post();
+                            ?>
+                            <div class="swiper-slide">
+                                <div class="slide-content">
+                                    <!-- Post Image -->
+                                    <?php if (has_post_thumbnail()) : ?>
+                                        <img src="<?php the_post_thumbnail_url('large'); ?>" alt="<?php the_title(); ?>" class="slide-image">
+                                    <?php endif; ?>
+
+                                    <!-- Post Title and Excerpt -->
+                                    <h3 class="slide-title"><?php the_title(); ?></h3>
+                                    <p class="slide-description"><?php the_excerpt(); ?></p>
+                                </div>
+                            </div>
+                            <?php
+                        endwhile;
+                        wp_reset_postdata();
+                    else :
+                        echo '<p>No slides available.</p>';
+                    endif;
+                    ?>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+
+
+
+
+
+
 
 <!-- Testimonials Section -->
 <section class="testimonials">
@@ -238,38 +249,58 @@ if ($category) {
 <section class="recent-posts">
     <div class="recent-posts-header">
         <h2>Recent <span>Posts</span></h2>
-        <a href="<?php echo get_permalink(get_option('page_for_posts')); ?>" class="view-all">VIEW ALL</a>
+        <!-- Link to the 'recent' category archive page -->
+        <a href="<?php echo get_category_link( get_cat_ID( 'recent' ) ); ?>" class="view-all">VIEW ALL</a>
     </div>
     <div class="posts-grid">
         <?php
-        $args = ['post_type' => 'recent_post', 
-        'posts_per_page' => 3, 
-        'orderby' => 'date', 
-        'order' => 'DESC'
-        ];
+        // WP_Query to fetch recent posts of custom post type 'recent_posts' with the 'recent' category
+        $args = array(
+            'post_type' => 'recent_posts', // Custom Post Type
+            'posts_per_page' => 3, // Fetch 3 posts
+            'post_status' => 'publish', // Only published posts
+            'orderby' => 'date', // Order by post date
+            'order' => 'DESC', 
+            'tax_query' => array( 
+                array(
+                    'taxonomy' => 'category', 
+                    'field'    => 'slug', 
+                    'terms'    => 'recent', 
+                    'operator' => 'IN', 
+                ),
+            ),
+        );
+
+        // Perform the query
         $recent_posts = new WP_Query($args);
 
+        // Check if there are any posts
         if ($recent_posts->have_posts()) :
             while ($recent_posts->have_posts()) : $recent_posts->the_post();
         ?>
                 <article class="post-card">
                     <div class="post-image">
+                        <!-- Display post thumbnail image -->
                         <img src="<?php the_post_thumbnail_url('large'); ?>" alt="<?php the_title(); ?>">
                     </div>
                     <div class="post-content">
+                        <!-- Display post title and date -->
                         <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
                         <p>Admin | <?php echo get_the_date('d M, Y'); ?></p>
                     </div>
                 </article>
         <?php
             endwhile;
-            wp_reset_postdata();
+            wp_reset_postdata(); // Reset post data after custom query
         else :
             echo '<p>No recent posts found.</p>';
         endif;
         ?>
     </div>
 </section>
+
+
+
 
 
 

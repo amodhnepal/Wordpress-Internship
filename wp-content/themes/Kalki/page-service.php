@@ -40,7 +40,7 @@
                 <div class="service-post-content">
                     <h2><?php the_title(); ?></h2>
                     <div class="service-post-excerpt">
-                        <?php the_content(); ?>
+                        <?php the_excerpt(); ?>
                         <a href="<?php the_permalink(); ?>" class="read-more-btn">Read More</a>
                     </div>
                     

@@ -51,11 +51,11 @@
 
 /* Vector 3: Starts from the logo skew area */
 .start-from-logo {
-    top: 25%; /* Adjust the starting position */
-    left: 10%; /* Position relative to the logo */
-    width: 180px; /* Adjust size */
-    height: auto;
-    transform: rotate(-45deg); /* Diagonal rotation */
+    bottom: 0;
+    left: 13.2%;
+    width: 240px;
+    height: 275;
+    transform: rotate(352deg);
 }
 
 /* Banner Content */
@@ -173,26 +173,33 @@
 
 /* Achievement */
 /* Achievement Section */
-.container-achieve {
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    /* min-height: 20%;  */
-    /* text-align: center;*/
-    background-color: #f9f9f9; 
-    margin: 0; 
-    /* padding: 50px;  */
-    padding-top: 80px;
-}
-
 .achieve {
-    max-width: 800px; 
+    max-width: 900px; 
     width: 100%; 
     padding: 20px; 
-    /* background-color: #fff;  */
-    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);  */
-    margin: 0; 
+    margin: 0 auto; 
+    display: flex;
+    flex-direction: column;
+    gap: 40px; 
 }
+
+.achieve img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto; /* Centers the image */
+}
+
+/* Extra spacing for paragraphs */
+.achieve p {
+    line-height: 1.8;
+}
+
+/* Ensure all elements inside .achieve have spacing */
+.achieve > * {
+    margin-bottom: 20px; /* Adds space between all elements */
+}
+
 
 /* Service */
 /* Update service section to position image on the right */
@@ -213,7 +220,7 @@
     padding: 20px;
     /* background-color: #fff;  */
     /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);  */
-    margin-left: 0; /* Aligns the div to the left */
+    margin-left: 0; 
     margin-right: auto;
 }
 /* Ensures the service section aligns properly */
@@ -236,14 +243,14 @@
 .view-all-button .button {
     background-color: #007BFF; 
     margin-top: 20px;
-    color: white;              /* White text */
-    padding: 12px 25px;        /* Adjust padding for larger button */
-    font-size: 18px;           /* Make the button text bigger */
-    border: none;              /* Remove the border */
-    border-radius: 5px;        /* Rounded corners */
-    text-decoration: none;     /* Remove underline */
-    display: inline-block;     /* Ensure it aligns properly */
-    transition: background-color 0.3s ease; /* Smooth background change on hover */
+    color: white;             
+    padding: 12px 25px;        
+    font-size: 18px;           
+    border: none;              
+    border-radius: 5px;        
+    text-decoration: none;     
+    display: inline-block;     
+    transition: background-color 0.3s ease; 
 }
 .view-all-button .button:hover {
     background-color: #0056B3; /* Darker blue on hover */
@@ -366,83 +373,129 @@
 
 
 /* Carousel */
+/* Featured Projects Section */
+/* Featured Projects Section */
 .featured-projects {
+    position: relative; /* Ensure everything inside is positioned relative to this */
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
+}
+
+/* Container - Two Columns */
+.container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 100px 30px;
-    background-color: #f5f5f5;
-    height: 100vh;
-    position: relative;
-    overflow: hidden;
+    width: 90%;
+    max-width: 1200px;  
 }
 
-/* Rectangle Image */
-.background-rectangle {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 60%; /* Adjust based on your design */
-    height: 100%;
-    object-fit: cover; /* Ensure the image covers the area */
-    z-index: 1; /* Behind the content and slider */
-}
-
-.content {
-    width: 30%;
-    z-index: 2; /* Above the rectangle */
-}
-
-.slider-container {
-    width: 65%;
-    overflow: hidden;
-    position: relative;
-    z-index: 2; /* Above the rectangle */
-}
-
-.slider {
+/* LEFT COLUMN (Title & Buttons) */
+.left-column {
+    width: 20%; /* Adjust as needed */
+    text-align: left;
     display: flex;
-    gap: 20px;
-    transition: transform 0.5s ease-in-out;
-}
-
-.slide {
-    min-width: calc(33.33% - 20px); /* Adjust based on the number of slides and gap */
-    background: #f4f4f4;
-    text-align: center;
-    padding-bottom: 20px;
-    margin-left: 40px;
-    flex-shrink: 0; /* Prevent slides from shrinking */
-}
-
-.slide img {
-    width: 100%;
-    height: auto;
-}
-
-/* Arrow Buttons */
-.nav-buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.nav-buttons button {
-    background: none;
-    border: 2px solid #000;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
+    position: relative; /* Ensures the buttons stay inside this column */
 }
 
-.nav-buttons button img {
-    width: 20px; /* Adjust based on your arrow image size */
-    height: 20px;
+/* Title */
+.left-column h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.left-column h2 span {
+    color: #0073e6
+}
+
+/* View All Button */
+.view-all {
+    display: inline-block;  /* Makes it behave like a button */
+    padding: 12px 25px; /* Adjust padding for proper spacing */
+    margin-bottom: 10px;
+    background-color: #0073e6; /* Button background color */
+    color: white; 
+    font-size: 1rem; 
+    font-weight: bold; 
+    text-align: center; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+
+
+
+
+/* Navigation Buttons */
+.swiper-navigation {
+    display: flex;
+    /* gap: 5px; */
+    margin-top: 10px;
+    position: relative; /* Keeps it inside the left column */
+    padding: 10px;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+    background: #0073e6;
+}
+
+/* RIGHT COLUMN (Slider) */
+.right-column {
+    /* width: 80%; The slider takes 50% of the section */
+    display: flex;
+    justify-content: center; /* Center the slider inside the column */
+}
+
+/* Swiper Container */
+.swiper-container {
+    width: 300px; /* Reduce slider width inside the right column */
+    overflow: hidden;
+}
+
+/* Swiper Slide */
+.swiper-slide {
+    background: #fff;
+    /* padding: 20px; */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 8px;
+}
+
+/* Slide Image */
+.swiper-slide img {
+    /* width: 100%;
+    height: auto;
+    border-radius: 8px; */
+    margin-bottom: 15px;
+}
+
+/* Slide Title */
+.slide-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Slide Description */
+.slide-description {
+    font-size: 1rem;
+    color: #555;
 }
 
 
@@ -649,6 +702,7 @@
 .view-all {
     text-decoration: none;
     color: #0073e6;
+    background-color: #fff;
     font-weight: bold;
     padding: 10px 20px;
     border: 2px solid #0073e6;
@@ -1714,3 +1768,35 @@ button:hover {
 
 
 
+/* Default Layout for Blog Category */
+.blog-layout {
+    /* Custom styles for Blog posts */
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Custom Layout for Service Page Category */
+.servicepage-layout {
+    /* Styles for service page posts */
+    background-color: #e0f7fa;
+    padding: 30px;
+    border-left: 5px solid #00796b;
+}
+
+/* Custom Layout for Slider Category */
+.slider-layout {
+    /* Styles for slider posts */
+    background-color: #fff3e0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom Layout for Our Service Category */
+.our-service-layout {
+    /* Styles for 'Our Service' posts */
+    background-color: #ffeb3b;
+    padding: 40px;
+    font-style: italic;
+}
