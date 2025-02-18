@@ -2,7 +2,6 @@
 /*
 Template Name: Front Page
 */
-require get_template_directory() . '/banner.php';
 get_header(); 
 ?>
 

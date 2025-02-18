@@ -4,43 +4,49 @@ Template Name: About Us
 */
 get_header();
 ?>
-
-<div class="about-us-container">
-    <!-- Fetch Content from "About" Page -->
-    <div class="about-page-content">
-        <?php
-        $about_page = get_page_by_path('about'); 
-        if ($about_page) :
-        ?>
-            <div class="about-page-item">
-                <h1><?php echo esc_html(get_the_title($about_page)); ?></h1>
-                <div class="about-content">
-                    <?php echo apply_filters('the_content', $about_page->post_content); ?>
-                </div>
+<div class='about-page'>
+    <?php
+    $about_posts = new WP_Query(array(
+        'post_type' => 'page',
+        'posts_per_page' => 1,
+        'pagename' => 'about',
+    ));
+    if ($about_posts->have_posts()) :
+        while ($about_posts->have_posts()) : $about_posts->the_post();
+    ?>
+            <div class='about-container-header'>
+                <h1><?php the_title(); ?></h1>
             </div>
-        <?php
-        else :
-            echo "<p>No content found for About page.</p>";
-        endif;
-        ?>
+            <div class='about-container-content'>
+                <?php the_content(); ?>
+                <?php if (has_post_thumbnail()) : ?>
+                    <img src='<?php the_post_thumbnail_url('large'); ?>' alt='<?php the_title(); ?>'>
+                <?php endif; ?>
+            </div>
+    <?php
+        endwhile;
+        wp_reset_postdata();
+    endif;
+    ?>
+</div>
+<!-- About Posts -->
+<div class='about-title'>
+        <h1>We provide <span>high</span><br> quality services</h1>
     </div>
-
-    <!-- Fetch Posts from "About" Category -->
-    <div class="about-posts slider"> 
+    <div class='about-posts'>
         <?php
         $about_posts = new WP_Query(array(
-            'category_name' => 'about', 
+            'category_name' => 'About',
             'posts_per_page' => -1,
             'order' => 'ASC',
             'orderby' => 'date'
         ));
-
         if ($about_posts->have_posts()) :
             while ($about_posts->have_posts()) : $about_posts->the_post();
         ?>
-                <div class="about-post-item slide">
+                <div class='about-post-item'>
                     <h2><?php the_title(); ?></h2>
-                    <div class="about-post-excerpt">
+                    <div class='about-post-excerpt'>
                         <?php the_excerpt(); ?>
                     </div>
                 </div>
@@ -48,88 +54,65 @@ get_header();
             endwhile;
             wp_reset_postdata();
         else :
-            echo "<p>No posts found in About category.</p>";
+            echo '<p>No posts found in About category.</p>';
         endif;
         ?>
     </div>
-
-   
-    
-
-    <!-- Team Member Section -->
-    <?php
-    $team_query = new WP_Query(array(
-        'category_name' => 'person',
-        'posts_per_page' => -1,
-    ));
-
-    if ($team_query->have_posts()) :
-    ?>
-    <section class="team-section">
-        <div class="team-container">
-            <!-- Left: Large Image -->
-            <div class="team-main">
-                <?php
-                $first = true;
-                while ($team_query->have_posts()) : $team_query->the_post();
-                    $image_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                ?>
-                    <div class="team-member-large <?php echo $first ? 'active' : ''; ?>" data-id="<?php echo get_the_ID(); ?>">
-                        <img src="<?php echo esc_url($image_url); ?>" alt="<?php the_title(); ?>">
-                    </div>
-                <?php
-                    $first = false;
-                endwhile;
-                ?>
+<div class='director-wrap'>
+    <div class='director'>
+        <?php
+        $director_query = new WP_Query(array(
+            'category_name' => 'directors',
+            'posts_per_page' => 2
+        ));
+        if ($director_query->have_posts()) {
+            $director_query->the_post(); // Fetch first post for main display
+        ?>
+            <div class='director-left'>
+                <?php if (has_post_thumbnail()) : ?>
+                    <img class='main-image' id='mainImage' src='<?php the_post_thumbnail_url('large'); ?>' alt='Director'>
+                <?php endif; ?>
             </div>
-
-            <!-- Right: Name & Description -->
-            <div class="team-info">
-                <?php
-                $first = true;
-                $team_query->rewind_posts(); // Reset loop
-                while ($team_query->have_posts()) : $team_query->the_post();
-                ?>
-                    <div class="team-member-text <?php echo $first ? 'active' : ''; ?>" data-id="<?php echo get_the_ID(); ?>">
-                        <h2><?php the_title(); ?></h2>
-                        <p><?php the_excerpt(); ?></p>
+            <div class='director-right'>
+                <div class='director-content-container'>
+                    <h1><?php the_title(); ?></h1>
+                    <p><?php echo wp_trim_words(get_the_excerpt(), 20, '...'); ?></p>
+                    <p><?php echo wp_trim_words(get_the_content(), 20, '...'); ?></p>
+                    <div class='navigation'>
+                        <button class='nav-btn prev-btn'>←</button>
+                        <button class='nav-btn next-btn'>→</button>
                     </div>
-                <?php
-                    $first = false;
-                endwhile;
-                ?>
-            </div>
-        </div>
-
-        <!-- Navigation Arrows -->
-        <div class="team-controls">
-
-            <button id="prev-btn">←</button>
-            <button id="next-btn">→</button>
-        </div>
-
-        <!-- Thumbnails -->
-        <div class="team-thumbnails">
-            <?php
-            $first = true;
-            $team_query->rewind_posts();
-            while ($team_query->have_posts()) : $team_query->the_post();
-                $thumb_url = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
-            ?>
-                <div class="team-thumb <?php echo $first ? 'selected' : ''; ?>" data-id="<?php echo get_the_ID(); ?>">
-                    <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php the_title(); ?>">
                 </div>
-            <?php
-                $first = false;
-            endwhile;
-            ?>
-        </div>
-    </section>
-    <?php
-    wp_reset_postdata();
-    endif;
-    ?>
+                <div class='thumbnail-container'>
+                <img class="thumbnail active"
+     src="<?php echo esc_url(get_the_post_thumbnail_url(null, 'thumbnail')); ?>"
+     data-title="<?php echo esc_attr(get_the_title()); ?>"
+     data-desc="<?php echo esc_attr(get_the_excerpt()); ?>"
+     data-content="<?php echo esc_attr(strip_tags(get_the_content())); ?>"
+     data-img="<?php echo esc_url(get_the_post_thumbnail_url(null, 'large')); ?>"
+     alt="<?php echo esc_attr(get_the_title()); ?>">
+
+                    <?php while ($director_query->have_posts()) {
+                        $director_query->the_post();
+                    ?>
+                        <img class="thumbnail"
+     src="<?php echo esc_url(get_the_post_thumbnail_url(null, 'thumbnail')); ?>"
+     data-title="<?php echo esc_attr(get_the_title()); ?>"
+     data-desc="<?php echo esc_attr(get_the_excerpt()); ?>"
+     data-content="<?php echo esc_attr(strip_tags(get_the_content())); ?>"
+     data-img="<?php echo esc_url(get_the_post_thumbnail_url(null, 'large')); ?>"
+     alt="<?php echo esc_attr(get_the_title()); ?>">
+
+                    <?php } ?>
+                </div>
+            </div>
+        <?php
+        }
+        wp_reset_postdata();
+        ?>
+    </div>
 </div>
-
-
+<div class='need-advice'>
+    <h1>You have a project? Need advice?</h1>
+</div>
 <?php get_footer(); ?>
