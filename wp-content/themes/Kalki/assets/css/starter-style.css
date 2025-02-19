@@ -1843,3 +1843,242 @@
     padding: 40px;
     font-style: italic;
 }
+.content-section {
+    width: 92%;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 25px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+}
+
+.page-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.section-header {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.article-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.empty-content {
+    text-align: center;
+    padding: 40px;
+    font-size: 1.3rem;
+    color: #777;
+}
+
+
+/* Booking */
+
+/* Booking Form Styles */
+.appointment-form {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.booking-title {
+    text-align: center;
+    font-size: 26px;
+    color: #0073e6;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.form-input:focus {
+    border-color: #0073e6;
+    outline: none;
+    box-shadow: 0px 0px 5px rgba(0, 115, 230, 0.3);
+}
+
+.form-submit {
+    width: 100%;
+    padding: 12px;
+    background: #0073e6;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-submit:hover {
+    background: #005bb5;
+}
+
+/* Confirmation  */
+/* Confirmation Page Styling */
+.confirmation-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+.confirmation-box {
+    background: #ffffff;
+    text-align: center;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+}
+
+.confirmation-title {
+    font-size: 24px;
+    color: #27ae60;
+    margin-bottom: 15px;
+}
+
+.confirmation-message {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.confirmation-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.confirmation-btn:hover {
+    background-color: #2980b9;
+}
+
+
+/* Booking */
+.container-book {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.book-container-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.book-post-content {
+    flex: 1;
+    max-width: 50%;
+}
+
+.book-post-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.book-post-content .post-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.book-post-content .post-thumbnail img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.book-appointment-form {
+    flex: 1;
+    max-width: 45%;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.booking-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.appointment-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-input {
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.form-submit {
+    background-color: #0073e6;
+    color: white;
+    padding: 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-submit:hover {
+    background-color: #005bb5;
+}

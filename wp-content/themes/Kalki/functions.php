@@ -94,4 +94,6 @@ function recent_posts_single_template($template) {
     return $template;
 }
 add_filter('template_include', 'recent_posts_single_template');
-?>
+
+
+    ?>
