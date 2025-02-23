@@ -4,100 +4,193 @@ Plugin Name: Appointment Booking System
 Description: A custom WordPress plugin for managing appointments.
 Version: 1.0
 Author: Your Name
-*/
+*/?>
+<?php  
+function appbokin_enqueue_assets() {
+    wp_enqueue_style('appbokin-style', plugins_url('assets/appointment.css', __FILE__));
+}
+add_action('admin_enqueue_scripts', 'appbokin_enqueue_assets');
 
+?>
+<?php
 if (!defined('ABSPATH')) {
     exit;
 }
 
 class AppointmentBookingSystem {
-
-    private static $instance = null;
-    private $table_name;
-
-    public function __construct() {
-        global $wpdb;
-        $this->table_name = $wpdb->prefix . 'appointments';
-
-        add_action('admin_menu', [$this, 'register_booking_menu']);
-        add_action('init', [$this, 'handle_booking_form']);
-        add_action('init', [$this, 'update_booking']);
-        add_action('init', [$this, 'delete_booking']);
-        add_action('init', [$this, 'add_booking']);
-    }
-
-    // Singleton instance
-    public static function get_instance() {
-        if (self::$instance == null) {
-            self::$instance = new self();
+        private static $instance = null;
+        private $table_name;
+    
+        private function __construct() {
+            global $wpdb;
+            $this->table_name = $wpdb->prefix . 'appointments';
+    
+            // Register hooks
+            add_action('admin_menu', [$this, 'register_booking_menu']);
+            add_action('init', [$this, 'handle_booking_form']);
+            add_action('admin_init', [$this, 'delete_booking']);
+            add_action('admin_init', [$this, 'handle_admin_booking_submission']);
+            add_action('admin_post_edit_appointment', [$this, 'handle_admin_booking_submission']);
+            add_action('admin_init', [$this, 'register_ajax_handler']);
+    
         }
-        return self::$instance;
-    }
-
-    // Register Admin Menu
-    public function register_booking_menu() {
-        add_menu_page(
-            'Appointments',
-            'Appointments',
-            'manage_options',
-            'booking_system',
-            [$this, 'show_bookings'],
-            'dashicons-calendar-alt',
-            20
-        );
-
-        add_submenu_page(
-            null, // Hidden from menu
-            'Edit Appointment',
-            'Edit Appointment',
-            'manage_options',
-            'edit_booking',
-            [$this, 'edit_booking_page']
-        );
-
-        add_submenu_page(
-            null, // Hidden from menu
-            'Add Appointment',
-            'Add Appointment',
-            'manage_options',
-            'add_booking',
-            [$this, 'add_booking_page']
-        );
-    }
-
-    // Show Bookings in Admin Panel
-    public function show_bookings() {
-        global $wpdb;
-        $appointments = $wpdb->get_results("SELECT * FROM $this->table_name");
-
-        echo "<div style='display: flex; align-items: center;'>";
-        echo "<h2 style='margin: 0;'>Appointments</h2>";
-        echo "<a href='" . admin_url("admin.php?page=add_booking") . "' class='button button-primary' style='margin-left: 10px;'>Add Appointment</a>";
-        echo "</div>";
-
-        if (isset($_GET['added'])) {
-            echo "<div class='updated'><p>Appointment Added Successfully!</p></div>";
-        } elseif (isset($_GET['updated'])) {
-            echo "<div class='updated'><p>Appointment Updated Successfully!</p></div>";
-        } elseif (isset($_GET['deleted'])) {
-            echo "<div class='updated'><p>Appointment Deleted Successfully!</p></div>";
+    
+        // Singleton pattern
+        public static function get_instance() {
+            if (self::$instance === null) {
+                self::$instance = new self();
+            }
+            return self::$instance;
         }
-
-        echo "<table class='widefat'>";
-        echo "<tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Service</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>";
-
-        foreach ($appointments as $appointment) {
-            echo "<tr>
+     
+        public function show_add_appointment_form() {
+            echo "<div class='wrap'><h1>Add New Appointment</h1>";
+        
+            if (isset($_POST['submit_new_appointment'])) {
+                global $wpdb;
+                $table_name = $wpdb->prefix . 'appointments';
+        
+                $name    = sanitize_text_field($_POST['name']);
+                $email   = sanitize_email($_POST['email']);
+                $phone   = sanitize_text_field($_POST['phone']);
+                $date    = sanitize_text_field($_POST['date']);
+                $time    = sanitize_text_field($_POST['time']);
+                $service = sanitize_text_field($_POST['service']);
+                $status  = sanitize_text_field($_POST['status']);
+        
+                // Insert appointment into database
+                $wpdb->insert($table_name, [
+                    'name'    => $name,
+                    'email'   => $email,
+                    'phone'   => $phone,
+                    'date'    => $date,
+                    'time'    => $time,
+                    'service' => $service,
+                    'status'  => $status
+                ]);
+        
+                echo "<div class='updated'><p>Appointment Added Successfully!</p></div>";
+            }
+        
+            echo "<form method='post' action=''>";
+            wp_nonce_field('add_appointment_action', 'add_appointment_nonce');
+            echo "
+                <table class='form-table'>
+                    <tr><th><label for='name'>Name</label></th><td><input type='text' name='name' required class='regular-text'></td></tr>
+                    <tr><th><label for='email'>Email</label></th><td><input type='email' name='email' required class='regular-text'></td></tr>
+                    <tr><th><label for='phone'>Phone</label></th><td><input type='text' name='phone' required class='regular-text'></td></tr>
+                    <tr><th><label for='date'>Date</label></th><td><input type='date' name='date' required></td></tr>
+                    <tr><th><label for='time'>Time</label></th><td><input type='time' name='time' required></td></tr>
+                    <tr><th><label for='service'>Service</label></th>
+                        <td>
+                            <select name='service'>
+                                <option value='Consultation'>Consultation</option>
+                                <option value='Support Call'>Support Call</option>
+                                <option value='Development Meeting'>Development Meeting</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr><th><label for='status'>Status</label></th>
+                        <td>
+                            <select name='status'>
+                                <option value='Pending'>Pending</option>
+                                <option value='Confirmed'>Confirmed</option>
+                                <option value='Cancelled'>Cancelled</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <input type='submit' name='submit_new_appointment' value='Add Appointment' class='button button-primary'>
+            ";
+            echo "</form></div>";
+        }
+    
+        // Register Admin Menu
+        public function register_booking_menu() {
+            add_menu_page(
+                'Appointments',
+                'Appointments',
+                'manage_options',
+                'booking_system',
+                [$this, 'show_bookings'],
+                'dashicons-calendar-alt',
+                20
+            );
+    
+            // Add "Add Appointment" submenu
+            add_submenu_page(
+                'booking_system',
+                'Add Appointment',
+                'Add Appointment',
+                'manage_options',
+                'add_appointment',
+                [$this, 'show_add_appointment_form']
+            );
+        }
+    
+        // Show Appointments and handle Edit request
+        public function show_bookings() {
+            // If an edit is requested, show the edit form
+            if (isset($_GET['edit'])) {
+                $this->show_edit_appointment_form(intval($_GET['edit']));
+                return; // Stop further processing so only the edit form is shown.
+            }
+        
+            // Send Email Logic in Admin Panel
+            if (isset($_GET['send_email'])) {
+                $this->send_email_notification(intval($_GET['send_email']));
+            }
+        
+            global $wpdb;
+            
+            // Define the number of appointments to show per page
+            $appointments_per_page = 10;
+        
+            // Get the current page
+            $paged = isset($_GET['paged']) ? max(1, intval($_GET['paged'])) : 1;
+            $offset = ($paged - 1) * $appointments_per_page; // Calculate the offset for the SQL query
+        
+            // Get total appointments for pagination
+            $total_appointments = $wpdb->get_var("SELECT COUNT(*) FROM $this->table_name");
+        
+            // Get the appointments for the current page
+            $appointments = $wpdb->get_results($wpdb->prepare(
+                "SELECT * FROM $this->table_name LIMIT %d, %d",
+                $offset, $appointments_per_page
+            ));
+        
+            echo "<h2>Appointments</h2>";
+        
+            // Add Appointment Button
+            echo "<a href='?page=booking_system&add_appointment=true' class='button button-primary' style='margin-bottom: 15px;'>Add Appointment</a>";
+        
+            if (isset($_GET['add_appointment'])) {
+                $this->show_add_appointment_form();
+            }
+        
+            if (isset($_GET['updated'])) {
+                echo "<div class='updated'><p>Appointment Updated Successfully!</p></div>";
+            }
+            if (isset($_GET['email_sent'])) {
+                echo "<div class='updated'><p>Email Sent Successfully!</p></div>";
+            }
+        
+            // Display the appointments in a table
+            echo "<table class='widefat'>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Service</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>";
+        
+            foreach ($appointments as $appointment) {
+                echo "<tr>
                     <td>{$appointment->id}</td>
                     <td>{$appointment->name}</td>
                     <td>{$appointment->email}</td>
@@ -105,148 +198,308 @@ class AppointmentBookingSystem {
                     <td>{$appointment->date}</td>
                     <td>{$appointment->time}</td>
                     <td>{$appointment->service}</td>
-                    <td>{$appointment->status}</td>
                     <td>
-                        <a href='" . admin_url("admin.php?page=edit_booking&id={$appointment->id}") . "' class='button'>Edit</a>
-                        <a href='?page=booking_system&delete={$appointment->id}' class='button button-danger' onclick='return confirm(\"Are you sure?\")'>Delete</a>
+                        <div style='display:flex; justify-content:center; column-gap:10px;'>
+                            <div>
+                                <select name='status' class='app-select' id='status_{$appointment->id}'>
+                                    <option value='Pending' " . selected($appointment->status, 'Pending', false) . ">Pending</option>
+                                    <option value='Confirmed' " . selected($appointment->status, 'Confirmed', false) . ">Confirmed</option>
+                                    <option value='Cancelled' " . selected($appointment->status, 'Cancelled', false) . ">Cancelled</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button type='button' class='update-status' data-id='{$appointment->id}'>✓</button>
+                            </div>
+                        </div>
                     </td>
-                  </tr>";
-        }
-        echo "</table>";
-    }
-
-    // Add Booking Page (Opens Separately)
-    public function add_booking_page() {
-        echo "<h2>Add Appointment</h2>";
-        echo "<form method='post' action=''>";
-        echo "<p><label>Name:</label><input type='text' name='name' required /></p>";
-        echo "<p><label>Email:</label><input type='email' name='email' required /></p>";
-        echo "<p><label>Phone:</label><input type='text' name='phone' required /></p>";
-        echo "<p><label>Date:</label><input type='date' name='date' required /></p>";
-        echo "<p><label>Time:</label><input type='time' name='time' required /></p>";
-        echo "<p><label>Service:</label><input type='text' name='service' required /></p>";
-        echo "<p><input type='submit' name='submit_booking' value='Add Appointment' class='button button-primary' /></p>";
-        echo "</form>";
-    }
-
-    // Handle New Booking Submission (Admin)
-    public function add_booking() {
-        if (isset($_POST['submit_booking'])) {
-            global $wpdb;
-            $data = [
-                'name' => sanitize_text_field($_POST['name']),
-                'email' => sanitize_email($_POST['email']),
-                'phone' => sanitize_text_field($_POST['phone']),
-                'date' => sanitize_text_field($_POST['date']),
-                'time' => sanitize_text_field($_POST['time']),
-                'service' => sanitize_text_field($_POST['service']),
-                'status' => 'Pending',
+                    <td>
+                        <a href='?page=booking_system&edit={$appointment->id}' class='button'>Edit</a>
+                        <a href='?page=booking_system&delete={$appointment->id}' class='button button-danger' onclick='return confirm(\"Are you sure?\")'>Delete</a>
+                        <a href='?page=booking_system&send_email={$appointment->id}' class='button'>Send Email</a>
+                    </td>
+                </tr>";
+            }
+            echo "</table>";
+        
+            // Pagination
+            $total_pages = ceil($total_appointments / $appointments_per_page); // Calculate the total number of pages
+        
+            $pagination_args = [
+                'base' => add_query_arg('paged', '%#%'),
+                'format' => '',
+                'total' => $total_pages,
+                'current' => $paged,
+                'show_all' => false,
+                'type' => 'plain',
+                'end_size' => 3,
+                'mid_size' => 2,
             ];
-
-            $wpdb->insert($this->table_name, $data);
-            wp_redirect(admin_url('admin.php?page=booking_system&added=true'));
-            exit;
+            
+            echo '<div class="tablenav"><div class="pagination-links">';
+            echo paginate_links($pagination_args);
+            echo '</div></div>';
+        
+            // Add JavaScript for AJAX update
+            echo "<script type='text/javascript'>
+                    jQuery(document).ready(function($) {
+                        $('.update-status').on('click', function() {
+                            var appointmentId = $(this).data('id');
+                            var status = $('#status_' + appointmentId).val(); // Get the selected status
+        
+                            // Send AJAX request to update status
+                            $.ajax({
+                                url: '" . admin_url('admin-ajax.php') . "',
+                                type: 'POST',
+                                data: {
+                                    action: 'update_appointment_status',
+                                    appointment_id: appointmentId,
+                                    status: status
+                                },
+                                success: function(response) {
+                                    if (response.success) {
+                                        alert('Status updated successfully!');
+                                    } else {
+                                        alert('Error updating status');
+                                    }
+                                },
+                                error: function() {
+                                    alert('Error occurred while updating status');
+                                }
+                            });
+                        });
+                    });
+                </script>";
         }
-    }
-
-    // Edit Booking Page (Opens Separately)
-    public function edit_booking_page() {
-        if (!isset($_GET['id'])) {
-            echo "<p>Invalid Appointment ID</p>";
-            return;
+    
+        public function register_ajax_handler() {
+            add_action('wp_ajax_update_appointment_status', [$this, 'update_appointment_status']);
         }
-
-        global $wpdb;
-        $appointment_id = intval($_GET['id']);
-        $appointment = $wpdb->get_row("SELECT * FROM $this->table_name WHERE id = $appointment_id");
-
-        if (!$appointment) {
-            echo "<p>Appointment not found!</p>";
-            return;
-        }
-
-        echo "<h2>Edit Appointment</h2>";
-        echo "<form method='post' action=''>";
-        echo "<input type='hidden' name='appointment_id' value='{$appointment->id}' />";
-        echo "<p><label>Name:</label><input type='text' name='name' value='{$appointment->name}' required /></p>";
-        echo "<p><label>Email:</label><input type='email' name='email' value='{$appointment->email}' required /></p>";
-        echo "<p><label>Phone:</label><input type='text' name='phone' value='{$appointment->phone}' required /></p>";
-        echo "<p><label>Date:</label><input type='date' name='date' value='{$appointment->date}' required /></p>";
-        echo "<p><label>Time:</label><input type='time' name='time' value='{$appointment->time}' required /></p>";
-        echo "<p><label>Service:</label><input type='text' name='service' value='{$appointment->service}' required /></p>";
-        echo "<p><label>Status:</label><select name='status'>";
-        echo "<option value='Pending' " . selected('Pending', $appointment->status, false) . ">Pending</option>";
-        echo "<option value='Confirmed' " . selected('Confirmed', $appointment->status, false) . ">Confirmed</option>";
-        echo "<option value='Cancelled' " . selected('Cancelled', $appointment->status, false) . ">Cancelled</option>";
-        echo "</select></p>";
-        echo "<p><input type='checkbox' name='send_mail' value='1'> Send Email Notification</p>";
-        echo "<p><input type='submit' name='update_booking' value='Update Appointment' class='button button-primary' /></p>";
-        echo "</form>";
-    }
-
-    // Update Booking
-    public function update_booking() {
-        if (isset($_POST['update_booking'])) {
+        
+        public function update_appointment_status() {
+            // Check if we have the appointment_id and status in the request
+            if (!isset($_POST['appointment_id']) || !isset($_POST['status'])) {
+                wp_send_json_error('Invalid request');
+            }
+        
             global $wpdb;
             $appointment_id = intval($_POST['appointment_id']);
-            $data = [
-                'name' => sanitize_text_field($_POST['name']),
-                'email' => sanitize_email($_POST['email']),
-                'phone' => sanitize_text_field($_POST['phone']),
-                'date' => sanitize_text_field($_POST['date']),
-                'time' => sanitize_text_field($_POST['time']),
-                'service' => sanitize_text_field($_POST['service']),
-                'status' => sanitize_text_field($_POST['status']),
-            ];
-
-            $wpdb->update($this->table_name, $data, ['id' => $appointment_id]);
-
-            // Send email only if checkbox is checked
-            if (isset($_POST['send_mail'])) {
-                $this->send_user_update_notification(
-                    $data['name'], $data['email'], $data['phone'],
-                    $data['date'], $data['time'], $data['service'],
-                    $data['status'], $appointment_id
-                );
+            $status = sanitize_text_field($_POST['status']); // Sanitize input
+        
+            // Update only the status column in the database for the given appointment_id
+            $updated = $wpdb->update(
+                $this->table_name,
+                ['status' => $status],
+                ['id' => $appointment_id]
+            );
+        
+            if ($updated !== false) {
+                wp_send_json_success();
+            } else {
+                wp_send_json_error('Failed to update status');
             }
-
-            wp_redirect(admin_url('admin.php?page=booking_system&updated=true'));
-            exit;
         }
-    }
-
-    // Delete Booking
-    public function delete_booking() {
-        if (isset($_GET['delete'])) {
+        
+    
+        // New Function: Show Edit Appointment Form
+        public function show_edit_appointment_form($appointment_id) {
             global $wpdb;
-            $appointment_id = intval($_GET['delete']);
-            $wpdb->delete($this->table_name, ['id' => $appointment_id]);
-
-            wp_redirect(admin_url('admin.php?page=booking_system&deleted=true'));
-            exit;
+            $appointment = $wpdb->get_row($wpdb->prepare("SELECT * FROM $this->table_name WHERE id = %d", $appointment_id));
+            if (!$appointment) {
+                echo "<div class='error'><p>Appointment not found.</p></div>";
+                return;
+            }
+    
+            echo "<div class='wrap'><h1>Edit Appointment</h1>";
+            if (isset($_POST['submit_edit_appointment'])) {
+                // Verify nonce for security
+                if (!isset($_POST['edit_appointment_nonce']) || !wp_verify_nonce($_POST['edit_appointment_nonce'], 'edit_appointment_action')) {
+                    wp_die("Security check failed");
+                }
+    
+                $name    = sanitize_text_field($_POST['name']);
+                $email   = sanitize_email($_POST['email']);
+                $phone   = sanitize_text_field($_POST['phone']);
+                $date    = sanitize_text_field($_POST['date']);
+                $time    = sanitize_text_field($_POST['time']);
+                $service = sanitize_text_field($_POST['service']);
+                $status  = sanitize_text_field($_POST['status']);
+    
+                // Update the appointment in the database
+                $wpdb->update(
+                    $this->table_name,
+                    [
+                        'name'    => $name,
+                        'email'   => $email,
+                        'phone'   => $phone,
+                        'date'    => $date,
+                        'time'    => $time,
+                        'service' => $service,
+                        'status'  => $status,
+                    ],
+                    ['id' => $appointment_id]
+                );
+    
+                // Redirect to the bookings page with a success message
+                wp_redirect(admin_url('admin.php?page=booking_system&updated=true'));
+                exit;
+            }
+    
+          // Edit Appointment Form
+            echo "<form method='post' action=''>";
+            wp_nonce_field('edit_appointment_action', 'edit_appointment_nonce');
+            echo "
+                <input type='hidden' name='appointment_id' value='" . esc_attr($appointment->id) . "'>
+                <table class='form-table'>
+                    <tr><th><label for='name'>Name</label></th><td><input type='text' name='name' required class='regular-text' value='" . esc_attr($appointment->name) . "'></td></tr>
+                    <tr><th><label for='email'>Email</label></th><td><input type='email' name='email' required class='regular-text' value='" . esc_attr($appointment->email) . "'></td></tr>
+                    <tr><th><label for='phone'>Phone</label></th><td><input type='text' name='phone' required class='regular-text' value='" . esc_attr($appointment->phone) . "'></td></tr>
+                    <tr><th><label for='date'>Date</label></th><td><input type='date' name='date' required value='" . esc_attr($appointment->date) . "'></td></tr>
+                    <tr><th><label for='time'>Time</label></th><td><input type='time' name='time' required value='" . esc_attr($appointment->time) . "'></td></tr>
+                    <tr><th><label for='service'>Service</label></th><td><select name='service'>
+                        <option value='Consultation' " . selected($appointment->service, 'Consultation', false) . ">Consultation</option>
+                        <option value='Support Call' " . selected($appointment->service, 'Support Call', false) . ">Support Call</option>
+                        <option value='Development Meeting' " . selected($appointment->service, 'Development Meeting', false) . ">Development Meeting</option>
+                    </select></td></tr>
+                    <tr><th><label for='status'>Status</label></th><td><select name='status'>
+                        <option value='Pending' " . selected($appointment->status, 'Pending', false) . ">Pending</option>
+                        <option value='Confirmed' " . selected($appointment->status, 'Confirmed', false) . ">Confirmed</option>
+                        <option value='Cancelled' " . selected($appointment->status, 'Cancelled', false) . ">Cancelled</option>
+                    </select></td></tr>
+                </table>
+                <input type='submit' name='submit_edit_appointment' value='Update Appointment' class='button button-primary'>
+            ";
+            echo "</form>";
+    
         }
-    }
-
-    // Handle New Booking Submission (Front-end)
-    public function handle_booking_form() {
-        if (isset($_POST['submit_booking'])) {
+    
+        public function handle_admin_booking_submission() {
+            if (isset($_POST['submit_edit_appointment'])) {
+                if (!isset($_POST['edit_appointment_nonce']) || !wp_verify_nonce($_POST['edit_appointment_nonce'], 'edit_appointment_action')) {
+                    wp_die("Security check failed");
+                }
+        
+                global $wpdb;
+                $appointment_id = intval($_POST['appointment_id']);
+                $name    = sanitize_text_field($_POST['name']);
+                $email   = sanitize_email($_POST['email']);
+                $phone   = sanitize_text_field($_POST['phone']);
+                $date    = sanitize_text_field($_POST['date']);
+                $time    = sanitize_text_field($_POST['time']);
+                $service = sanitize_text_field($_POST['service']);
+                $status  = sanitize_text_field($_POST['status']);
+        
+                // Update the appointment in the database
+                $wpdb->update(
+                    $this->table_name,
+                    [
+                        'name'    => $name,
+                        'email'   => $email,
+                        'phone'   => $phone,
+                        'date'    => $date,
+                        'time'    => $time,
+                        'service' => $service,
+                        'status'  => $status,
+                    ],
+                    ['id' => $appointment_id]
+                );
+        
+                // Redirect to the dashboard
+                wp_redirect(admin_url('admin.php?page=booking_system&updated=true'));
+                exit;
+            }
+        }
+        
+    
+        // Handle Booking Form Submission (Front Page)
+        public function handle_booking_form() {
+            if (isset($_POST['submit_booking'])) {
+                global $wpdb;
+    
+                $name    = sanitize_text_field($_POST['name']);
+                $email   = sanitize_email($_POST['email']);
+                $phone   = sanitize_text_field($_POST['phone']);
+                $date    = sanitize_text_field($_POST['date']);
+                $time    = sanitize_text_field($_POST['time']);
+                $service = sanitize_text_field($_POST['service']);
+    
+                // Validate date range
+                if ($date < '2025-01-01' || $date > '2026-12-31') {
+                    wp_die("Error: The appointment date must be between 2025 and 2026.");
+                }
+    
+                // Insert data
+                $wpdb->insert($this->table_name, [
+                    'name'    => $name,
+                    'email'   => $email,
+                    'phone'   => $phone,
+                    'date'    => $date,
+                    'time'    => $time,
+                    'service' => $service,
+                    'status'  => 'Pending'
+                ]);
+    
+                // Send emails
+                $this->send_booking_email($name, $email, $date, $time, $service, 'Pending');
+                $this->send_admin_notification($name, $email, $date, $time, $service, 'Pending');
+    
+                // Redirect to confirmation page dynamically
+                $confirmation_page = get_permalink(get_page_by_path('confirmation'));
+                if ($confirmation_page) {
+                    wp_redirect($confirmation_page . '?email_sent=true');
+                    exit;
+                } else {
+                    wp_redirect(home_url());
+                    exit;
+                }
+            }
+        }
+    
+        // Delete Booking
+        public function delete_booking() {
+            if (isset($_GET['delete'])) {
+                global $wpdb;
+                $appointment_id = intval($_GET['delete']);
+                $wpdb->delete($this->table_name, ['id' => $appointment_id]);
+    
+                wp_redirect(admin_url('admin.php?page=booking_system&deleted=true'));
+                exit;
+            }
+        }
+    
+    
+        // Send Booking Email
+        private function send_booking_email($name, $email, $date, $time, $service, $status) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                return;
+            }
+    
+            $subject = "Appointment Notification";
+            $message = "Dear $name,\n\nYour appointment details:\n\n";
+            $message .= "Service: $service\nDate: $date\nTime: $time\nStatus: $status\n\nThank you!";
+    
+            wp_mail($email, $subject, $message);
+        }
+        public function send_email_notification($appointment_id) {
             global $wpdb;
-            $data = [
-                'name' => sanitize_text_field($_POST['name']),
-                'email' => sanitize_email($_POST['email']),
-                'phone' => sanitize_text_field($_POST['phone']),
-                'date' => sanitize_text_field($_POST['date']),
-                'time' => sanitize_text_field($_POST['time']),
-                'service' => sanitize_text_field($_POST['service']),
-                'status' => 'Pending',
-            ];
-
-            $wpdb->insert($this->table_name, $data);
-            wp_redirect(admin_url('admin.php?page=booking_system&added=true'));
-            exit;
+            $appointment = $wpdb->get_row($wpdb->prepare("SELECT * FROM $this->table_name WHERE id = %d", $appointment_id));
+        
+            if ($appointment) {
+                $this->send_booking_email($appointment->name, $appointment->email, $appointment->date, $appointment->time, $appointment->service, $appointment->status);
+                wp_redirect(admin_url('admin.php?page=booking_system&email_sent=true'));
+                exit;
+            }
+        }
+        // Send Admin Notification
+        private function send_admin_notification($name, $email, $date, $time, $service, $status) {
+            $admin_email = get_option('admin_email');
+            $subject = "New Appointment Booked";
+            $message = "New Appointment Details:\n\n";
+            $message .= "Name: $name\nEmail: $email\nService: $service\nDate: $date\nTime: $time\nStatus: $status\n\n";
+    
+            wp_mail($admin_email, $subject, $message);
         }
     }
-}
-
-// Initialize the plugin
+    
+    // Initialize the plugin
+ 
 AppointmentBookingSystem::get_instance();

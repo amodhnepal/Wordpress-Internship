@@ -1884,194 +1884,172 @@
 }
 
 
-
-/* Booking Page Layout */
-.container-book {
+/* General Styles */
+.booking-section {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    max-width: 1200px;
-    margin: 50px auto;
-    gap: 30px;
-}
-
-/* Left Section: Content */
-.book-container {
-    width: 55%;
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-}
-
-.book-title {
-    font-size: 30px;
-    font-weight: 700;
-    color: #2c3e50;
-    margin-bottom: 20px;
-}
-
-.content-main {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.content-image img {
+    justify-content: center;
     width: 100%;
-    max-width: 350px;
-    border-radius: 8px;
-    object-fit: cover;
+    margin: 80px auto;
+    gap: 50px;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-.content-text {
-    font-size: 16px;
-    line-height: 1.7;
-    color: #555;
-}
-
-/* Right Section: Booking Form */
-.book-form {
+/* Booking Image */
+.booking-image {
     width: 40%;
-    background: #ffffff;
-    padding: 35px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.booking-image img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Appointment Container */
+.app-container {
+    background-color: #ffffff;
+    padding: 39px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    max-width: 600px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    /* margin-top: -24px; */
+}
+
+.app-container h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #007bff;
+    text-align: center;
 }
 
 /* Form Styling */
-.booking-title {
-    font-size: 26px;
-    font-weight: 700;
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-.appointment-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-.appointment-form .form-group.full-width {
-    grid-column: span 2;
-}
-
-.appointment-form label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #444;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.form-input {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    background: #f9f9f9;
-    transition: all 0.3s ease;
-}
-
-.form-input:focus {
-    border-color: #007bff;
-    background: #fff;
-    outline: none;
-    box-shadow: 0 0 6px rgba(0, 123, 255, 0.2);
-}
-
-.form-submit {
-    background: linear-gradient(135deg, #007bff, #004b9a);
-    color: white;
-    border: none;
-    padding: 14px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    grid-column: span 2;
-}
-
-.form-submit:hover {
-    background: linear-gradient(135deg, #0056b3, #002f6c);
-}
-
-/* Responsive Adjustments */
-@media (max-width: 1024px) {
-    .container-book {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-    }
-
-    .book-container, .book-form {
-        width: 90%;
-        min-width: 350px;
-    }
-
-    .content-main {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .appointment-form {
-        grid-template-columns: 1fr;
-    }
-
-    .form-submit {
-        grid-column: span 1;
-    }
-}
-
-
-/* Confirmation  */
-/* Confirmation Page Styles */
-.confirmation-page {
+.app-form {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
 }
 
-.confirmation-message {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    max-width: 500px;
-}
-
-.confirmation-message h1 {
-    font-size: 28px;
-    color: #007bff;
-    margin-bottom: 15px;
-}
-
-.confirmation-message p {
+.app-form label {
+    font-weight: bold;
     font-size: 16px;
-    color: #555;
-    margin-bottom: 10px;
+    color: #333;
 }
 
-.back-home {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 20px;
+.app-form input,
+.app-form select {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.app-form input[type="submit"] {
     background: #007bff;
     color: #ffffff;
-    text-decoration: none;
-    border-radius: 5px;
+    font-size: 18px;
     font-weight: bold;
+    cursor: pointer;
+    padding: 14px;
+    border-radius: 8px;
+    transition: background 0.3s;
+    border: none;
 }
 
-.back-home:hover {
+.app-form input[type="submit"]:hover {
     background: #0056b3;
 }
 
+/* Confirmation Section */
+.app-con {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    margin: 50px auto;
+}
 
+.app-con h2 {
+    color: #28a745;
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+.app-con p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.app-con a {
+    display: inline-block;
+    text-decoration: none;
+    background: #007bff;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 12px 25px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.app-con a:hover {
+    background: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .booking-section {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .booking-image {
+        width: 80%;
+    }
+
+    .app-container {
+        width: 90%;
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 500px) {
+    .app-container {
+        width: 100%;
+        padding: 25px;
+    }
+
+    .app-form label {
+        font-size: 14px;
+    }
+
+    .app-form input,
+    .app-form select {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .app-form input[type="submit"] {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .app-con a {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+}

@@ -1,0 +1,101 @@
+/* Ensure the custom styles are scoped to your booking system */
+#app-bokin-booking-system {
+    margin-top: 20px;
+  }
+  
+  /* Table styling */
+  #app-bokin-booking-system table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  #app-bokin-booking-system th,
+  #app-bokin-booking-system td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Header styling */
+  #app-bokin-booking-system th {
+    background-color: #0073aa;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  /* Style for buttons */
+  #app-bokin-booking-system .button {
+    background-color: #0073aa;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  #app-bokin-booking-system .button:hover {
+    background-color: #005a87;
+  }
+  
+  /* Style for the status dropdown */
+  .app-select {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+  }
+  
+  .app-select option {
+    padding: 5px;
+  }
+  
+  /* Styling the tick mark button */
+  #app-bokin-booking-system .update-status {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #app-bokin-booking-system .update-status:hover {
+    background-color: #218838;
+  }
+  
+  /* Styling for action buttons (edit, delete, send email) */
+  #app-bokin-booking-system .button-primary {
+    background-color: #28a745;
+  }
+  
+  #app-bokin-booking-system .button-danger {
+    background-color: #dc3545;
+  }
+  
+  #app-bokin-booking-system .button-primary:hover {
+    background-color: #218838;
+  }
+  
+  #app-bokin-booking-system .button-danger:hover {
+    background-color: #c82333;
+  }
+  
+  /* Ensure the table looks good on mobile */
+  @media screen and (max-width: 768px) {
+    #app-bokin-booking-system table {
+      font-size: 14px;
+    }
+  
+    #app-bokin-booking-system th,
+    #app-bokin-booking-system td {
+      padding: 8px;
+    }
+  
+    #app-bokin-booking-system .button,
+    #app-bokin-booking-system .update-status {
+      font-size: 12px;
+      padding: 5px 10px;
+    }
+  }
