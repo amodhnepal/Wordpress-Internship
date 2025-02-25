@@ -1,27 +1,21 @@
-
-const slider = document.querySelector('.slider');
-const prevBtn = document.getElementById('prev');
-const nextBtn = document.getElementById('next');
-let scrollAmount = 0;
-
-nextBtn.addEventListener('click', () => {
-    scrollAmount += slider.children[0].offsetWidth + 20;
-    if (scrollAmount >= slider.scrollWidth - slider.offsetWidth) {
-        scrollAmount = 0;
+document.addEventListener("DOMContentLoaded", function () {
+    var swiperContainer = document.querySelector(".swiper-container");
+    if (swiperContainer) {
+        var swiper = new Swiper(".swiper-container", {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            effect: "slide",
+            speed: 500,
+        });
     }
-    slider.style.transform = `translateX(-${scrollAmount}px)`;
 });
 
-prevBtn.addEventListener('click', () => {
-    scrollAmount -= slider.children[0].offsetWidth + 20;
-    if (scrollAmount < 0) {
-        scrollAmount = slider.scrollWidth - slider.offsetWidth;
-    }
-    slider.style.transform = `translateX(-${scrollAmount}px)`;
-});
-
-
-// Testimonial
+// Testimonial Slider
 document.addEventListener("DOMContentLoaded", function () {
     const slides = document.querySelectorAll(".testimonial-slide");
     const prevBtn = document.getElementById("prevTestimonial");
@@ -29,21 +23,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const prevImage = document.getElementById("prevImage");
     const nextImage = document.getElementById("nextImage");
 
+    if (slides.length === 0 || !prevBtn || !nextBtn || !prevImage || !nextImage) return;
+
     let currentIndex = 0;
+
     function updateSlider() {
         slides.forEach((slide, index) => {
             slide.style.transform = `translateX(-${currentIndex * 100}%)`;
         });
-    
+
         const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
         const nextIndex = (currentIndex + 1) % slides.length;
-    
-        // Ensure prevImage and nextImage exist before updating src
-        if (prevImage && nextImage) {
-            prevImage.src = slides[prevIndex].querySelector(".testimonial-img img").src;
-            nextImage.src = slides[nextIndex].querySelector(".testimonial-img img").src;
+
+        if (slides[prevIndex] && slides[nextIndex]) {
+            prevImage.src = slides[prevIndex].querySelector(".testimonial-img img")?.src || "";
+            nextImage.src = slides[nextIndex].querySelector(".testimonial-img img")?.src || "";
         }
     }
+
     prevBtn.addEventListener("click", function () {
         currentIndex = (currentIndex - 1 + slides.length) % slides.length;
         updateSlider();
@@ -57,77 +54,57 @@ document.addEventListener("DOMContentLoaded", function () {
     updateSlider();
 });
 
-
-
-
-
-
-// foooter js
-
+// About Us Page Slider
 document.addEventListener("DOMContentLoaded", function () {
-    const scrollToTop = document.createElement("button");
-    scrollToTop.innerText = "↑";
-    scrollToTop.id = "scrollToTop";
-    document.body.appendChild(scrollToTop);
+    let thumbnails = document.querySelectorAll(".thumbnail");
+    let mainImage = document.getElementById("mainImage");
+    let mainTitle = document.querySelector(".director-content-container h1");
+    let mainDesc = document.querySelector(".director-content-container p:first-of-type");
+    let mainContent = document.querySelector(".director-content-container p:last-of-type");
+    let prevBtn = document.querySelector(".prev-btn");
+    let nextBtn = document.querySelector(".next-btn");
 
-    window.addEventListener("scroll", function () {
-        if (window.scrollY > 200) {
-            scrollToTop.style.display = "block";
-        } else {
-            scrollToTop.style.display = "none";
-        }
-    });
+    if (!thumbnails.length || !mainImage || !mainTitle || !mainDesc || !mainContent || !prevBtn || !nextBtn) return;
 
-    scrollToTop.addEventListener("click", function () {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-});
+    let data = [];
+    thumbnails.forEach((thumb, index) => {
+        data.push({
+            imgSrc: thumb.getAttribute("data-img"),
+            title: thumb.getAttribute("data-title"),
+            description: thumb.getAttribute("data-desc"),
+            content: thumb.getAttribute("data-content"),
+        });
 
-
-
-// About us page slider
-document.addEventListener("DOMContentLoaded", function () {
-    const teamContainer = document.querySelector(".team-container");
-    if (!teamContainer) return;
-
-    let teamMembers = teamContainer.querySelectorAll(".team-member-large");
-    let teamTexts = teamContainer.querySelectorAll(".team-member-text");
-    let teamThumbnails = teamContainer.querySelectorAll(".team-thumb");
-    let prevTeamBtn = teamContainer.querySelector("#prev-btn");
-    let nextTeamBtn = teamContainer.querySelector("#next-btn");
-
-    let teamCurrentIndex = 0;
-
-    function updateActiveTeamMember(index) {
-        teamMembers.forEach(member => member.classList.remove("active"));
-        teamTexts.forEach(text => text.classList.remove("active"));
-        teamThumbnails.forEach(thumb => thumb.classList.remove("selected"));
-
-        teamMembers[index]?.classList.add("active");
-        teamTexts[index]?.classList.add("active");
-        teamThumbnails[index]?.classList.add("selected");
-    }
-
-    // Handle Thumbnail Clicks
-    teamThumbnails.forEach((thumb, index) => {
         thumb.addEventListener("click", function () {
-            teamCurrentIndex = index; 
-            updateActiveTeamMember(teamCurrentIndex);
+            updateMainContent(index);
         });
     });
 
-    // ✅ Ensure `prevTeamBtn` and `nextTeamBtn` exist before adding event listeners
-    if (prevTeamBtn && nextTeamBtn) {
-        prevTeamBtn.addEventListener("click", function () {
-            teamCurrentIndex = (teamCurrentIndex - 1 + teamMembers.length) % teamMembers.length;
-            updateActiveTeamMember(teamCurrentIndex);
-        });
+    let currentIndex = 0;
 
-        nextTeamBtn.addEventListener("click", function () {
-            teamCurrentIndex = (teamCurrentIndex + 1) % teamMembers.length;
-            updateActiveTeamMember(teamCurrentIndex);
-        });
+    function updateMainContent(index) {
+        if (data[index]) {
+            mainImage.src = data[index].imgSrc || "";
+            mainTitle.textContent = data[index].title || "";
+            mainDesc.textContent = data[index].description || "";
+            mainContent.textContent = data[index].content || "";
+
+            thumbnails.forEach((img) => img.classList.remove("active"));
+            thumbnails[index].classList.add("active");
+            currentIndex = index;
+        }
     }
 
-    updateActiveTeamMember(teamCurrentIndex);
+    prevBtn.addEventListener("click", function () {
+        let newIndex = (currentIndex - 1 + data.length) % data.length;
+        updateMainContent(newIndex);
+    });
+
+    nextBtn.addEventListener("click", function () {
+        let newIndex = (currentIndex + 1) % data.length;
+        updateMainContent(newIndex);
+    });
+
+    updateMainContent(0);
+    
 });

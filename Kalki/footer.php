@@ -9,21 +9,23 @@
             <?php endif; ?>
         </div>
 
-        <!-- Footer Menu -->
-        <div class="footer-links">
-            <h4>About</h4>
-            <?php
-                wp_nav_menu(array(
-                    'theme_location' => 'footer_menu',
-                    'container' => false,
-                    'menu_class' => 'footer-menu',
-                ));
-            ?>
-        </div>
+
+       <!-- Footer Menu -->
+<div class="footer-links">
+    <h4>About</h4>
+    <?php
+        wp_nav_menu(array(
+            'menu'=> 'kalki_menu',
+            'container' => false,
+            'menu_class' => 'footer-menu',
+        ));
+    ?>
+</div>
+
 
         <!-- Footer Contact Information -->
         <div class="footer-contact">
-            <h4>Contact</h4>
+            <h4>Connect</h4>
             <p><?php echo esc_textarea(get_option('footer_address', 'No address specified.')); ?></p>
 
             <!-- Social Media Links -->
@@ -44,15 +46,12 @@
     <!-- Footer Bottom -->
     <div class="footer-bottom">
         <p>Copyright © <?php echo date("Y"); ?> Kalki Automations. All Rights Reserved.</p>
-        <a href="<?php echo site_url('/terms-conditions'); ?>">Terms & Conditions</a> |
+        <a href="<?php echo site_url('/terms-conditions'); ?>">Terms & Conditions</a> 
         <a href="<?php echo site_url('/privacy-policy'); ?>">Privacy Policy</a>
     </div>
 </footer>
 
+
 <?php wp_footer(); ?>
-</body>
-</html>
-
-
 </body>
 </html>

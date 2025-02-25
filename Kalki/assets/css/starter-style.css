@@ -3,13 +3,15 @@
     padding: 0;
 }
 
+/* Banner Section */
 .banner-section {
     height: 100vh; /* Full viewport height */
     overflow: hidden;
     position: relative;
-    background: rgba(60, 90, 251, 0.45);
+    background: rgba(60, 90, 251, 0.25);
 }
-/* Banner image to cover the screen */
+
+/* Banner image */
 .banner-image {
     position: absolute;
     width: 100%;
@@ -17,7 +19,42 @@
     object-fit: cover;
     z-index: -1;
 }
-/* Centered banner content */
+
+/* Vector Images */
+.banner-vector {
+    position: absolute;
+    z-index: 1;
+}
+
+
+/* Vector 1 Position: Top Right */
+.vector1 {
+    /* top: 10; */
+    right: 150;
+    /* width: 150px; Adjust size */
+    height: auto;
+}
+
+/* Vector 2 Position: Top Right */
+.vector2 {
+    top: -233px;
+    right: 29px;
+    width: 112px;
+    height: 450px;
+    transform: rotate(28deg);
+}
+
+
+/* Vector 3: Starts from the logo skew area */
+.start-from-logo {
+    bottom: 0;
+    left: 13.2%;
+    width: 240px;
+    height: 275;
+    transform: rotate(352deg);
+}
+
+/* Banner Content */
 .banner-content {
     position: absolute;
     top: 50%;
@@ -26,6 +63,7 @@
     text-align: center;
     z-index: 2;
 }
+
 /* Rectangle with skew effect */
 .rectangle {
     display: inline-block;
@@ -37,6 +75,7 @@
     margin-bottom: 20px;
     position: relative; /* Required for button positioning */
 }
+
 /* Text inside the rectangle */
 .rectangle h1 {
     color: white;
@@ -47,10 +86,11 @@
     line-height: 1.2;
     font-weight: normal;
 }
+
 .bold {
     font-weight: bold;
-    width: auto;
 }
+
 /* Button styles */
 .btn {
     display: block;
@@ -61,39 +101,44 @@
     font-size: 1rem;
     margin-top: 20px;
     position: absolute;
-    bottom: -20px; /* Adjust to touch the bottom of the rectangle */
+    bottom: -20px;
     left: 50%;
-    transform: translateX(-50%) skewX(15deg); /* Center and skew the button */
+    transform: translateX(-50%) skewX(15deg);
     text-align: center;
-    border-radius: 5px; /* Optional: Add rounded corners */
 }
-/* Fixed navigation menu at the bottom right */
+
+/* Navigation menu styles (unchanged) */
 .main-nav {
+    height: 100px;
     position: sticky;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
-    z-index: 10;
-    text-align: right;
-    width: 100%;
-    padding: 0;
-    /* padding: 10px 20PX; */
+    top: 0;
+    left: 0;
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    height: 109px;
+    background-color: rgb(1, 15, 47);
+    padding: 40px 0px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: -10px;
+    overflow: hidden;
+    z-index: 999;
 }
+
 .nav-container {
     display: flex;
     align-items: center;
     width: 100%;
     justify-content: space-between;
 }
+
 .logo {
     margin-right: 20px;
-    
+    background-color: white;
+    transform: skew(340deg);
+    margin-left: -17px;
 }
+
 /* Navigation menu list */
 .nav-menu {
     list-style: none;
@@ -122,28 +167,35 @@
 
 
 
-
 /* Achievement */
 /* Achievement Section */
-.container-achieve {
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    min-height: 100%; 
-    /* text-align: center;*/
-    background-color: #f9f9f9; 
-    margin: 0; 
-    padding: 50px; 
-}
-
 .achieve {
-    max-width: 800px; 
+    max-width: 900px; 
     width: 100%; 
     padding: 20px; 
-    /* background-color: #fff;  */
-    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);  */
-    margin: 0; 
+    margin: 0 auto; 
+    display: flex;
+    flex-direction: column;
+    gap: 40px; 
 }
+
+.achieve img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto; /* Centers the image */
+}
+
+/* Extra spacing for paragraphs */
+.achieve p {
+    line-height: 1.8;
+}
+
+/* Ensure all elements inside .achieve have spacing */
+.achieve > * {
+    margin-bottom: 20px; /* Adds space between all elements */
+}
+
 
 /* Service */
 /* Update service section to position image on the right */
@@ -164,7 +216,7 @@
     padding: 20px;
     /* background-color: #fff;  */
     /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);  */
-    margin-left: 0; /* Aligns the div to the left */
+    margin-left: 0; 
     margin-right: auto;
 }
 /* Ensures the service section aligns properly */
@@ -184,33 +236,17 @@
     align-items: center;
     justify-content: flex-start;
 }
-.container-mata-service .wp-block-media-text__media img {
-    border-radius: 50%; /* Make the image round */
-    object-fit: cover;  /* Ensure the image fills the container */
-    width: 200px;       /* Adjust the image size */
-    height: 200px;      /* Maintains aspect ratio */
-    position: relative;
-}
-.container-mata-service .wp-block-media-text__content {
-    padding-left: 20px;
-}
-.container-mata-service .wp-block-media-text__content h1 {
-    font-size: 36px; /* Increase category name size */
-    font-weight: bold;
-}
-.container-mata-service .wp-block-media-text__content p {
-    font-size: 18px; /* Increase category description size */
-}
 .view-all-button .button {
-    background-color: #007BFF; /* Blue background */
-    color: white;              /* White text */
-    padding: 12px 25px;        /* Adjust padding for larger button */
-    font-size: 18px;           /* Make the button text bigger */
-    border: none;              /* Remove the border */
-    border-radius: 5px;        /* Rounded corners */
-    text-decoration: none;     /* Remove underline */
-    display: inline-block;     /* Ensure it aligns properly */
-    transition: background-color 0.3s ease; /* Smooth background change on hover */
+    background-color: #007BFF; 
+    margin-top: 20px;
+    color: white;             
+    padding: 12px 25px;        
+    font-size: 18px;           
+    border: none;              
+    border-radius: 5px;        
+    text-decoration: none;     
+    display: inline-block;     
+    transition: background-color 0.3s ease; 
 }
 .view-all-button .button:hover {
     background-color: #0056B3; /* Darker blue on hover */
@@ -333,61 +369,129 @@
 
 
 /* Carousel */
+/* Featured Projects Section */
+/* Featured Projects Section */
 .featured-projects {
+    position: relative; /* Ensure everything inside is positioned relative to this */
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
+}
+
+/* Container - Two Columns */
+.container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 90%;
+    max-width: 1200px;  
+}
 
-    padding: 100px 30px;
-    background: #fff;
+/* LEFT COLUMN (Title & Buttons) */
+.left-column {
+    width: 20%; /* Adjust as needed */
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative; /* Ensures the buttons stay inside this column */
 }
-.content {
-    width: 30%;
+
+/* Title */
+.left-column h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 10px;
 }
-.content h2 {
-    font-size: 2.5em;
-    font-weight: bold;
+
+.left-column h2 span {
+    color: #0073e6
 }
-.content span {
-    color: blue;
-}
+
+/* View All Button */
 .view-all {
-    background: blue;
+    display: inline-block;  /* Makes it behave like a button */
+    padding: 12px 25px; /* Adjust padding for proper spacing */
+    margin-bottom: 10px;
+    background-color: #0073e6; /* Button background color */
+    color: white; 
+    font-size: 1rem; 
+    font-weight: bold; 
+    text-align: center; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+
+
+
+
+/* Navigation Buttons */
+.swiper-navigation {
+    display: flex;
+    /* gap: 5px; */
+    margin-top: 10px;
+    position: relative; /* Keeps it inside the left column */
+    padding: 10px;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    background: #333;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 15px;
     cursor: pointer;
+    font-size: 1.2rem;
+    transition: 0.3s;
 }
-.nav-buttons button {
-    background: none;
-    border: 2px solid #000;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-    cursor: pointer;
+
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+    background: #0073e6;
 }
-.slider-container {
-    width: 65%;
-    overflow: hidden;
-    position: relative;
-}
-.slider {
+
+/* RIGHT COLUMN (Slider) */
+.right-column {
+    /* width: 80%; The slider takes 50% of the section */
     display: flex;
-    gap: 20px;
-    transition: transform 0.5s;
+    justify-content: center; /* Center the slider inside the column */
 }
-.slide {
-    min-width: 30%;
-    background: #f4f4f4;
+
+/* Swiper Container */
+.swiper-container {
+    width: 300px; /* Reduce slider width inside the right column */
+    overflow: hidden;
+}
+
+/* Swiper Slide */
+.swiper-slide {
+    background: #fff;
+    /* padding: 20px; */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    padding: 20px;
-    border-radius: 10px;
+    border-radius: 8px;
 }
-.slide img {
-    width: 100%;
+
+/* Slide Image */
+.swiper-slide img {
+    /* width: 100%;
     height: auto;
-    border-radius: 10px;
+    border-radius: 8px; */
+    margin-bottom: 15px;
+}
+
+/* Slide Title */
+.slide-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Slide Description */
+.slide-description {
+    font-size: 1rem;
+    color: #555;
 }
 
 
@@ -397,46 +501,54 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 500px; /* Increase height */
+    height: 500px;
     background: #f5f5f5;
     padding: 0;
+    background-color: #fff;
 }
 
 .blue-text {
     color: blue;
 }
+
 .testimonial-wrapper {
     display: flex;
-    align-items: stretch; /* Ensures all child elements have the same height */
-    position: relative;
     align-items: center;
     justify-content: center;
     width: 80%;
-    max-width: 800px;
-    /* height: 100%;  */
+    max-width: 900px;
+    position: relative;
 }
 
 .arrow {
-    flex: 0 0 30%; /* Same width as image */
-    height: 270px; /* Increases height */
-    background: blue;
+    flex: 0 0 150px; /* Increased width */
+    height: 300px; /* Increased height */
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    overflow: hidden;
     position: relative;
+    overflow: hidden;
 }
 
 .arrow img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.4;
     position: absolute;
     top: 0;
     left: 0;
+    filter: brightness(70%); /* Makes the image darker */
+}
+
+.arrow .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 255, 0.5); /* Semi-transparent blue overlay */
     z-index: 1;
 }
 
@@ -451,14 +563,13 @@
 .testimonial-content {
     flex-grow: 1;
     background: white;
-    /* border-radius: 10px; */
     padding: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    min-width: 500px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    min-width: 600px; /* Adjusted for better layout */
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .testimonial-slider {
@@ -477,7 +588,7 @@
 }
 
 .testimonial-img {
-     flex: 0 0 20%;/* Image takes up 40% */
+    flex: 0 0 20%;
     height: 100%;
     overflow: hidden;
 }
@@ -486,7 +597,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* border-radius: 10px 0 0 10px;  */
 }
 
 .testimonial-text {
@@ -519,6 +629,7 @@
     text-align: center;
     gap: 100px;
     padding: 100px ;
+    background-color: #f6f6f6;
 }
 
 .counter-box {
@@ -559,21 +670,55 @@
 
 /* Recent Post */
 .recent-posts {
-    text-align: center;
+    text-align: center; /* Center content */
     padding: 40px 0;
 }
 
 .recent-posts-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Align the title and button on the same row */
     align-items: center;
     margin-bottom: 20px;
+    width: 100%; /* Make sure it takes up the full width */
+    max-width: 1200px; /* Optional: limit max width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.recent-posts h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.recent-posts h2 span {
+    color: #0073e6;
+}
+
+.view-all {
+    text-decoration: none;
+    color: #0073e6;
+    background-color: #fff;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: 2px solid #0073e6;
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.view-all:hover {
+    background: #0073e6;
+    color: white;
 }
 
 .posts-grid {
     display: flex;
     gap: 20px;
     justify-content: center;
+    margin-top: 20px;
+    max-width: 1200px; /* Optional: limit max width */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .post-card {
@@ -585,16 +730,32 @@
     text-align: left;
 }
 
+.post-image {
+    position: relative;
+}
+
 .post-image img {
     width: 100%;
     height: 200px;
     object-fit: cover;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.post-card:hover .post-image img {
+    transform: scale(1.05);
 }
 
 .post-content {
     padding: 15px;
+    position: relative;
+    z-index: 1;
+    margin-left: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    border-left: 4px solid blue;
+    background: white;
+    border-radius: 10px;
 }
 
 .post-content h3 {
@@ -608,35 +769,61 @@
     color: gray;
 }
 
+
+
+
 /* Contact Form */
 
 .contact-section {
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 80px 0; /* Increased padding for top & bottom spacing */
+    align-items: flex-start; /* Align items to the start (not centered) */
     margin-top: 50px; /* Adds extra space from the top */
     background-color: #F5F5F5; /* Set background color for the entire section */
     width: 100%; /* Ensures the section fills the width */
     box-sizing: border-box; /* Ensures padding doesn't affect width */
-    padding-bottom: 0;
 }
+
 /* Inner Container */
 .contact-container {
     width: 100%; /* Make the container fill the full width */
     max-width: 1600px; /* Increase max-width for a wider container */
     background: #FFFFFF; /* White background for the container */
-    padding: 40px;
-    border-radius: 10px;
+    padding-right: 30px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     text-align: center;
 }
-/* Heading */
-.contact h2 {
-    font-size: 28px;
+
+/* Ensure the image stays where it is */
+.contact img {
+    width: 100%;
+    height: auto; /* Ensure proper aspect ratio */
+}
+
+/* Contact Header (Moved to the top, no overlap with form) */
+.contact-header {
+    margin-bottom: 20px; /* Space between title and content */
+    position: relative;
+    z-index: 10; /* Ensure title stays above any image if there's overlap */
+    text-align: center;
+}
+
+.contact h1 {
+    font-size: 32px; /* Slightly larger for the title */
     color: #333;
     margin-bottom: 15px;
 }
+
+.contact h1 span {
+    color: blue;
+}
+
+/* Form Section (Content) */
+.contact {
+    padding: 20px; /* Add padding to make it look spacious */
+    background-color: #fff; /* Form background color */
+}
+
 /* Paragraph/Text */
 .contact p {
     font-size: 16px;
@@ -644,6 +831,7 @@
     line-height: 1.6;
     margin-bottom: 20px;
 }
+
 /* Links Inside Content */
 .contact a {
     color: #007BFF;
@@ -653,12 +841,14 @@
 .contact a:hover {
     text-decoration: underline;
 }
+
 /* Category Styling */
 .contact .post-categories {
     margin-top: 10px;
     font-size: 14px;
     color: #777;
 }
+
 /* No Content Message */
 .no-content {
     text-align: center;
@@ -666,23 +856,30 @@
     color: #999;
     padding: 20px;
 }
+
 /* Responsive */
 @media (max-width: 768px) {
     .contact-container {
         width: 100%; /* Ensure container stretches full width on mobile */
         padding: 30px;
     }
-    .contact h2 {
-        font-size: 24px;
+    .contact h1 {
+        font-size: 28px; /* Adjust title size on mobile */
     }
     .contact p {
         font-size: 14px;
     }
 }
+
+
+
+
+
+
 /* Contact Form Styling */
 /* Make the Contact Section Wider */
 .wpcf7 {
-    max-width: 800px; /* Adjust width */
+    max-width: 700px; /* Adjust width */
     margin: auto;
 }
 /* Flexbox Layout for Two-Column Fields */
@@ -932,145 +1129,192 @@
 
 
 /* About Us */
-/* General container styling */
-.about-us-container {
-    max-width: 1200px;
-    margin: auto;
-    text-align: center;
-}
+.about-page{
+    background-color: white;
+  }
+  .about-container-header{
+    font-size: 25px;
+    margin-left: 180px;
+    padding: 50px;
 
-/* General spacing for content elements */
-/* General spacing for content elements */
-.about-page-content > * {
-    margin-bottom: 20px; /* Adjust the value as needed */
-}
+  }
+  .about-first-part{
+    /* gap: 5%; */
+    display: flex;
+    justify-content: center;
+    /* padding: 60px 0px; */
+  }
+  .about-first-img{
+    justify-content: center;
+    display: flex;
+  }
+  .about-first-img img{
+    width: 70%;
+    padding: 10px 0px;
+  }
+  .about-second-p2{
+    max-width: 590px;
 
-/* Specific spacing for lists */
-.about-page-content ul,
-.about-page-content ol {
-    margin-bottom: 20px; /* Adjust the value as needed */
-}
-
-/* Specific spacing for paragraphs */
-.about-page-content p {
-    margin-bottom: 20px; /* Adjust the value as needed */
-}
-
-/* Specific spacing for images */
-.about-page-content img {
-    margin-bottom: 20px; /* Adjust the value as needed */
-}
-
-/* About Posts Section */
-.about-posts {
+  }
+  .about-first-p1{
+  width: 30%;
+  }
+  .about-third-part{
+    background-color: black;
+    width: 100%;
+    display: flex;
+  }
+  .about-third-paragraph{
+    padding: 130px 0px;
+    row-gap: 30px;
+    width: 50%;
+  }
+  .about-third-button{
+    padding: 30px;
+    margin-left: 350px;
+  }
+  .image-section{
+    width: 50%;
+  }
+  .about-third-p1{
+    padding: 10px 0px 10px 50px;
+    margin-left: 300px;
+    color:white
+  }
+  .about-list{
+    padding:30px 0 0 50px;
+    margin-left: 300px;
+    color: white;
+  }
+  .about-list li{
+    padding-top:10px;
+  }
+  /* -----------------in the about page quality service css------------------ */
+  .about-posts {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
-    gap: 20px; /* Adjust the value as needed */
-    margin-bottom: 40px; /* Adjust the value as needed */
-}
-
-.about-post-item {
-    background: #f9f9f9;
+    gap: 20px; /* Adjust the value as needed */ /* Adjust the value as needed */
+    padding-left: 350px;
+    padding-right: 300px;
+    padding-top: 50px;
+    padding-bottom: 80px;
+    background-color: #F5F5F5;
+  }
+  .about-post-item {
+    background: #F9F9F9;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.about-post-item h2 {
+  }
+  .about-post-item h2 {
     font-size: 24px;
     margin-bottom: 10px;
-}
-
-.about-post-excerpt {
+  }
+  .about-post-excerpt {
     font-size: 16px;
     color: #666;
-}
-
-/* Team Member Section */
-.team-section {
+  }
+  .about-title {
+    text-align: left;
+    font-size: 50px;
+    font-weight: bold;
+    padding-bottom: 20px;
+    padding-left: 350px;
+    background-color: #F5F5F5;
+    padding-top: 50px;
+  }
+  .about-title h1 {
+    font-size: 60px;
+    color: black;
+  }
+  .about-title h1 span {
+    color: blue;
+    font-size: 60px;
+    font-weight: bold;
+  }
+  /*------------------- team section--------------------- */
+  .director {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  /* Left Section - Large Image */
+  .director-left .main-image {
+    width: 600px;
+    height: 650px;
+    object-fit: cover;
+    transition: 0.3s;
+  }
+  /* Right Section - Content */
+  .director-right {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: left;
-    width: 80%;
-    max-width: 1200px;
-    margin: auto;
-}
-/* Layout: Image on Left, Text on Right */
-.team-container {
+    row-gap: 50px;
+    max-width: 400px;
+  }
+  .director-content-container {
+    padding: 100px 0px;
+  }
+  .director-right h1 {
+    font-size: 50px;
+    margin-bottom: 5px;
+    color: #111;
+  }
+  .director-right p {
+    padding: 10px 0px;
+    font-size: 16px;
+    color: #666;
+  }
+  /* Thumbnail Carousel */
+  .thumbnail-container {
+    position: relative;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    width: 100%;
-    background-color: #f5f5f5;
-}
-.team-main {
-    flex: 1;
-}
-.team-main img {
-    width: 300px;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-.team-info {
-    flex: 1;
-}
-.team-member-text {
-    display: none;
-}
-.team-member-text.active {
-    display: block;
-}
-/* Navigation Arrows */
-.team-controls {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-}
-button {
-    background: #333;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-button:hover {
-    background: #555;
-}
-.team-thumbnails {
-    display: flex;
-    flex-direction: row; /* Horizontal alignment */
-    justify-content: center;
     gap: 10px;
-    margin-top: 20px;
-}
-.team-thumb {
-    cursor: pointer;
-    border: 2px solid transparent;
-    padding: 5px;
-    transition: 0.3s;
-}
-.team-thumb.selected {
-    border: 2px solid blue;
-    border-radius: 5px;
-}
-.team-thumb img {
-    width: 80px;
-    height: 80px;
+  }
+  .thumbnail {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
     object-fit: cover;
-    border-radius: 5px;
-}
-.team-member-large {
-    display: none; /* Hide all images initially */
-}
-.team-member-large.active {
-    display: block; /* Show only the active member */
-}
+    cursor: pointer;
+    transition: 0.3s;
+    border: 3px solid transparent;
+  }
+  .thumbnail.active {
+    border-color: #3B82F6;
+  }
+  /* Navigation Arrows */
+  .navigation {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .nav-btn {
+    background: none;
+    border: 1px solid #000;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 18px;
+    transition: 0.3s;
+  }
+  .nav-btn:hover {
+    background: #3B82F6;
+    color: #fff;
+    border-color: #3B82F6;
+  }
+  .need-advice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 0px;
+    font-size: 27px;
+  }
 
 
 
@@ -1148,9 +1392,9 @@ button:hover {
 
 .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Two posts per row */
-    gap: 30px;
-    max-width: 1200px;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); /* Two posts per row */
+    gap: 10px;
+    max-width: 1010px;
     margin: auto;
 }
 
@@ -1322,3 +1566,490 @@ button:hover {
     background-color: #005bb5;
 }
 
+
+/* ============================= */
+/* MAIL FORM SECTION STYLING */
+/* ============================= */
+
+/* Main container for the entire section */
+.container {
+    margin-top:40px;
+    background-color: #f5f5f5; /*Light grey background color*/
+    width: 100%; /* Full width */
+    padding: 40px; /* Add padding for space inside */
+    box-sizing: border-box; /* Ensures padding is included in width */
+}
+
+/* Blog after pagination styling */
+.blog-after-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+/* Left Header (h1) */
+.left-header h1 {
+    font-size: 40px;
+    margin: 0;
+    padding: 30px;
+    color: #333;
+}
+
+/* Right Header (h5) */
+.right-header h5 {
+    font-size: 20px;
+    color: #666;
+    padding:45px 30px 0px 0px ;
+    word-wrap: break-word; /* Ensures long text wraps inside the box */
+    max-width: 500px; /* Optional: restricts text width */
+    text-align: right; /* Aligns to the right */
+}
+
+/* Form container styling */
+/* General Styling */
+/* Contact Page Container */
+.contact-page-container {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+/* Title Styling */
+.contact-header {
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.contact-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #000;
+
+}
+
+/* Two-Column Layout */
+.contact-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+    
+}
+
+/* Left Side - Contact Form */
+.contact-form-section {
+    width: 60%;
+    margin-top: 30px;
+}
+
+/* Form Styling (Contact Form 7 inside WordPress content) */
+.wpcf7 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+}
+
+/* Form Inputs - Only Bottom Border */
+.wpcf7 input[type="text"],
+.wpcf7 input[type="email"],
+.wpcf7 input[type="tel"],
+.wpcf7 textarea {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-bottom: 2px solid #ccc; /* Only bottom border */
+    font-size: 1rem;
+    background: transparent;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.wpcf7 input[type="text"]:focus,
+.wpcf7 input[type="email"]:focus,
+.wpcf7 input[type="tel"]:focus,
+.wpcf7 textarea:focus {
+    border-bottom: 2px solid #0056b3; /* Change color on focus */
+}
+
+/* Adjust textarea height */
+.wpcf7 textarea {
+    resize: none;
+    height: 100px;
+}
+
+/* Submit Button - Positioned Bottom Right */
+.wpcf7-submit-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.wpcf7 input[type="submit"] {
+    background-color: #0056b3;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.wpcf7 input[type="submit"]:hover {
+    background-color: #003f80;
+}
+
+/* Right Side - Contact Info Box */
+.contact-info-box {
+    width: 35%;
+    background-color: #000;
+    color: white;
+    padding: 30px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.contact-info-box h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.contact-info-box p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.contact-details i {
+    margin-right: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contact-content {
+        flex-direction: column;
+    }
+
+    .contact-form-section, .contact-info-box {
+        width: 100%;
+    }
+
+    .wpcf7-submit-container {
+        justify-content: center;
+    }
+}
+
+
+
+
+
+
+/* Single posts */
+/* Title */
+/* Title */
+.post-title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    padding: 10px 0;
+    text-align: center;
+}
+
+/* Author & Date */
+.post-meta {
+    font-size: 1rem;
+    color: #555;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Content */
+.post-content {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    text-align: justify; /* Justify the text */
+    max-width: 800px; /* Constrain width for better readability */
+    margin: 0 auto; /* Center content */
+    padding: 20px;
+}
+
+/* Recommended Posts Section */
+.related-posts {
+    margin-top: 40px;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+/* Recommended Posts Grid */
+.related-posts-grid {
+    display: flex;
+    gap: 20px;
+}
+
+/* Individual Recommended Post */
+.related-post-item {
+    flex: 1;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Image for Recommended Posts */
+.related-post-thumbnail img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Excerpt */
+.related-excerpt {
+    font-size: 1rem;
+    color: #666;
+    margin-top: 10px;
+}
+
+
+
+
+/* Default Layout for Blog Category */
+.blog-layout {
+    /* Custom styles for Blog posts */
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Custom Layout for Service Page Category */
+.servicepage-layout {
+    /* Styles for service page posts */
+    background-color: #e0f7fa;
+    padding: 30px;
+    border-left: 5px solid #00796b;
+}
+
+/* Custom Layout for Slider Category */
+.slider-layout {
+    /* Styles for slider posts */
+    background-color: #fff3e0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom Layout for Our Service Category */
+.our-service-layout {
+    /* Styles for 'Our Service' posts */
+    background-color: #ffeb3b;
+    padding: 40px;
+    font-style: italic;
+}
+.content-section {
+    width: 92%;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 25px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+}
+
+.page-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.section-header {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.article-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.empty-content {
+    text-align: center;
+    padding: 40px;
+    font-size: 1.3rem;
+    color: #777;
+}
+
+
+/* General Styles */
+.booking-section {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 80px auto;
+    gap: 50px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Booking Image */
+.booking-image {
+    width: 40%;
+    text-align: center;
+}
+
+.booking-image img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Appointment Container */
+.app-container {
+    background-color: #ffffff;
+    padding: 39px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    max-width: 600px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    /* margin-top: -24px; */
+}
+
+.app-container h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #007bff;
+    text-align: center;
+}
+
+/* Form Styling */
+.app-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.app-form label {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+}
+
+.app-form input,
+.app-form select {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.app-form input[type="submit"] {
+    background: #007bff;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 14px;
+    border-radius: 8px;
+    transition: background 0.3s;
+    border: none;
+}
+
+.app-form input[type="submit"]:hover {
+    background: #0056b3;
+}
+
+/* Confirmation Section */
+.app-con {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    margin: 50px auto;
+}
+
+.app-con h2 {
+    color: #28a745;
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+.app-con p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.app-con a {
+    display: inline-block;
+    text-decoration: none;
+    background: #007bff;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 12px 25px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.app-con a:hover {
+    background: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .booking-section {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .booking-image {
+        width: 80%;
+    }
+
+    .app-container {
+        width: 90%;
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 500px) {
+    .app-container {
+        width: 100%;
+        padding: 25px;
+    }
+
+    .app-form label {
+        font-size: 14px;
+    }
+
+    .app-form input,
+    .app-form select {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .app-form input[type="submit"] {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .app-con a {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+}
