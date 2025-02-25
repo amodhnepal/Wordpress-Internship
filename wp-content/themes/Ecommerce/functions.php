@@ -5,6 +5,7 @@ function ecommerce_enqueue_assets() {
     // Enqueue custom CSS from your assets folder (adjust path if needed)
     wp_enqueue_style( 'ecommerce-custom-css', get_template_directory_uri() . '/assets/css/style-starter.css' );
     
+    wp_enqueue_style('google-fonts-poppins', 'https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap', false, null);
     // Enqueue Swiper CSS (for logo slider)
     wp_enqueue_style('swiper-style', 'https://unpkg.com/swiper/swiper-bundle.min.css');
 

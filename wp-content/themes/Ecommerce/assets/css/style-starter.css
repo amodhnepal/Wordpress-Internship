@@ -1,3 +1,21 @@
+/* Logo marquee */
+:root {
+    --color-text: navy;
+    --color-bg: papayawhip;
+    --color-bg-accent: #ecdcc0;
+    --size: clamp(8rem, 1rem + 10vmin, 12rem);
+    --gap: 2rem;
+    --duration: 20s; /* Adjust speed */
+    --scroll-start: 0;
+    --scroll-end: calc(-100% - var(--gap));
+}
+*{
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 /* Header Container */
 #site-header {
     background-color: #fff; /* White background */
@@ -69,117 +87,154 @@
 }
 
 
-/* Hero Section */
-.hero {
-    position: relative;
-    width: 100%;
-    height: 90vh; /* Full viewport height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    overflow: hidden;
-}
-
-/* Background Image */
-.hero-image {
-    position: absolute;
-    top: 0;
-    left: 0;
+/* ========================= */
+/* Hero Section (Banner Slider) */
+/* ========================= */
+.swiper {
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    filter: brightness(70%);
-}
+  }
+  .hero{
+    padding: 20px;
+  }
 
-/* Hero Content */
-.hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 600px;
-}
-
-.hero-content h1 {
-    font-size: 50px;
-    font-weight: 700;
-    line-height: 1.2;
-    text-transform: capitalize;
-}
-
-.hero-content p {
+  .swiper-slide {
+    
     font-size: 18px;
-    font-weight: 300;
-    margin-bottom: 20px;
-}
-
-/* Buttons */
-.hero-buttons {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-}
-
-.btn {
-    display: inline-block;
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: uppercase;
-    background: white;
-    color: black;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: all 0.3s ease-in-out;
-    border: 2px solid white;
-}
-
-.btn:hover {
-    background: transparent;
-    color: white;
-}
-
-/* Style for the logo posts section */
-.logo-posts {
-    margin-top: 50px;
-    display: flex;
-    justify-content: center;
+    background: #fff;
+    display: flex !important;
+    height: 100%;
+    justify-content: start;
     align-items: center;
-}
+    background-size:cover;
+    background-repeat: no-repeat;
+    padding: 120px;
+  }
 
-.swiper-container {
+  .swiper-slide img {
+    display: block;
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom;
+   
+  }
+
+  .mySwiper{
+    height: 100vh;
+
+  }
+  .swiper-wrapper{
+    height: 100%;
+
+  }
+  .swiper-container{
+    height: 100vh;
+  }
+
+
+  .hero-content h1{
+    font-size: 4rem;
+    font-weight: 500;
+    color: #fff;
+  }
+  .hero-content p{
+    color: #fff;
+    font-size: 18px;
+
+  }
+
+  .btn{
+    background-color: #fff;
+    color: #000;
+    padding: 10px 20px;
+    text-decoration: none;
+    text-transform: uppercase;  
+
+  }
+  .hero-content{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 40%;
+  }
+  .hero-buttons{
+    display: flex;
+    gap: 20px;
+  }
+/* ========================= */
+/* Logo Section (Logo Slider) */
+/* ========================= */
+
+
+
+
+.wrapper {
+    display: flex;
     overflow: hidden;
-    background-color: white; /* Optional */
-    padding: 20px 0; /* More padding for spacing */
     position: relative;
 }
+.wrapper::after,
+.wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
 
-.swiper-wrapper {
+    height: 100%;
+    width: 2rem;
+    z-index: 1;
+}
+.wrapper::after {
+    background: linear-gradient(to left, rgb(241 245 249), transparent);
+    right: 0;
+}
+.wrapper::before {
+    background: linear-gradient(to right, rgb(241 245 249), transparent);
+    left: 0;
+}
+.logo-container {
+    display: flex;
+    animation: marquee 20s linear infinite;
+    align-items: center;
+    gap: 20px;
+}
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+/* Duplicating content for seamless looping */
+.marquee__inner {
     display: flex;
     align-items: center;
+    gap: var(--gap);
+    flex-wrap: nowrap;
 }
 
-.swiper-slide {
-    width: auto !important;  /* Auto width for images */
-    height: auto !important;
-    flex-shrink: 0;
-    margin: 0 30px; /* Increased space between images */
-}
-
-.swiper-slide img {
-    width: 100px; /* Adjust logo size */
+/* Logo images */
+.marquee img {
+    width: var(--size);
     height: auto;
-    object-fit: contain; /* Ensures logos are not cropped */
+    object-fit: contain;
+    background: var(--color-bg-accent);
+    padding: 1rem;
+    border-radius: 8px;
 }
 
-/* Hide Swiper buttons (Optional) */
-.swiper-button-next,
-.swiper-button-prev {
-    display: none;
+@keyframes scroll-x {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
 }
+
+
+
 
 /* About Section */
 .about-section {

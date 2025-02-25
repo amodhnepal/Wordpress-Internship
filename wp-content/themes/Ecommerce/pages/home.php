@@ -6,74 +6,88 @@ get_template_part('assets/inc/header'); ?>
 
 <!-- Hero Section -->
 <!-- Hero Section -->
-<!-- Hero Section -->
 <section class="hero">
-    <?php
-    // Fetch the latest banner post to get title & text (Static content)
-    $banner_args = array(
-        'post_type'      => 'post',
-        'posts_per_page' => 1, // Get only one post for content
-        'category_name'  => 'banner',
-        'orderby'        => 'date',
-        'order'          => 'DESC'
-    );
-    $banner_query = new WP_Query($banner_args);
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <?php
+            $banner_args = array(
+                'post_type'      => 'post',
+                'posts_per_page' => 3, // Fetch latest 3 banners
+                'category_name'  => 'banner',
+                'orderby'        => 'date',
+                'order'          => 'DESC'
+            );
+            $banner_query = new WP_Query($banner_args);
 
-    if ($banner_query->have_posts()) :
-        while ($banner_query->have_posts()) : $banner_query->the_post();
-            $banner_image = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'full') : '';
-            $banner_title = get_the_title();
-            $banner_excerpt = get_the_excerpt();
-        endwhile;
-        wp_reset_postdata();
-    endif;
-    ?>
-
-    <div class="hero-content">
-        <h1><?php echo esc_html($banner_title); ?></h1>
-        <p><?php echo esc_html($banner_excerpt); ?></p>
-        <div class="hero-buttons">
-            <a href="#" class="btn">Shop Men</a>
-            <a href="#" class="btn">Shop Women</a>
+            if ($banner_query->have_posts()) :
+                while ($banner_query->have_posts()) : $banner_query->the_post();
+                    $banner_image = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'full') : '';
+                    ?>
+                    <div class="swiper-slide" style="background-image: url('<?php echo esc_url($banner_image); ?>');  ">
+                        <div class="hero-content">
+                            <h1><?php the_title(); ?></h1>
+                            <p><?php the_excerpt(); ?></p>
+                            <div class="hero-buttons">
+                                <a href="#" class="btn">Shop Men</a>
+                                <a href="#" class="btn">Shop Women</a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                endwhile;
+                wp_reset_postdata();
+            endif;
+            ?>
         </div>
-    </div>
 
-    <div class="hero-image" style="background-image: url('<?php echo esc_url($banner_image); ?>');"></div>
+        <!-- Swiper Pagination and Navigation -->
+        <div class="swiper-pagination hero-pagination"></div>
+        <div class="swiper-button-next hero-next"></div>
+        <div class="swiper-button-prev hero-prev"></div>
+    </div>
+</section>
+
+
+<!-- Featured Logos Section -->
+<section class="logo-posts">
+    <div class="wrapper">
+            <div class="logo-container">
+                <?php
+                $args = array(
+                    'post_type'      => 'post',
+                    'posts_per_page' => -1,
+                    'category_name'  => 'logo',
+                    'orderby'        => 'date',
+                    'order'          => 'DESC',
+                );
+
+                $logo_query = new WP_Query($args);
+                if ($logo_query->have_posts()) :
+                    while ($logo_query->have_posts()) : $logo_query->the_post();
+                        $post_thumbnail_url = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'full') : ''; // Fetch featured image
+                        ?>
+                        <div class="logo-item">
+                            <?php if (!empty($post_thumbnail_url)) : ?>
+                                <img src="<?php echo esc_url($post_thumbnail_url); ?>" alt="<?php the_title_attribute(); ?>">
+                            <?php endif; ?>
+                        </div>
+                        <?php
+                    endwhile;
+                    wp_reset_postdata();
+                else :
+                    echo '<p>No logos found.</p>';
+                endif;
+                ?>
+            </div>
+        </div>
+        
 </section>
 
 
 
 <!-- Featured Images Section -->
-<section class="logo-posts">
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-            <?php
-            $args = array(
-                'post_type'      => 'post',
-                'posts_per_page' => -1,
-                'category_name'  => 'logo',
-                'orderby'        => 'date',
-                'order'          => 'DESC',
-            );
+<!-- Featured Logos Section -->
 
-            $logo_query = new WP_Query($args);
-            if ($logo_query->have_posts()) :
-                while ($logo_query->have_posts()) : $logo_query->the_post();
-                    if (has_post_thumbnail()) :
-                        $post_thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                        ?>
-                        <img class="swiper-slide" src="<?php echo esc_url($post_thumbnail_url); ?>" alt="Logo">
-                        <?php
-                    endif;
-                endwhile;
-                wp_reset_postdata();
-            else :
-                echo '<p>No logos found.</p>';
-            endif;
-            ?>
-        </div>
-    </div>
-</section>
 
 <!-- About Section -->
 <section class="about-section">
