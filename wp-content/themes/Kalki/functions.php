@@ -393,6 +393,65 @@ function save_appointment_meta($post_id) {
     }
 }
 add_action('save_post', 'save_appointment_meta');
+
+function create_counter_post_type() {
+    register_post_type('counter',
+        array(
+            'labels'      => array(
+                'name'          => __('Counters', 'Kalki'),
+                'singular_name' => __('Counter', 'Kalki'),
+            ),
+            'public'      => true,
+            'has_archive' => false,
+            'supports'    => array('title'),
+            'menu_icon'   => 'dashicons-chart-line',
+        )
+    );
+}
+add_action('init', 'create_counter_post_type');
+
+
+function counter_meta_boxes() {
+    add_meta_box('counter_values', 'Counter Values', 'render_counter_meta_box', 'counter', 'normal', 'high');
+}
+
+function render_counter_meta_box($post) {
+    // Retrieve existing values
+    $projects_completed = get_post_meta($post->ID, 'projects_completed', true);
+    $hours_coding = get_post_meta($post->ID, 'hours_coding', true);
+    $happy_clients = get_post_meta($post->ID, 'happy_clients', true);
+    ?>
+    <p>
+        <label>Projects Completed:</label>
+        <input type="number" name="projects_completed" value="<?php echo esc_attr($projects_completed); ?>" />
+    </p>
+    <p>
+        <label>Hours Coding:</label>
+        <input type="number" name="hours_coding" value="<?php echo esc_attr($hours_coding); ?>" />
+    </p>
+    <p>
+        <label>Happy Clients:</label>
+        <input type="number" name="happy_clients" value="<?php echo esc_attr($happy_clients); ?>" />
+    </p>
+    <?php
+}
+
+// Save Meta Box Data
+function save_counter_meta_box($post_id) {
+    if (array_key_exists('projects_completed', $_POST)) {
+        update_post_meta($post_id, 'projects_completed', sanitize_text_field($_POST['projects_completed']));
+    }
+    if (array_key_exists('hours_coding', $_POST)) {
+        update_post_meta($post_id, 'hours_coding', sanitize_text_field($_POST['hours_coding']));
+    }
+    if (array_key_exists('happy_clients', $_POST)) {
+        update_post_meta($post_id, 'happy_clients', sanitize_text_field($_POST['happy_clients']));
+    }
+}
+
+add_action('add_meta_boxes', 'counter_meta_boxes');
+add_action('save_post', 'save_counter_meta_box');
+
 ?>
 
 

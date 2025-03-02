@@ -20,29 +20,29 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-// define( 'DB_NAME', 'wordpress' );
+define( 'DB_NAME', 'wordpress' );
 
-// /** Database username */
-// define( 'DB_USER', 'root' );
+/** Database username */
+define( 'DB_USER', 'root' );
 
-// /** Database password */
-// define( 'DB_PASSWORD', '' );
+/** Database password */
+define( 'DB_PASSWORD', '' );
 
-// /** Database hostname */
-// define( 'DB_HOST', 'localhost' );
+/** Database hostname */
+define( 'DB_HOST', 'localhost' );
 
-// /** Database charset to use in creating database tables. */
-// define( 'DB_CHARSET', 'utf8mb4' );
+/** Database charset to use in creating database tables. */
+define( 'DB_CHARSET', 'utf8mb4' );
 
-// /** The database collate type. Don't change this if in doubt. */
-// define( 'DB_COLLATE', '' );
+/** The database collate type. Don't change this if in doubt. */
+define( 'DB_COLLATE', '' );
 
-define('DB_NAME', 'Ecommerce'); // Your database name
-define('DB_USER', 'root'); // Your MySQL username
-define('DB_PASSWORD', ''); // Your MySQL password (leave empty if not set)
-define('DB_HOST', '127.0.0.1'); // DBngin’s MySQL host (use localhost or 127.0.0.1)
-define('DB_CHARSET', 'utf8mb4');
-define('DB_COLLATE', '');
+// define('DB_NAME', 'Ecommerce'); // Your database name
+// define('DB_USER', 'root'); // Your MySQL username
+// define('DB_PASSWORD', ''); // Your MySQL password (leave empty if not set)
+// define('DB_HOST', '127.0.0.1'); // DBngin’s MySQL host (use localhost or 127.0.0.1)
+// define('DB_CHARSET', 'utf8mb4');
+// define('DB_COLLATE', '');
 
 /**#@+
  * Authentication unique keys and salts.

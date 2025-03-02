@@ -108,3 +108,47 @@ document.addEventListener("DOMContentLoaded", function () {
     updateMainContent(0);
     
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    function animateCounter(element, target) {
+        let start = 0;
+        let duration = 2000; // Animation duration in milliseconds
+        let stepTime = Math.abs(Math.floor(duration / target));
+
+        let counter = setInterval(() => {
+            start += 1;
+            element.querySelector(".counter-number").textContent = start; // Update only the number
+            if (start >= target) {
+                clearInterval(counter);
+            }
+        }, stepTime);
+    }
+
+    function startCounters() {
+        document.querySelectorAll(".counter-box h2").forEach(counter => {
+            let fullText = counter.innerHTML.trim(); // Get full text
+            let targetValue = parseInt(fullText.replace(/\D/g, ""), 10); // Extract only numbers
+
+            // Wrap the number inside a span for easy targeting
+            counter.innerHTML = fullText.replace(targetValue, `<span class="counter-number">${targetValue}</span>`);
+            
+            animateCounter(counter, targetValue);
+        });
+    }
+
+    // Intersection Observer to detect when the counter section is in view
+    let counterSection = document.querySelector(".counter-section");
+    let observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                startCounters();
+                observer.unobserve(entry.target); // Run only once
+            }
+        });
+    }, { threshold: 0.5 });
+
+    if (counterSection) {
+        observer.observe(counterSection);
+    }
+});
+
