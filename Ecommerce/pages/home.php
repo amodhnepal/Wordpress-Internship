@@ -230,7 +230,11 @@ if ($arrivals_query->have_posts()) : ?>
     </section>
 <?php endif; 
 wp_reset_postdata();
+
 ?>
+
+<?php display_testimonials(); ?>
+
 
 
 <?php get_template_part('assets/inc/footer'); ?>

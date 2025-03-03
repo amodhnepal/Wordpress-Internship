@@ -42,3 +42,25 @@ jQuery(document).ready(function($) {
         return false;
     });
 });
+
+
+jQuery(document).ready(function($) {
+    $('.woocommerce-cart-form').on('change', 'input.qty', function() {
+        var $this = $(this);
+        var item_key = $this.closest('tr').find('.remove').attr('data-product_id');
+        var new_qty = $this.val();
+
+        $.ajax({
+            type: 'POST',
+            url: ajax_obj.ajaxurl,
+            data: {
+                action: 'update_cart_quantity',
+                cart_item_key: item_key,
+                quantity: new_qty
+            },
+            success: function(response) {
+                location.reload(); // Refresh the page to reflect the updated cart
+            }
+        });
+    });
+});

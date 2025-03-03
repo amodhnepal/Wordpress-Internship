@@ -29,6 +29,37 @@ get_header();
     endif;
     ?>
 </div>
+<section class="counter-section">
+    <?php
+    $args = array(
+     'post_type' => 'counter',
+     'posts_per_page' => 1
+    );
+    $counter_query = new WP_Query($args);
+    if ($counter_query->have_posts()) :
+        while ($counter_query->have_posts()) : $counter_query->the_post();
+            $projects_completed = get_post_meta(get_the_ID(), 'projects_completed', true);
+            $hours_coding = get_post_meta(get_the_ID(), 'hours_coding', true);
+            $happy_clients = get_post_meta(get_the_ID(), 'happy_clients', true);
+    ?>
+            <div class="counter-box">
+                <h2><?php echo esc_html($projects_completed); ?> <span class="blue">+</span></h2>
+                <p>Projects Completed</p>
+            </div>
+            <div class="counter-box">
+                <h2><?php echo esc_html($hours_coding); ?> <span class="blue">m</span></h2>
+                <p>Hours Coding</p>
+            </div>
+            <div class="counter-box">
+                <h2><?php echo esc_html($happy_clients); ?> <span class="blue">+</span></h2>
+                <p>Happy Clients</p>
+            </div>
+    <?php
+        endwhile;
+        wp_reset_postdata();
+    endif;
+    ?>
+</section>
 <!-- About Posts -->
 <div class='about-title'>
         <h1>We provide <span>high</span><br> quality services</h1>

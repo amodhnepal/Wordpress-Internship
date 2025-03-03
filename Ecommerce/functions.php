@@ -82,4 +82,207 @@ add_action('create_category', 'ecommerce_save_category_image');
 // Optionally include other files from your inc folder
 // require_once get_template_directory() . '/inc/some-file.php';
 
+function create_testimonial_post_type() {
+    register_post_type('testimonials',
+        array(
+            'labels'      => array(
+                'name'          => __('Testimonials'),
+                'singular_name' => __('Testimonial'),
+            ),
+            'public'      => true,
+            'has_archive' => false,
+            'supports'    => array('title', 'editor', 'thumbnail'),
+            'menu_icon'   => 'dashicons-testimonial',
+        )
+    );
+}
+add_action('init', 'create_testimonial_post_type');
+
+
+function testimonial_add_meta_box() {
+    add_meta_box(
+        'testimonial_star_rating',  // Unique ID
+        'Star Rating',              // Box title
+        'testimonial_meta_box_callback',  // Callback function
+        'testimonials',             // Post type
+        'side',                     // Context (where to show)
+        'default'                    // Priority
+    );
+}
+add_action('add_meta_boxes', 'testimonial_add_meta_box');
+
+function testimonial_meta_box_callback($post) {
+    $rating = get_post_meta($post->ID, '_testimonial_star_rating', true);
+
+    echo '<label for="testimonial_star_rating">Select a Rating (1-5): </label>';
+    echo '<select name="testimonial_star_rating" id="testimonial_star_rating">';
+    for ($i = 1; $i <= 5; $i++) {
+        echo '<option value="' . $i . '" ' . selected($rating, $i, false) . '>' . $i . ' Stars</option>';
+    }
+    echo '</select>';
+}
+
+function display_testimonials() {
+    $args = array(
+        'post_type'      => 'testimonials',
+        'posts_per_page' => 3,
+        'orderby'        => 'rand',
+    );
+
+    $query = new WP_Query($args);
+    if ($query->have_posts()) {
+        echo '<div class="testimonials-container">';
+        while ($query->have_posts()) {
+            $query->the_post();
+            $customer_name = get_the_title();
+            $testimonial_text = get_the_content();
+            $profile_image = get_the_post_thumbnail_url(get_the_ID(), 'thumbnail');
+            $rating = get_field('star_rating'); // ACF Field for star rating
+
+            echo '<div class="testimonial-box">';
+            echo '<div class="testimonial-rating">';
+            for ($i = 0; $i < $rating; $i++) {
+                echo '<span style="color:gold;">★</span>';
+            }
+            echo '</div>';
+            echo '<p class="testimonial-text">"' . esc_html($testimonial_text) . '"</p>';
+            echo '<div class="testimonial-footer">';
+            if ($profile_image) {
+                echo '<img src="' . esc_url($profile_image) . '" alt="' . esc_attr($customer_name) . '" class="testimonial-img">';
+            }
+            echo '<span class="testimonial-name">' . esc_html($customer_name) . '</span>';
+            echo '</div>';
+            echo '</div>';
+        }
+        echo '</div>';
+    }
+    wp_reset_postdata();
+}
+
+
+function register_footer_menus_widgets() {
+    // Register footer menus
+    register_nav_menus([
+        'footer_menu_shop'    => __('Footer Menu - Shop'),
+        'footer_menu_about'   => __('Footer Menu - About'),
+        'footer_menu_help'    => __('Footer Menu - Need Help?'),
+    ]);
+
+    // Register Footer Widgets
+    register_sidebar([
+        'name'          => 'Footer Widget Area',
+        'id'            => 'footer_widget',
+        'before_widget' => '<div class="footer-widget">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4>',
+        'after_title'   => '</h4>',
+    ]);
+}
+add_action('init', 'register_footer_menus_widgets');
+
+
+function customize_footer_settings($wp_customize) {
+    // Footer Section
+    $wp_customize->add_section('footer_settings', [
+        'title'    => __('Footer Settings'),
+        'priority' => 120,
+    ]);
+
+    // Secure Payment Text
+    $wp_customize->add_setting('secure_payment_text', [
+        'default'   => 'Secure Payment',
+        'transport' => 'refresh',
+    ]);
+    $wp_customize->add_control('secure_payment_text', [
+        'label'   => __('Secure Payment Text'),
+        'section' => 'footer_settings',
+        'type'    => 'text',
+    ]);
+
+    // Express Shipping Text
+    $wp_customize->add_setting('express_shipping_text', [
+        'default'   => 'Express Shipping',
+        'transport' => 'refresh',
+    ]);
+    $wp_customize->add_control('express_shipping_text', [
+        'label'   => __('Express Shipping Text'),
+        'section' => 'footer_settings',
+        'type'    => 'text',
+    ]);
+
+    // Free Return Text
+    $wp_customize->add_setting('free_return_text', [
+        'default'   => 'Free Return',
+        'transport' => 'refresh',
+    ]);
+    $wp_customize->add_control('free_return_text', [
+        'label'   => __('Free Return Text'),
+        'section' => 'footer_settings',
+        'type'    => 'text',
+    ]);
+
+    // Social Media Links
+    $socials = ['instagram', 'pinterest', 'facebook', 'twitter'];
+    foreach ($socials as $social) {
+        $wp_customize->add_setting("{$social}_link", [
+            'default'   => '#',
+            'transport' => 'refresh',
+        ]);
+        $wp_customize->add_control("{$social}_link", [
+            'label'   => ucfirst($social) . ' Link',
+            'section' => 'footer_settings',
+            'type'    => 'url',
+        ]);
+    }
+
+    // Payment Icons
+    $payments = ['stripe', 'paypal', 'amex', 'visa', 'mastercard'];
+    foreach ($payments as $payment) {
+        $wp_customize->add_setting("{$payment}_icon", [
+            'default'   => get_template_directory_uri() . "/images/{$payment}.png",
+            'transport' => 'refresh',
+        ]);
+        $wp_customize->add_control(new WP_Customize_Image_Control(
+            $wp_customize,
+            "{$payment}_icon",
+            [
+                'label'    => ucfirst($payment) . ' Icon',
+                'section'  => 'footer_settings',
+                'settings' => "{$payment}_icon",
+            ]
+        ));
+    }
+}
+add_action('customize_register', 'customize_footer_settings');
+
+
+function override_woocommerce_template($template) {
+    if (is_singular('product')) {
+        return get_template_directory() . '/pages/product-details.php';
+    }
+    return $template;
+}
+add_filter('template_include', 'override_woocommerce_template');
+
+function override_woocommerce_cart_template($template) {
+    if (is_page('cart')) {
+        return get_template_directory() . '/pages/cart.php';
+    }
+    return $template;
+}
+add_filter('template_include', 'override_woocommerce_cart_template');
+
+
+add_filter('woocommerce_checkout_fields', 'fix_checkout_fields');
+
+function fix_checkout_fields($fields) {
+    if (isset($fields['billing']['billing_country']['options'])) {
+        foreach ($fields['billing']['billing_country']['options'] as $key => $value) {
+            // Remove any <span> elements inside options
+            $fields['billing']['billing_country']['options'][$key] = strip_tags($value);
+        }
+    }
+    return $fields;
+}
+
 ?>
