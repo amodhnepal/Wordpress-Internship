@@ -451,6 +451,10 @@ function save_counter_meta_box($post_id) {
 
 add_action('add_meta_boxes', 'counter_meta_boxes');
 add_action('save_post', 'save_counter_meta_box');
+function custom_add_to_cart_redirect( $url ) {
+    return wc_get_cart_url(); // Redirects to the correct cart page
+}
+add_filter( 'woocommerce_add_to_cart_redirect', 'custom_add_to_cart_redirect' );
 
 ?>
 
