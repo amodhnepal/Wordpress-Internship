@@ -166,72 +166,28 @@
 /* Logo Section (Logo Slider) */
 /* ========================= */
 
-
-
-
-.wrapper {
+.container {
+    width: 100%;
+    padding: 20px 0;
+    background: #f8f9fa;
     display: flex;
-    overflow: hidden;
-    position: relative;
+    justify-content: center;
+    
 }
-.wrapper::after,
-.wrapper::before {
-    content: '';
-    position: absolute;
-    top: 0;
-
-    height: 100%;
-    width: 2rem;
-    z-index: 1;
-}
-.wrapper::after {
-    background: linear-gradient(to left, rgb(241 245 249), transparent);
-    right: 0;
-}
-.wrapper::before {
-    background: linear-gradient(to right, rgb(241 245 249), transparent);
-    left: 0;
-}
-.logo-container {
-    display: flex;
-    animation: marquee 20s linear infinite;
-    align-items: center;
-    gap: 20px;
-}
-@keyframes marquee {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
-}
-/* Duplicating content for seamless looping */
-.marquee__inner {
-    display: flex;
-    align-items: center;
-    gap: var(--gap);
-    flex-wrap: nowrap;
+.splide__list{
+    gap: 69px;
 }
 
-/* Logo images */
-.marquee img {
-    width: var(--size);
+.splide__slide img {
+    max-width: 100%;
     height: auto;
+    display: block;
     object-fit: contain;
-    background: var(--color-bg-accent);
-    padding: 1rem;
-    border-radius: 8px;
+    
 }
 
-@keyframes scroll-x {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-50%);
-    }
-}
+
+
 
 
 
@@ -251,7 +207,7 @@
 }
 
 .about-image img {
-    width: 115%; /* Full width of the container */
+    width: 100%; /* Full width of the container */
     height: 60%; /* Adjust height */
     object-fit:contain; /* Prevent image from stretching */
 }

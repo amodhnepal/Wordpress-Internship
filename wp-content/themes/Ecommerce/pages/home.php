@@ -48,10 +48,11 @@ get_template_part('assets/inc/header'); ?>
 </section>
 
 
-<!-- Featured Logos Section -->
-<section class="logo-posts">
-    <div class="wrapper">
-            <div class="logo-container">
+<!-- Splide Logo Slider -->
+<section class="container">
+    <div class="splide" id="logo-slider">
+        <div class="splide__track">
+            <ul class="splide__list">
                 <?php
                 $args = array(
                     'post_type'      => 'post',
@@ -62,26 +63,30 @@ get_template_part('assets/inc/header'); ?>
                 );
 
                 $logo_query = new WP_Query($args);
+                
                 if ($logo_query->have_posts()) :
                     while ($logo_query->have_posts()) : $logo_query->the_post();
-                        $post_thumbnail_url = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'full') : ''; // Fetch featured image
-                        ?>
-                        <div class="logo-item">
-                            <?php if (!empty($post_thumbnail_url)) : ?>
-                                <img src="<?php echo esc_url($post_thumbnail_url); ?>" alt="<?php the_title_attribute(); ?>">
-                            <?php endif; ?>
-                        </div>
-                        <?php
+                        if (has_post_thumbnail()) {
+                            $logo_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                            ?>
+                            <li class="splide__slide">
+                                <img src="<?php echo esc_url($logo_url); ?>" alt="Logo">
+                            </li>
+                            <?php
+                        }
                     endwhile;
                     wp_reset_postdata();
                 else :
                     echo '<p>No logos found.</p>';
                 endif;
                 ?>
-            </div>
+            </ul>
         </div>
-        
+    </div>
 </section>
+
+
+
 
 
 

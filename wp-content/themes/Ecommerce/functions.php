@@ -14,6 +14,12 @@ function ecommerce_enqueue_assets() {
 
     // Enqueue custom JavaScript file (for general theme functionality)
     wp_enqueue_script( 'ecommerce-custom-js', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), null, true );
+     // Enqueue Splide CSS
+     wp_enqueue_style('splide-css', 'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/css/splide.min.css', array(), null);
+    
+     // Enqueue Splide JS
+     wp_enqueue_script('splide-js', 'https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.3/dist/js/splide.min.js', array('jquery'), null, true);
+
 }
 add_action( 'wp_enqueue_scripts', 'ecommerce_enqueue_assets' );
 

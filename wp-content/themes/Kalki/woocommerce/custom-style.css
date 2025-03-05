@@ -1,0 +1,95 @@
+/* Order Received Page Styling */
+.woocommerce-order-received {
+    text-align: center;
+    padding: 50px 20px;
+    background: #F8F9FA;
+}
+
+/* Order Confirmation Message */
+.woocommerce-thankyou-order-received {
+    font-size: 28px;
+    font-weight: bold;
+    color: #4CAF50; /* Green */
+    margin-bottom: 20px;
+}
+
+/* Order Details Container */
+.woocommerce-order {
+    max-width: 700px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Order Summary */
+.woocommerce-thankyou-order-details {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f1f1f1;
+    border-radius: 8px;
+}
+
+/* Order Number & Details */
+.woocommerce-order-overview {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Strong Text */
+.woocommerce-order-overview strong {
+    font-weight: bold;
+    color: #6A0DAD; /* Purple */
+}
+
+/* Payment & Shipping Details */
+.woocommerce-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Table Styling */
+.woocommerce-table th, .woocommerce-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.woocommerce-table th {
+    background: #6A0DAD;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Thank You Page Button */
+.woocommerce-thankyou-footer .button {
+    display: inline-block;
+    background: #6A0DAD;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.woocommerce-thankyou-footer .button:hover {
+    background: #520D9B;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .woocommerce-order {
+        padding: 20px;
+    }
+    .woocommerce-thankyou-order-received {
+        font-size: 24px;
+    }
+}

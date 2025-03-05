@@ -8,6 +8,7 @@ function kalki_theme_assets() {
     // Font Awesome
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css', [], null);
     wp_localize_script('jquery', 'ajax_object', ['ajax_url' => admin_url('admin-ajax.php')]);
+
     // Custom Theme Styles & Scripts
     wp_enqueue_style('kalki-style', get_template_directory_uri() . '/assets/css/starter-style.css', [], '1.0.0');
     wp_enqueue_script('kalki-script', get_template_directory_uri() . '/assets/js/script.js', ['swiper-js'], null, true);
@@ -455,6 +456,24 @@ function custom_add_to_cart_redirect( $url ) {
     return wc_get_cart_url(); // Redirects to the correct cart page
 }
 add_filter( 'woocommerce_add_to_cart_redirect', 'custom_add_to_cart_redirect' );
+
+
+function custom_woocommerce_styles() {
+    if (is_wc_endpoint_url('order-received')) { // Only load on Thank You page
+        wp_enqueue_style('custom-woocommerce', get_stylesheet_directory_uri() . '/woocommerce/custom-style.css', array(), '1.0', 'all');
+    }
+}
+add_action('wp_enqueue_scripts', 'custom_woocommerce_styles');
+
+
+
+function custom_login_redirect($redirect_to, $request, $user) {
+    if (!is_wp_error($user) && $user->roles[0] === 'subscriber') {
+        return home_url('/dashboard'); // Redirect subscribers to a dashboard
+    }
+    return $redirect_to;
+}
+add_filter('login_redirect', 'custom_login_redirect', 10, 3);
 
 ?>
 

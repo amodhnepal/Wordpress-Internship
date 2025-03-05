@@ -2501,3 +2501,33 @@
         padding: 12px;
     }
 }
+
+
+/* Login and Register */
+.woocommerce form.login {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.woocommerce form.login input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+.woocommerce form.login button {
+    background: #6A0DAD;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.woocommerce form.login button:hover {
+    background: #520D9B;
+}

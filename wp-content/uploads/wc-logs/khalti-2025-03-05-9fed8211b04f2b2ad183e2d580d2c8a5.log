@@ -1,0 +1,228 @@
+2025-03-05T04:51:41+00:00 INFO Generating payment form for order 755. Notify URL: http://wordpress.test/wc-api/WC_Gateway_Khalti/
+2025-03-05T04:51:41+00:00 INFO Khalti Request Args for order : 755Array
+(
+    [return_url] => http://wordpress.test/wc-api/WC_Gateway_Khalti/
+    [website_url] => http://wordpress.test
+    [amount] => 2800000
+    [purchase_order_id] => wc_order_hAdmqipMMEtIs
+    [purchase_order_name] => wc_order_hAdmqipMMEtIs
+    [product_details] => Array
+        (
+            [0] => Array
+                (
+                    [identity] => 736
+                    [name] => Automation website
+                    [quantity] => 4
+                    [unit_price] => 700000
+                    [total_price] => 2800000
+                )
+
+        )
+
+    [customer_info] => Array
+        (
+            [name] => Amodh Nepal
+            [email] => nthgisreal@gmail.com
+            [phone] => 
+        )
+
+    [amount_breakdown] => Array
+        (
+            [0] => Array
+                (
+                    [label] => Mark Price
+                    [amount] => 2800000
+                )
+
+            [1] => Array
+                (
+                    [label] => Shipping Charge
+                    [amount] => 0
+                )
+
+            [2] => Array
+                (
+                    [label] => VAT
+                    [amount] => 0
+                )
+
+        )
+
+)
+
+2025-03-05T04:51:50+00:00 INFO IPN Response: Array
+(
+    [status] => Completed
+    [t] => txn
+    [idx] => KGjz2kAvNMUDCWPSbfpttT
+    [token] => ucnt3wo5deWTg5Y6hhzn4Z
+    [bank_reference] => None
+    [amount] => 2800000
+    [mobile] => 98XXXXX210
+    [transaction_id] => KGjz2kAvNMUDCWPSbfpttT
+    [tidx] => KGjz2kAvNMUDCWPSbfpttT
+    [total_amount] => 2800000
+    [purchase_order_id] => wc_order_hAdmqipMMEtIs
+    [purchase_order_name] => wc_order_hAdmqipMMEtIs
+    [pidx] => qM5qwQ9K9Qx5keYqQP2ven
+    [woocommerce-login-nonce] => 
+    [_wpnonce] => 
+    [woocommerce-reset-password-nonce] => 
+)
+
+2025-03-05T04:51:50+00:00 INFO Validating IPN response
+2025-03-05T04:51:51+00:00 INFO Payment Verification: Successful
+2025-03-05T04:51:51+00:00 INFO Found order #755
+2025-03-05T04:51:51+00:00 INFO Payment status: completed
+2025-03-05T05:12:49+00:00 INFO Generating payment form for order 757. Notify URL: http://wordpress.test/wc-api/WC_Gateway_Khalti/
+2025-03-05T05:12:49+00:00 INFO Khalti Request Args for order : 757Array
+(
+    [return_url] => http://wordpress.test/wc-api/WC_Gateway_Khalti/
+    [website_url] => http://wordpress.test
+    [amount] => 700000
+    [purchase_order_id] => wc_order_ewePDK1TZS7LS
+    [purchase_order_name] => wc_order_ewePDK1TZS7LS
+    [product_details] => Array
+        (
+            [0] => Array
+                (
+                    [identity] => 736
+                    [name] => Automation website
+                    [quantity] => 1
+                    [unit_price] => 700000
+                    [total_price] => 700000
+                )
+
+        )
+
+    [customer_info] => Array
+        (
+            [name] => Amodh Nepal
+            [email] => rupeshthapa.kalki@gmail.com
+            [phone] => 
+        )
+
+    [amount_breakdown] => Array
+        (
+            [0] => Array
+                (
+                    [label] => Mark Price
+                    [amount] => 700000
+                )
+
+            [1] => Array
+                (
+                    [label] => Shipping Charge
+                    [amount] => 0
+                )
+
+            [2] => Array
+                (
+                    [label] => VAT
+                    [amount] => 0
+                )
+
+        )
+
+)
+
+2025-03-05T05:12:58+00:00 INFO IPN Response: Array
+(
+    [status] => Completed
+    [t] => txn
+    [idx] => pFT4nnQ99WKf7VUgYvpfMg
+    [token] => hr9THYewiZ8ecXFAaR5Yxh
+    [bank_reference] => None
+    [amount] => 700000
+    [mobile] => 98XXXXX210
+    [transaction_id] => pFT4nnQ99WKf7VUgYvpfMg
+    [tidx] => pFT4nnQ99WKf7VUgYvpfMg
+    [total_amount] => 700000
+    [purchase_order_id] => wc_order_ewePDK1TZS7LS
+    [purchase_order_name] => wc_order_ewePDK1TZS7LS
+    [pidx] => NKmUc8GXucRRjenSYvZKpd
+    [woocommerce-login-nonce] => 
+    [_wpnonce] => 
+    [woocommerce-reset-password-nonce] => 
+)
+
+2025-03-05T05:12:58+00:00 INFO Validating IPN response
+2025-03-05T05:12:59+00:00 INFO Payment Verification: Successful
+2025-03-05T05:12:59+00:00 INFO Found order #757
+2025-03-05T05:12:59+00:00 INFO Payment status: completed
+2025-03-05T09:43:14+00:00 INFO Generating payment form for order 773. Notify URL: http://wordpress.test/wc-api/WC_Gateway_Khalti/
+2025-03-05T09:43:14+00:00 INFO Khalti Request Args for order : 773Array
+(
+    [return_url] => http://wordpress.test/wc-api/WC_Gateway_Khalti/
+    [website_url] => http://wordpress.test
+    [amount] => 1400000
+    [purchase_order_id] => wc_order_folysaosUbmew
+    [purchase_order_name] => wc_order_folysaosUbmew
+    [product_details] => Array
+        (
+            [0] => Array
+                (
+                    [identity] => 772
+                    [name] => Inventory Management System
+                    [quantity] => 1
+                    [unit_price] => 1400000
+                    [total_price] => 1400000
+                )
+
+        )
+
+    [customer_info] => Array
+        (
+            [name] => Amodh Nepal
+            [email] => rupeshthapa.kalki@gmail.com
+            [phone] => 
+        )
+
+    [amount_breakdown] => Array
+        (
+            [0] => Array
+                (
+                    [label] => Mark Price
+                    [amount] => 1400000
+                )
+
+            [1] => Array
+                (
+                    [label] => Shipping Charge
+                    [amount] => 0
+                )
+
+            [2] => Array
+                (
+                    [label] => VAT
+                    [amount] => 0
+                )
+
+        )
+
+)
+
+2025-03-05T09:43:29+00:00 INFO IPN Response: Array
+(
+    [status] => Completed
+    [t] => txn
+    [idx] => Hh9zHjy3Y57pqBJUuVTw7c
+    [token] => Z49UUkJSZq5ZvyM4ECZrCH
+    [bank_reference] => None
+    [amount] => 1400000
+    [mobile] => 98XXXXX210
+    [transaction_id] => Hh9zHjy3Y57pqBJUuVTw7c
+    [tidx] => Hh9zHjy3Y57pqBJUuVTw7c
+    [total_amount] => 1400000
+    [purchase_order_id] => wc_order_folysaosUbmew
+    [purchase_order_name] => wc_order_folysaosUbmew
+    [pidx] => 73X3SLQpK4vyCi45p7KsTH
+    [woocommerce-login-nonce] => 
+    [_wpnonce] => 
+    [woocommerce-reset-password-nonce] => 
+)
+
+2025-03-05T09:43:29+00:00 INFO Validating IPN response
+2025-03-05T09:43:29+00:00 INFO Payment Verification: Successful
+2025-03-05T09:43:29+00:00 INFO Found order #773
+2025-03-05T09:43:29+00:00 INFO Payment status: completed

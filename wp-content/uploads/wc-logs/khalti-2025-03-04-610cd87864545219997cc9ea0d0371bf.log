@@ -1,0 +1,484 @@
+2025-03-04T12:30:01+00:00 INFO Generating payment form for order 746. Notify URL: http://wordpress.test/wc-api/WC_Gateway_Khalti/
+2025-03-04T12:30:01+00:00 INFO Khalti Request Args for order : 746Array
+(
+    [return_url] => http://wordpress.test/wc-api/WC_Gateway_Khalti/
+    [website_url] => http://wordpress.test
+    [amount] => 700000
+    [purchase_order_id] => wc_order_A9EuqepQLWXl2
+    [purchase_order_name] => wc_order_A9EuqepQLWXl2
+    [product_details] => Array
+        (
+            [0] => Array
+                (
+                    [identity] => 736
+                    [name] => Automation website
+                    [quantity] => 1
+                    [unit_price] => 700000
+                    [total_price] => 700000
+                )
+
+        )
+
+    [customer_info] => Array
+        (
+            [name] => Amodh Nepal
+            [email] => amodhnepal.kalki@gmail.com
+            [phone] => 
+        )
+
+    [amount_breakdown] => Array
+        (
+            [0] => Array
+                (
+                    [label] => Mark Price
+                    [amount] => 700000
+                )
+
+            [1] => Array
+                (
+                    [label] => Shipping Charge
+                    [amount] => 0
+                )
+
+            [2] => Array
+                (
+                    [label] => VAT
+                    [amount] => 0
+                )
+
+        )
+
+)
+
+2025-03-04T12:30:30+00:00 INFO IPN Response: Array
+(
+    [status] => Completed
+    [t] => txn
+    [idx] => egcgPkQuevhVcEjEXQveTM
+    [token] => y2Z3yzM9LRjBny3fBNJCJC
+    [bank_reference] => None
+    [amount] => 700000
+    [mobile] => 98XXXXX199
+    [transaction_id] => egcgPkQuevhVcEjEXQveTM
+    [tidx] => egcgPkQuevhVcEjEXQveTM
+    [total_amount] => 700000
+    [purchase_order_id] => wc_order_A9EuqepQLWXl2
+    [purchase_order_name] => wc_order_A9EuqepQLWXl2
+    [pidx] => BhLGNDer2Nx8XuQw3rid4F
+    [woocommerce-login-nonce] => 
+    [_wpnonce] => 
+    [woocommerce-reset-password-nonce] => 
+)
+
+2025-03-04T12:30:30+00:00 INFO Validating IPN response
+2025-03-04T12:30:31+00:00 INFO Payment Verification: Successful
+2025-03-04T12:30:31+00:00 INFO Found order #746
+2025-03-04T12:30:31+00:00 INFO Payment status: completed
+2025-03-04T12:39:42+00:00 INFO Generating payment form for order 747. Notify URL: http://wordpress.test/wc-api/WC_Gateway_Khalti/
+2025-03-04T12:39:42+00:00 INFO Khalti Request Args for order : 747Array
+(
+    [return_url] => http://wordpress.test/wc-api/WC_Gateway_Khalti/
+    [website_url] => http://wordpress.test
+    [amount] => 1400000
+    [purchase_order_id] => wc_order_H8X1l6jIRhfVc
+    [purchase_order_name] => wc_order_H8X1l6jIRhfVc
+    [product_details] => Array
+        (
+            [0] => Array
+                (
+                    [identity] => 736
+                    [name] => Automation website
+                    [quantity] => 2
+                    [unit_price] => 700000
+                    [total_price] => 1400000
+                )
+
+        )
+
+    [customer_info] => Array
+        (
+            [name] => Amodh Nepal
+            [email] => amodhnepal.kalki@gmail.com
+            [phone] => 
+        )
+
+    [amount_breakdown] => Array
+        (
+            [0] => Array
+                (
+                    [label] => Mark Price
+                    [amount] => 1400000
+                )
+
+            [1] => Array
+                (
+                    [label] => Shipping Charge
+                    [amount] => 0
+                )
+
+            [2] => Array
+                (
+                    [label] => VAT
+                    [amount] => 0
+                )
+
+        )
+
+)
+
+2025-03-04T12:40:02+00:00 INFO IPN Response: Array
+(
+    [status] => Completed
+    [t] => txn
+    [idx] => rkuFJu4VTSnepMxPUJjzLF
+    [token] => cNoZKAheMaMDvcpQ4CWMxN
+    [bank_reference] => None
+    [amount] => 1400000
+    [mobile] => 98XXXXX210
+    [transaction_id] => rkuFJu4VTSnepMxPUJjzLF
+    [tidx] => rkuFJu4VTSnepMxPUJjzLF
+    [total_amount] => 1400000
+    [purchase_order_id] => wc_order_H8X1l6jIRhfVc
+    [purchase_order_name] => wc_order_H8X1l6jIRhfVc
+    [pidx] => NqwDxBT5mF4w6vbcGh2Wjn
+    [woocommerce-login-nonce] => 
+    [_wpnonce] => 
+    [woocommerce-reset-password-nonce] => 
+)
+
+2025-03-04T12:40:02+00:00 INFO Validating IPN response
+2025-03-04T12:40:03+00:00 INFO Payment Verification: Successful
+2025-03-04T12:40:03+00:00 INFO Found order #747
+2025-03-04T12:40:03+00:00 INFO Payment status: completed
+2025-03-04T13:05:05+00:00 INFO Generating payment form for order 750. Notify URL: http://wordpress.test/wc-api/WC_Gateway_Khalti/
+2025-03-04T13:05:05+00:00 INFO Khalti Request Args for order : 750Array
+(
+    [return_url] => http://wordpress.test/wc-api/WC_Gateway_Khalti/
+    [website_url] => http://wordpress.test
+    [amount] => 2800000
+    [purchase_order_id] => wc_order_L8lMpfWUc8Xro
+    [purchase_order_name] => wc_order_L8lMpfWUc8Xro
+    [product_details] => Array
+        (
+            [0] => Array
+                (
+                    [identity] => 736
+                    [name] => Automation website
+                    [quantity] => 4
+                    [unit_price] => 700000
+                    [total_price] => 2800000
+                )
+
+        )
+
+    [customer_info] => Array
+        (
+            [name] => Amodh Nepal
+            [email] => amodhnepal.kalki@gmail.com
+            [phone] => 
+        )
+
+    [amount_breakdown] => Array
+        (
+            [0] => Array
+                (
+                    [label] => Mark Price
+                    [amount] => 2800000
+                )
+
+            [1] => Array
+                (
+                    [label] => Shipping Charge
+                    [amount] => 0
+                )
+
+            [2] => Array
+                (
+                    [label] => VAT
+                    [amount] => 0
+                )
+
+        )
+
+)
+
+2025-03-04T13:09:25+00:00 INFO Generating payment form for order 751. Notify URL: http://wordpress.test/wc-api/WC_Gateway_Khalti/
+2025-03-04T13:09:25+00:00 INFO Khalti Request Args for order : 751Array
+(
+    [return_url] => http://wordpress.test/wc-api/WC_Gateway_Khalti/
+    [website_url] => http://wordpress.test
+    [amount] => 2800000
+    [purchase_order_id] => wc_order_hDfdsxR85yLZ1
+    [purchase_order_name] => wc_order_hDfdsxR85yLZ1
+    [product_details] => Array
+        (
+            [0] => Array
+                (
+                    [identity] => 736
+                    [name] => Automation website
+                    [quantity] => 4
+                    [unit_price] => 700000
+                    [total_price] => 2800000
+                )
+
+        )
+
+    [customer_info] => Array
+        (
+            [name] => Amodh Nepal
+            [email] => amodhnepal.kalki@gmail.com
+            [phone] => 
+        )
+
+    [amount_breakdown] => Array
+        (
+            [0] => Array
+                (
+                    [label] => Mark Price
+                    [amount] => 2800000
+                )
+
+            [1] => Array
+                (
+                    [label] => Shipping Charge
+                    [amount] => 0
+                )
+
+            [2] => Array
+                (
+                    [label] => VAT
+                    [amount] => 0
+                )
+
+        )
+
+)
+
+2025-03-04T14:12:19+00:00 INFO Generating payment form for order 752. Notify URL: http://wordpress.test/wc-api/WC_Gateway_Khalti/
+2025-03-04T14:12:19+00:00 INFO Khalti Request Args for order : 752Array
+(
+    [return_url] => http://wordpress.test/wc-api/WC_Gateway_Khalti/
+    [website_url] => http://wordpress.test
+    [amount] => 3500000
+    [purchase_order_id] => wc_order_ahIfflyptIyD7
+    [purchase_order_name] => wc_order_ahIfflyptIyD7
+    [product_details] => Array
+        (
+            [0] => Array
+                (
+                    [identity] => 736
+                    [name] => Automation website
+                    [quantity] => 5
+                    [unit_price] => 700000
+                    [total_price] => 3500000
+                )
+
+        )
+
+    [customer_info] => Array
+        (
+            [name] => Amodh Nepal
+            [email] => amodhnepal.kalki@gmail.com
+            [phone] => 
+        )
+
+    [amount_breakdown] => Array
+        (
+            [0] => Array
+                (
+                    [label] => Mark Price
+                    [amount] => 3500000
+                )
+
+            [1] => Array
+                (
+                    [label] => Shipping Charge
+                    [amount] => 0
+                )
+
+            [2] => Array
+                (
+                    [label] => VAT
+                    [amount] => 0
+                )
+
+        )
+
+)
+
+2025-03-04T14:12:28+00:00 INFO IPN Response: Array
+(
+    [status] => Completed
+    [t] => txn
+    [idx] => Tw3jmdxMoqki3dNWX5U5Zh
+    [token] => biFLVf2KMScJMcU6x9W9ud
+    [bank_reference] => None
+    [amount] => 3500000
+    [mobile] => 98XXXXX210
+    [transaction_id] => Tw3jmdxMoqki3dNWX5U5Zh
+    [tidx] => Tw3jmdxMoqki3dNWX5U5Zh
+    [total_amount] => 3500000
+    [purchase_order_id] => wc_order_ahIfflyptIyD7
+    [purchase_order_name] => wc_order_ahIfflyptIyD7
+    [pidx] => 29UBdUbu7aQ7nNpFXhuof2
+    [woocommerce-login-nonce] => 
+    [_wpnonce] => 
+    [woocommerce-reset-password-nonce] => 
+)
+
+2025-03-04T14:12:28+00:00 INFO Validating IPN response
+2025-03-04T14:12:29+00:00 INFO Payment Verification: Successful
+2025-03-04T14:12:29+00:00 INFO Found order #752
+2025-03-04T14:12:29+00:00 INFO Payment status: completed
+2025-03-04T14:13:24+00:00 INFO Generating payment form for order 753. Notify URL: http://wordpress.test/wc-api/WC_Gateway_Khalti/
+2025-03-04T14:13:24+00:00 INFO Khalti Request Args for order : 753Array
+(
+    [return_url] => http://wordpress.test/wc-api/WC_Gateway_Khalti/
+    [website_url] => http://wordpress.test
+    [amount] => 700000
+    [purchase_order_id] => wc_order_Eyd4xMeKKNXKe
+    [purchase_order_name] => wc_order_Eyd4xMeKKNXKe
+    [product_details] => Array
+        (
+            [0] => Array
+                (
+                    [identity] => 736
+                    [name] => Automation website
+                    [quantity] => 1
+                    [unit_price] => 700000
+                    [total_price] => 700000
+                )
+
+        )
+
+    [customer_info] => Array
+        (
+            [name] => Amodh Nepal
+            [email] => nthgisreal@gmaill.com
+            [phone] => 
+        )
+
+    [amount_breakdown] => Array
+        (
+            [0] => Array
+                (
+                    [label] => Mark Price
+                    [amount] => 700000
+                )
+
+            [1] => Array
+                (
+                    [label] => Shipping Charge
+                    [amount] => 0
+                )
+
+            [2] => Array
+                (
+                    [label] => VAT
+                    [amount] => 0
+                )
+
+        )
+
+)
+
+2025-03-04T14:13:34+00:00 INFO IPN Response: Array
+(
+    [status] => Completed
+    [t] => txn
+    [idx] => GcvqdKoHis2EbMuY5akZV7
+    [token] => Z8ZGC8PvryGiDR6Qb6weuC
+    [bank_reference] => None
+    [amount] => 700000
+    [mobile] => 98XXXXX210
+    [transaction_id] => GcvqdKoHis2EbMuY5akZV7
+    [tidx] => GcvqdKoHis2EbMuY5akZV7
+    [total_amount] => 700000
+    [purchase_order_id] => wc_order_Eyd4xMeKKNXKe
+    [purchase_order_name] => wc_order_Eyd4xMeKKNXKe
+    [pidx] => YY2ineFqXgHtw96KnGuoYS
+    [woocommerce-login-nonce] => 
+    [_wpnonce] => 
+    [woocommerce-reset-password-nonce] => 
+)
+
+2025-03-04T14:13:34+00:00 INFO Validating IPN response
+2025-03-04T14:13:34+00:00 INFO Payment Verification: Successful
+2025-03-04T14:13:34+00:00 INFO Found order #753
+2025-03-04T14:13:34+00:00 INFO Payment status: completed
+2025-03-04T14:14:38+00:00 INFO Generating payment form for order 754. Notify URL: http://wordpress.test/wc-api/WC_Gateway_Khalti/
+2025-03-04T14:14:38+00:00 INFO Khalti Request Args for order : 754Array
+(
+    [return_url] => http://wordpress.test/wc-api/WC_Gateway_Khalti/
+    [website_url] => http://wordpress.test
+    [amount] => 700000
+    [purchase_order_id] => wc_order_s8EMgc2Mi2mDh
+    [purchase_order_name] => wc_order_s8EMgc2Mi2mDh
+    [product_details] => Array
+        (
+            [0] => Array
+                (
+                    [identity] => 736
+                    [name] => Automation website
+                    [quantity] => 1
+                    [unit_price] => 700000
+                    [total_price] => 700000
+                )
+
+        )
+
+    [customer_info] => Array
+        (
+            [name] => Amodh Nepal
+            [email] => nthgisreal@gmail.com
+            [phone] => 
+        )
+
+    [amount_breakdown] => Array
+        (
+            [0] => Array
+                (
+                    [label] => Mark Price
+                    [amount] => 700000
+                )
+
+            [1] => Array
+                (
+                    [label] => Shipping Charge
+                    [amount] => 0
+                )
+
+            [2] => Array
+                (
+                    [label] => VAT
+                    [amount] => 0
+                )
+
+        )
+
+)
+
+2025-03-04T14:14:46+00:00 INFO IPN Response: Array
+(
+    [status] => Completed
+    [t] => txn
+    [idx] => b44AKs9vAUnfivbygkQB5Y
+    [token] => xRrQyiTvuEtuPWQaQ6XjPQ
+    [bank_reference] => None
+    [amount] => 700000
+    [mobile] => 98XXXXX210
+    [transaction_id] => b44AKs9vAUnfivbygkQB5Y
+    [tidx] => b44AKs9vAUnfivbygkQB5Y
+    [total_amount] => 700000
+    [purchase_order_id] => wc_order_s8EMgc2Mi2mDh
+    [purchase_order_name] => wc_order_s8EMgc2Mi2mDh
+    [pidx] => puzDCXNSzqg5Xa4e8MYd3f
+    [woocommerce-login-nonce] => 
+    [_wpnonce] => 
+    [woocommerce-reset-password-nonce] => 
+)
+
+2025-03-04T14:14:46+00:00 INFO Validating IPN response
+2025-03-04T14:14:46+00:00 INFO Payment Verification: Successful
+2025-03-04T14:14:46+00:00 INFO Found order #754
+2025-03-04T14:14:46+00:00 INFO Payment status: completed
