@@ -21,23 +21,25 @@
         if ($loop->have_posts()) :
             while ($loop->have_posts()) : $loop->the_post();
                 global $product; ?>
-                <div class="product-item">
-                    <a href="<?php the_permalink(); ?>" class="product-link">
-                        <div class="product-image">
-                            <?php if (has_post_thumbnail()) {
-                                the_post_thumbnail('medium');
-                            } ?>
-                            <?php if ($product->is_on_sale()) : ?>
-                                <span class="sale-badge">Sale!</span>
-                            <?php endif; ?>
-                        </div>
-                        <h2 class="product-title"><?php the_title(); ?></h2>
-                        <span class="product-price"><?php echo $product->get_price_html(); ?></span>
-                        <div class="product-rating">
-                            <?php echo wc_get_rating_html($product->get_average_rating()); ?>
-                        </div>
-                    </a>
-                </div>
+
+                
+<div class="seller-item">                   
+    <a href="<?php the_permalink(); ?>">
+        <div class="seller-image">
+            <img src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" alt="<?php the_title_attribute(); ?>">
+        </div>
+        <h3><?php the_title(); ?></h3>
+        <p class="excerpt">
+            <?php 
+                $product = wc_get_product(get_the_ID()); // Get the WooCommerce product
+                if ($product) {
+                    echo $product->get_price_html(); // Display price
+                }
+            ?>
+        </p>
+    </a>
+</div>
+
         <?php endwhile;
         else :
             echo '<p>No products found</p>';

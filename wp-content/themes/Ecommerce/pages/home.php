@@ -162,7 +162,10 @@ if ($sellers_query->have_posts()) : ?>
             ?>
                 <div class="seller-item">
                     <a href="<?php echo esc_url($product_link); ?>">
-                        <img src="<?php echo esc_url($image_url); ?>" alt="<?php the_title(); ?>">
+                        <div class="seller-image">
+
+                            <img src="<?php echo esc_url($image_url); ?>" alt="<?php the_title(); ?>">
+                        </div>
                         <h3><?php the_title(); ?></h3>
                         <p class="excerpt"><?php echo get_the_excerpt(); ?></p>
                     </a>
@@ -216,22 +219,29 @@ $arrivals_query = new WP_Query($args);
 
 if ($arrivals_query->have_posts()) : ?>
     <section class="new-arrivals">
-        <h2>New Arrivals</h2>
+        <div class="new-arrivals-header">
+            <h2>New Arrivals</h2>
+            <a href="<?php echo get_category_link(get_category_by_slug('arrivals')->term_id); ?>" class="view-all">View All Arrivals</a>
+        </div>
         <div class="arrival-grid">
             <?php while ($arrivals_query->have_posts()) : $arrivals_query->the_post(); 
                 $product_link = get_permalink();
                 $image_url = get_the_post_thumbnail_url(get_the_ID(), 'medium');
             ?>
-                <div class="arrival-item">
+
+
+
+<div class="seller-item">
                     <a href="<?php echo esc_url($product_link); ?>">
-                        <img src="<?php echo esc_url($image_url); ?>" alt="<?php the_title(); ?>">
+                        <div class="seller-image">
+                            <img src="<?php echo esc_url(url: $image_url); ?>" alt="<?php the_title(); ?>">
+                        </div>
                         <h3><?php the_title(); ?></h3>
                         <p class="excerpt"><?php echo get_the_excerpt(); ?></p>
                     </a>
                 </div>
             <?php endwhile; ?>
         </div>
-        <a href="<?php echo get_category_link(get_category_by_slug('arrivals')->term_id); ?>" class="view-all">View All Arrivals</a>
     </section>
 <?php endif; 
 wp_reset_postdata();

@@ -475,6 +475,62 @@ function custom_login_redirect($redirect_to, $request, $user) {
 }
 add_filter('login_redirect', 'custom_login_redirect', 10, 3);
 
+function custom_user_orders() {
+    if (!is_user_logged_in()) {
+        echo '<p>You must be logged in to view your orders.</p>';
+        return;
+    }
+
+    $customer_orders = wc_get_orders(array(
+        'customer_id' => get_current_user_id(),
+        'status' => array('processing', 'completed'),
+        'limit' => -1
+    ));
+
+    if (!empty($customer_orders)) {
+        echo '<h3>Your Orders</h3><ul>';
+        foreach ($customer_orders as $order) {
+            echo '<li>Order #'. esc_html($order->get_id()) .' - '. esc_html($order->get_status()) .'</li>';
+        }
+        echo '</ul>';
+    } else {
+        echo '<p>No orders found.</p>';
+    }
+}
+add_shortcode('user_orders', 'custom_user_orders');
+
+
+
+function custom_user_appointments() {
+    if (!is_user_logged_in()) {
+        echo '<p>You must be logged in to view your appointments.</p>';
+        return;
+    }
+
+    $customer_orders = wc_get_orders(array(
+        'customer_id' => get_current_user_id(),
+        'status' => array('processing', 'completed'),
+        'limit' => -1
+    ));
+
+    if (!empty($customer_orders)) {
+        echo '<h3>Your Appointments</h3><ul>';
+        foreach ($customer_orders as $order) {
+            foreach ($order->get_items() as $item) {
+                if (strpos(strtolower($item->get_name()), 'appointment') !== false) {
+                    echo '<li>Appointment: '. esc_html($item->get_name()) .' on '. esc_html($order->get_date_created()->date('Y-m-d')) .'</li>';
+                }
+            }
+        }
+        echo '</ul>';
+    } else {
+        echo '<p>No appointments found.</p>';
+    }
+}
+add_shortcode('user_appointments', 'custom_user_appointments');
+
+
+
 ?>
 
 

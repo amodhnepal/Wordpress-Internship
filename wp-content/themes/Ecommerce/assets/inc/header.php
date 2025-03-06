@@ -7,7 +7,7 @@
 </head>
 <body <?php body_class(); ?>>
 <header id="site-header">
-    <div class="container">
+    <div class="nav-header">
         <nav id="main-navigation">
             <?php
             wp_nav_menu(array(

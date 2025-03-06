@@ -50,5 +50,18 @@
             ]);
             ?>
         </div>
+        <?php if (is_user_logged_in()): 
+    $current_user = wp_get_current_user();
+?>
+    <div class="user-info">
+        <p>Welcome, <?php echo esc_html($current_user->display_name); ?>!</p>
+        <a href="<?php echo wc_get_account_endpoint_url('orders'); ?>">View Orders</a>
+        <a href="<?php echo wc_get_account_endpoint_url('edit-account'); ?>">Edit Profile</a>
+        <a href="<?php echo wp_logout_url(home_url()); ?>">Logout</a>
+    </div>
+<?php else: ?>
+    <a href="<?php echo wc_get_page_permalink('myaccount'); ?>">Login / Register</a>
+<?php endif; ?>
+
     </nav>
 </header>
