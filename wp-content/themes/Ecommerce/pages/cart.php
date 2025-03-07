@@ -3,7 +3,7 @@
  * Template Name: Cart Page
  */
 
- get_template_part('assets/inc/header');;
+ get_template_part('assets/inc/header');
 ?>
 
 <main class="cart-container">

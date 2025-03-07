@@ -291,4 +291,55 @@ function fix_checkout_fields($fields) {
     return $fields;
 }
 
+function create_lookbook_cpt() {
+    $args = array(
+        'label' => 'Lookbook',
+        'public' => true,
+        'show_ui' => true,
+        'menu_icon' => 'dashicons-format-gallery',
+        'supports' => array('title', 'editor', 'thumbnail'),
+        'has_archive' => false,
+        'rewrite' => array('slug' => 'lookbook'),
+    );
+    register_post_type('lookbook', $args);
+}
+add_action('init', 'create_lookbook_cpt');
+
+
+// Register Custom Post Type for Men
+function create_men_post_type() {
+    register_post_type( 'men',
+      array(
+        'labels' => array(
+          'name' => 'Men Products',
+          'singular_name' => 'Men Product'
+        ),
+        'public' => true,
+        'has_archive' => true,
+        'rewrite' => array( 'slug' => 'men' ),
+        'show_in_rest' => true,
+        'supports' => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
+      )
+    );
+  }
+  add_action( 'init', 'create_men_post_type' );
+  
+  // Register Custom Post Type for Women
+  function create_women_post_type() {
+    register_post_type( 'women',
+      array(
+        'labels' => array(
+          'name' => 'Women Products',
+          'singular_name' => 'Women Product'
+        ),
+        'public' => true,
+        'has_archive' => true,
+        'rewrite' => array( 'slug' => 'women' ),
+        'show_in_rest' => true,
+        'supports' => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
+      )
+    );
+  }
+  add_action( 'init', 'create_women_post_type' );
+  
 ?>

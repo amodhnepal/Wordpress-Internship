@@ -12,7 +12,9 @@ get_template_part('assets/inc/header');
         the_post();
         global $post;
         $product = wc_get_product($post->ID);
-        ?>
+    ?>
+
+    
 
         <!-- Product Tabs (Description & Reviews) -->
         <div class="product-tabs">
