@@ -1,0 +1,289 @@
+/* Global Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between; /* Aligns items (logo and menu) at opposite ends */
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px; /* You can adjust based on your design needs */
+    margin: 0 auto;
+}
+
+.logo a {
+    display: inline-block;
+}
+
+.logo img {
+    max-height: 50px; /* Adjust logo size */
+    width: auto;
+}
+
+.main-menu {
+    display: flex;
+    justify-content: flex-end; /* Aligns menu items to the right */
+    flex-grow: 1;
+}
+
+.menu-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.menu-items li {
+    margin-left: 20px; /* Space between menu items */
+    
+}
+
+.menu-items li a {
+    color: black;
+    text-decoration: none;
+    
+    font-size: 16px;
+    padding: 10px;
+    display: inline-block;
+}
+
+.menu-items li a:hover {
+    background-color: #72bde9; /* Add a hover effect */
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+}
+
+.icons a {
+    color: #fff;
+    font-size: 18px;
+    margin-left: 15px;
+}
+
+/* Featured Image Styles */
+.featured-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .top-bar {
+        flex-direction: column;
+        align-items: flex-start; /* Stack elements vertically */
+    }
+
+    .container {
+        flex-direction: column;
+        align-items: flex-start; /* Align items to the left */
+    }
+
+    .main-menu {
+        justify-content: flex-start; /* Align menu to the left */
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .menu-items {
+        flex-direction: column;
+        margin-top: 10px;
+    }
+
+    .menu-items li {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+}
+
+/* Menu icon styling */
+.menu-icon {
+    width: 20px; /* Adjust the size */
+    height: auto;
+    margin-right: 10px; /* Space between the icon and text */
+    vertical-align: middle; /* Align image with text */
+}
+
+/* Optional: Change image size on hover or any other style */
+.menu-items li a:hover .menu-icon {
+    opacity: 0.8; /* Add a hover effect for the icon */
+}
+
+
+
+
+/* Banner */
+.banner {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.banner-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff4081;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+
+
+
+
+/* Products Slider */
+/* Product Slider Styling */
+#product-slider {
+    max-width: 100%;
+    margin: 20px auto;
+}
+
+.splide__slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.splide__slide img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Circular product images */
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 2px solid #ddd;
+    padding: 5px;
+}
+
+.product-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* View All Slide */
+.view-all {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.view-all-btn {
+    text-decoration: none;
+    text-align: center;
+}
+
+.view-all-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    transition: background 0.3s;
+}
+
+.view-all-circle:hover {
+    background: #333;
+}
+
+.view-all p {
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+
+
+
+
+/* Styling the Shirts Category and Products */
+.shirts-category {
+    margin: 30px 0;
+}
+
+.shirts-products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.product-item {
+    width: calc(33.333% - 20px); /* 3 items per row */
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.product-item:hover {
+    transform: scale(1.05);
+}
+
+.product-image {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%; /* Makes the div square */
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.product-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image fully covers the square div */
+    border-radius: 8px;
+}
+
+.product-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.product-price {
+    font-size: 14px;
+    color: #333;
+}
