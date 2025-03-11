@@ -6,7 +6,7 @@
 get_template_part('assets/inc/header'); ?>
 
 <main class="lookbook-container">
-    <h1 class="page-title">Lookbook</h1>
+    <h1 class="page-title ">Lookbook</h1>
 
     <?php
     $lookbook_query = new WP_Query(array(
@@ -24,8 +24,10 @@ get_template_part('assets/inc/header'); ?>
                 </div>
                 <div class="lookbook-text">
                     <h2><?php the_title(); ?></h2>
+                    <div class="lookbook-content">
                     <p><?php the_excerpt(); ?></p>
                     <a href="<?php the_permalink(); ?>" class="shop-btn">Shop Now</a>
+                    </div>
                 </div>
             </section>
 

@@ -3,7 +3,7 @@
  * Template Name: Checkout Page
  */
 
-get_header(); ?>
+get_template_part('assets/inc/header'); ?>
 
 <main class="checkout-container">
     <h1>Checkout</h1>
@@ -15,4 +15,4 @@ get_header(); ?>
 
 </main>
 
-<?php get_footer(); ?>
+<?php get_template_part('assets/inc/footer'); ?>

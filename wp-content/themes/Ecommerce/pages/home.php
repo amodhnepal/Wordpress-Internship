@@ -143,11 +143,17 @@ get_template_part('assets/inc/header'); ?>
 
 
 <?php 
-// Query to get posts from 'sellers' category
+// Query to get WooCommerce products from 'best-sellers' category
 $args = array(
-    'post_type'      => 'post', // Change to 'product' if using WooCommerce
+    'post_type'      => 'product', // Fetch WooCommerce products
     'posts_per_page' => 3,
-    'category_name'  => 'sellers',
+    'tax_query'      => array(
+        array(
+            'taxonomy' => 'product_cat',
+            'field'    => 'slug',
+            'terms'    => 'best-sellers', // Make sure this matches your actual category slug
+        ),
+    ),
 );
 
 $sellers_query = new WP_Query($args);
@@ -159,24 +165,27 @@ if ($sellers_query->have_posts()) : ?>
             <?php while ($sellers_query->have_posts()) : $sellers_query->the_post(); 
                 $product_link = get_permalink();
                 $image_url = get_the_post_thumbnail_url(get_the_ID(), 'medium');
+                $product = wc_get_product(get_the_ID()); // Get WooCommerce product object
             ?>
                 <div class="seller-item">
                     <a href="<?php echo esc_url($product_link); ?>">
                         <div class="seller-image">
-
                             <img src="<?php echo esc_url($image_url); ?>" alt="<?php the_title(); ?>">
                         </div>
                         <h3><?php the_title(); ?></h3>
-                        <p class="excerpt"><?php echo get_the_excerpt(); ?></p>
+                        
+                        <p class="product-price"><?php echo $product->get_price_html(); ?></p> <!-- Fetch product price -->
                     </a>
                 </div>
             <?php endwhile; ?>
         </div>
-        <a href="<?php echo get_category_link(get_category_by_slug('sellers')->term_id); ?>" class="view-all">View All Best Sellers</a>
+        <a href="<?php echo get_category_link(get_term_by('slug', 'best-sellers', 'product_cat')->term_id); ?>" class="view-all">View All Best Sellers</a> <!-- Link to Best Sellers category -->
     </section>
 <?php endif; 
 wp_reset_postdata();
 ?>
+
+
 
 <?php
 // Query to get 2 posts from the 'gender' category
@@ -228,8 +237,6 @@ if ($arrivals_query->have_posts()) : ?>
                 $product_link = get_permalink();
                 $image_url = get_the_post_thumbnail_url(get_the_ID(), 'medium');
             ?>
-
-
 
 <div class="seller-item">
                     <a href="<?php echo esc_url($product_link); ?>">

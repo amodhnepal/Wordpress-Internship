@@ -31,19 +31,23 @@
                     ?>
                     <tr>
                         <td class="cart-product">
-                            <a href="<?php echo get_permalink($product_id); ?>">
+                            <a class="cart-product-info" href="<?php echo get_permalink($product_id); ?>">
                                 <?php echo get_the_post_thumbnail($product_id, 'thumbnail'); ?>
                                 <?php echo $product->get_name(); ?>
                             </a>
                         </td>
                         <td class="cart-price"><?php echo wc_price($product->get_price()); ?></td>
+                        
                         <td class="cart-quantity">
-                            <form method="post">
-                                <input type="number" name="cart[<?php echo $cart_item_key; ?>][qty]" value="<?php echo $cart_item['quantity']; ?>" min="1">
-                                <button type="submit" name="update_cart" class="update-button">Update</button>
-                                <?php do_action('woocommerce_cart_actions'); ?>
-                            </form>
-                        </td>
+                        <form method="post" action="<?php echo esc_url(wc_get_cart_url()); ?>">
+                            <input type="hidden" name="cart_key" value="<?php echo esc_attr($cart_item_key); ?>">
+                            <input type="number" name="cart[<?php echo $cart_item_key; ?>][qty]" value="<?php echo esc_attr($cart_item['quantity']); ?>" min="1">
+                            <button type="submit" name="update_cart" value="Update Cart" class="update-button"><?php esc_html_e('Update', 'woocommerce'); ?></button>
+                            <?php wp_nonce_field('woocommerce-cart'); ?>
+                        </form>
+                    </td>
+
+                     
                         <td class="cart-subtotal"><?php echo wc_price($cart_item['line_total']); ?></td>
                         <td class="cart-remove">
                             <a href="<?php echo esc_url(wc_get_cart_remove_url($cart_item_key)); ?>" class="remove">&times;</a>

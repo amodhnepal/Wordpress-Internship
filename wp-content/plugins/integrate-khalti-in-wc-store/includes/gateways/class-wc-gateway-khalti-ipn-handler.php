@@ -194,13 +194,11 @@ class WC_Gateway_Khalti_IPN_Handler extends WC_Gateway_Khalti_Response
     {
         if ($order->has_status(wc_get_is_paid_statuses())) {
             WC_Gateway_Khalti::log('Aborting, Order #' . $order->get_id() . ' is already complete.');
-
-            wp_die(
-                'Order #' . $order->get_id() . ' is already complete.',
-                'Khalti IPN',
-                array('response' => 500)
-            );
+            
+            // Instead of stopping execution, just return
+            return;
         }
+        
 
         if ($order->has_status('cancelled')) {
             $this->payment_status_paid_cancelled_order($order);

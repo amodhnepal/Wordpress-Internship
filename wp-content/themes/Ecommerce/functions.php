@@ -306,40 +306,115 @@ function create_lookbook_cpt() {
 add_action('init', 'create_lookbook_cpt');
 
 
-// Register Custom Post Type for Men
-function create_men_post_type() {
-    register_post_type( 'men',
-      array(
-        'labels' => array(
-          'name' => 'Men Products',
-          'singular_name' => 'Men Product'
-        ),
-        'public' => true,
-        'has_archive' => true,
-        'rewrite' => array( 'slug' => 'men' ),
-        'show_in_rest' => true,
-        'supports' => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
-      )
+
+
+
+  function add_price_meta_box() {
+    add_meta_box(
+        'product_price_meta_box',
+        'Product Price',
+        'render_price_meta_box',
+        'product', // Replace with your CPT slug if different
+        'side',
+        'default'
     );
-  }
-  add_action( 'init', 'create_men_post_type' );
-  
-  // Register Custom Post Type for Women
-  function create_women_post_type() {
-    register_post_type( 'women',
-      array(
-        'labels' => array(
-          'name' => 'Women Products',
-          'singular_name' => 'Women Product'
-        ),
-        'public' => true,
-        'has_archive' => true,
-        'rewrite' => array( 'slug' => 'women' ),
-        'show_in_rest' => true,
-        'supports' => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
-      )
-    );
-  }
-  add_action( 'init', 'create_women_post_type' );
-  
+}
+add_action( 'add_meta_boxes', 'add_price_meta_box' );
+
+function render_price_meta_box($post) {
+    $price = get_post_meta($post->ID, '_product_price', true);
+    ?>
+    <label for="product_price">Price ($):</label>
+    <input type="text" id="product_price" name="product_price" value="<?php echo esc_attr($price); ?>" style="width: 100%;" />
+    <?php
+}
+
+function save_price_meta_box($post_id) {
+    if (isset($_POST['product_price'])) {
+        update_post_meta($post_id, '_product_price', sanitize_text_field($_POST['product_price']));
+    }
+}
+add_action( 'save_post', 'save_price_meta_box' );
+
+// function disable_woocommerce_checkout_styles() {
+//     if (is_checkout()) {
+//         wp_dequeue_style('woocommerce-general');
+//         wp_dequeue_style('woocommerce-layout');
+//     }
+// }
+// add_action('wp_enqueue_scripts', 'disable_woocommerce_checkout_styles', 99);
+
+
+function custom_checkout_script() {
+    if (is_checkout() && !is_wc_endpoint_url('order-received')) {
+        ?>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var checkoutForm = document.querySelector(".custom-checkout-container");
+                if (checkoutForm) {
+                    checkoutForm.style.opacity = "1";
+                    checkoutForm.style.transform = "scale(1)";
+                }
+            });
+        </script>
+        <?php
+    }
+}
+add_action('wp_footer', 'custom_checkout_script');
+function add_khalti_logo_to_payment_gateway( $available_gateways ) {
+    // Check if Khalti is an available payment gateway
+    if ( isset($available_gateways['khalti_gateway']) ) {
+        // Path to the Khalti logo
+        $khalti_logo_url = get_template_directory_uri() . '/assets/img/Khalti.jpg';
+
+        // Append the logo to the payment gateway description
+        $available_gateways['khalti_gateway']->description .= '<br><img src="' . esc_url($khalti_logo_url) . '" alt="Khalti Payment Gateway" style="width: 150px; height: auto; margin-top: 10px;"/>';
+    }
+
+    return $available_gateways;
+}
+add_filter('woocommerce_available_payment_gateways', 'add_khalti_logo_to_payment_gateway');
+
+function generate_pdf_invoice() {
+    if (!isset($_GET['download_invoice'])) {
+        return;
+    }
+
+    $order_id = intval($_GET['download_invoice']);
+    $order = wc_get_order($order_id);
+    if (!$order) {
+        wp_die('Invalid Order');
+    }
+
+    require_once ABSPATH . 'wp-content/plugins/woocommerce/includes/vendor/dompdf/autoload.inc.php';
+
+    $dompdf = new Dompdf\Dompdf();
+    $html = '<h1>Order Invoice</h1>';
+    $html .= '<p>Order Number: #' . $order->get_id() . '</p>';
+    $html .= '<p>Order Date: ' . wc_format_datetime($order->get_date_created()) . '</p>';
+    $html .= '<p>Payment Method: ' . $order->get_payment_method_title() . '</p>';
+    $html .= '<h2>Products Purchased</h2><ul>';
+
+    foreach ($order->get_items() as $item_id => $item) {
+        $html .= '<li>' . esc_html($item->get_name()) . ' × ' . esc_html($item->get_quantity()) . '</li>';
+    }
+    $html .= '</ul>';
+    $html .= '<p>Total Amount: ' . wc_price($order->get_total()) . '</p>';
+
+    $dompdf->loadHtml($html);
+    $dompdf->setPaper('A4', 'portrait');
+    $dompdf->render();
+
+    header("Content-type: application/pdf");
+    header("Content-Disposition: attachment; filename=invoice-" . $order->get_id() . ".pdf");
+
+    echo $dompdf->output();
+    exit;
+}
+add_action('init', 'generate_pdf_invoice');
+
+
+
+
+
 ?>
