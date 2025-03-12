@@ -88,18 +88,18 @@ get_template_part('assets/inc/header');
         while ($query->have_posts()) : $query->the_post();
             $price = get_post_meta(get_the_ID(), '_price', true); // WooCommerce price meta
             ?>
-            <div class="product-item">
+            <div class="seller-item">
                 <a href="<?php the_permalink(); ?>">
                     <?php if (has_post_thumbnail()) : ?>
-                        <div class="product-image">
+                        <div class="seller-image">
                             <?php the_post_thumbnail('medium'); ?>
                         </div>
                     <?php endif; ?>
                     <h2><?php the_title(); ?></h2>
+                    <?php if ($price) : ?>
+                        <p class="product-price">$<?php echo esc_html($price); ?></p>
+                    <?php endif; ?>
                 </a>
-                <?php if ($price) : ?>
-                    <p class="product-price">$<?php echo esc_html($price); ?></p>
-                <?php endif; ?>
             </div>
             <?php
         endwhile;

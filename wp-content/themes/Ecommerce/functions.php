@@ -413,6 +413,23 @@ function generate_pdf_invoice() {
 }
 add_action('init', 'generate_pdf_invoice');
 
+// Handle AJAX Add to Cart
+add_action('wp_ajax_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');
+add_action('wp_ajax_nopriv_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');
+
+function woocommerce_ajax_add_to_cart() {
+    $product_id = absint($_POST['product_id']);
+
+    if ($product_id && WC()->cart->add_to_cart($product_id)) {
+        wp_send_json([
+            'success'   => true,
+            'cart_count' => WC()->cart->get_cart_contents_count(),
+        ]);
+    } else {
+        wp_send_json(['success' => false]);
+    }
+    wp_die();
+}
 
 
 

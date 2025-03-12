@@ -16,7 +16,7 @@ wp_enqueue_style('invoice-style', get_template_directory_uri() . '/css/invoice-s
 <div class="invoice-container">
     <!-- Header Section -->
     <div class="invoice-header">
-        <img src="<?php echo get_template_directory_uri(); ?>/images/logo.png" alt="Company Logo">
+        <img src="<?php echo get_template_directory_uri(); ?>/img/logo.png" alt="Company Logo">
         <div class="invoice-title">Thank You for Your Order!</div>
         <div class="invoice-details">
             <p>Order Number: <strong>#<?php echo $order->get_order_number(); ?></strong></p>

@@ -9,6 +9,12 @@
 <header id="site-header">
     <div class="nav-header">
         <nav id="main-navigation">
+            <!-- Logo -->
+            <a href="<?php echo esc_url(home_url('/')); ?>" class="logo">
+                <img src="<?php echo get_template_directory_uri(); ?> /assets/img/trendsole-logo.png" alt="Site Logo">
+            </a>
+
+            <!-- Navigation Menu -->
             <?php
             wp_nav_menu(array(
                 'theme_location' => 'main_menu',  // The location registered in functions.php

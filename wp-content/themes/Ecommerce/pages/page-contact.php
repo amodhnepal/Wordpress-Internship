@@ -22,9 +22,9 @@ get_template_part('assets/inc/header'); ?>
 
         <div class="contact-form">
             <h2>Send Us a Message</h2>
-            <?php echo do_shortcode('[contact-form-7 id="cd603e5" title="Contact form 1"]'); ?>
+            <?php echo do_shortcode('[contact-form-7 id="6a4d89d" title="Contact Us Page"]'); ?>
         </div>
     </div>
 </main>
 
-<?php get_template_part('assets/inc/footer'); ?>    
+<?php get_template_part('assets/inc/footer'); ?>  
