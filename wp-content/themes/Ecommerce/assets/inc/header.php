@@ -8,10 +8,10 @@
 <body <?php body_class(); ?>>
 <header id="site-header">
     <div class="nav-header">
-        <nav id="main-navigation">
+        <nav id="main-navigation" style="display: flex; justify-content: space-between; width: 100%; margin: 0 20px;">
             <!-- Logo -->
             <a href="<?php echo esc_url(home_url('/')); ?>" class="logo">
-                <img src="<?php echo get_template_directory_uri(); ?> /assets/img/trendsole-logo.png" alt="Site Logo">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/trendsole.png" alt="Site Logo">
             </a>
 
             <!-- Navigation Menu -->

@@ -185,8 +185,6 @@ if ($sellers_query->have_posts()) : ?>
 wp_reset_postdata();
 ?>
 
-
-
 <?php
 // Query to get 2 posts from the 'gender' category
 $args = array(
@@ -201,12 +199,23 @@ if ($gender_query->have_posts()) : ?>
     <section class="image-row">
         <?php while ($gender_query->have_posts()) : $gender_query->the_post();
             $image_url = get_the_post_thumbnail_url(get_the_ID(), 'large');
+
+            // Get categories assigned to this post
+            $categories = wp_get_post_terms(get_the_ID(), 'category', array('fields' => 'slugs'));
+
+            // Default link to /women/
+            $page_link = site_url('/women/');
+
+            // If the post has "men" category, change link
+            if (in_array('men', $categories)) {
+                $page_link = site_url('/men/');
+            }
         ?>
             <div class="image-column">
                 <img src="<?php echo esc_url($image_url); ?>" alt="<?php the_title(); ?>">
                 <div class="overlay">
                     <h2 class="post-title"><?php the_title(); ?></h2>
-                    <a href="<?php the_permalink(); ?>" class="view-more-btn">View More</a>
+                    <a href="<?php echo esc_url($page_link); ?>" class="view-more-btn">View More</a>
                 </div>
             </div>
         <?php endwhile; ?>
@@ -214,6 +223,7 @@ if ($gender_query->have_posts()) : ?>
 <?php endif;
 wp_reset_postdata();
 ?>
+
 
 
 <?php 

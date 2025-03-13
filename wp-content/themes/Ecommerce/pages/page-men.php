@@ -2,15 +2,17 @@
 /* Template Name: Men Page */
 get_template_part('assets/inc/header'); 
 ?>
-
-<div class="men-products">
-    <h1>Men's Products</h1>
+<section style="display: flex; justify-content: center;">
+<div class="men-products" >
+    <h1 style="margin: 40px 0;  font-size: 32px;">Men</h1>
 
     <!-- Filter Form -->
-    <form method="GET" action="">
-        <div class="filter">
-            <label for="price">Price Range:</label>
-            <select name="price_range" id="price_range">
+    <form method="GET" action="" style="display: flex; justify-content: space-between; align-items:center; margin-bottom: 20px;">
+<h2 style="text-transform:uppercase;">Filter Shoes</h2>
+
+<div style="display: flex; align-items: center; height: 100%; gap:20px">
+        <div class="filter"  style="height: 100%; ">
+            <select name="price_range" id="price_range" style="height: 100%; padding: 12px 20px;">
                 <option value="">Select Price Range</option>
                 <option value="0-50" <?php echo (isset($_GET['price_range']) && $_GET['price_range'] === '1000-2000') ? 'selected' : ''; ?>>Rs.1000-2000</option>
                 <option value="51-100" <?php echo (isset($_GET['price_range']) && $_GET['price_range'] === '2100-3500') ? 'selected' : ''; ?>>Rs.2100-3500</option>
@@ -19,9 +21,9 @@ get_template_part('assets/inc/header');
             </select>
         </div>
 
-        <div class="filter">
-            <label for="size">Size:</label>
-            <select name="size" id="size">
+        <div class="filter" style="height: 100%;">
+            
+            <select name="size" id="size" style="height: 100%; padding: 12px 20px;">
                 <option value="">Select Size</option>
                 <?php
                 // Get all available sizes from WooCommerce attributes
@@ -38,6 +40,7 @@ get_template_part('assets/inc/header');
         </div>
 
         <button type="submit" class="filter-button">Apply Filters</button>
+        </div>
     </form>
 
     <?php
@@ -110,5 +113,6 @@ get_template_part('assets/inc/header');
     endif;
     ?>
 </div>
+</section>
 
 <?php get_template_part('assets/inc/footer'); ?>

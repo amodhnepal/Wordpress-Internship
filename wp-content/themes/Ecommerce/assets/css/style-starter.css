@@ -52,6 +52,11 @@
     display: flex;
     align-items: center;
 }
+#main-navigation img{
+    height: 95px;
+    margin-left: 60px;
+    margin-right: 20px;
+}
 
 /* Navigation Menu */
 .main-menu {
@@ -79,7 +84,11 @@
 
 /* Hover Effect */
 .main-menu li a:hover {
-    color: #007bff; /* A blue color for hover */
+        color: #007bff; /* A blue color for hover */
+    border-bottom: 2px solid #007bff; /* Add a border to the bottom */
+    transition: border 0.3s all;
+font-size: 18px;
+transition: all 0.3s ease;
 }
 
 /* Mobile Responsiveness (Optional) */
@@ -189,7 +198,7 @@
 
 .nav-header{
     width: 100%;
-    padding: 20px 0;
+    /* padding: 20px 0; */
     display: flex;
     justify-content: center;
 }
@@ -308,6 +317,8 @@
     /* flex-wrap: wrap; */
 }
 
+
+
 .seller-item {
 display: flex;
 justify-content: center;
@@ -315,6 +326,7 @@ justify-content: center;
     border-radius: 10px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+   
   
 }
 
@@ -1078,11 +1090,10 @@ bottom: 6px;
 }
 
 .related-products h2 {
-    font-size: 26px;
-    text-align: center;
-    margin-bottom: 25px;
+    font-size: 18px;
     font-weight: bold;
-    color: #222;
+    margin-top: 15px;
+    text-align: center;
 }
 
 .related-product-grid {
@@ -1534,8 +1545,7 @@ bottom: 6px;
 
 /* Women */
 .women-products {
-    width: 90%;
-    max-width: 1200px;
+  
     margin: 40px auto;
     padding: 20px;
 }
@@ -1551,9 +1561,9 @@ bottom: 6px;
 /* Product Grid */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 25px;
-    padding: 0;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    
 }
 
 /* Product Item */
@@ -1564,6 +1574,7 @@ bottom: 6px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-align: center;
+    
 }
 
 .product-item:hover {
@@ -1645,18 +1656,15 @@ bottom: 6px;
 
     .product-price {
         font-size: 0.9rem;
+    
     }
 }
 
 
 
 /* Mens products */
-
-.men-products {
-    width: 90%;
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 20px;
+.men-products{
+    width: 1400px;
 }
 
 
@@ -1806,4 +1814,11 @@ bottom: 6px;
 
 .download-receipt-btn:hover {
     background: #005580;
+}
+
+
+/* My account page */
+
+.form-row-first{
+width: 100%;
 }

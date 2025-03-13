@@ -4,6 +4,7 @@ function ecommerce_enqueue_assets() {
 
     // Enqueue custom CSS from your assets folder (adjust path if needed)
     wp_enqueue_style( 'ecommerce-custom-css', get_template_directory_uri() . '/assets/css/style-starter.css' );
+    wp_enqueue_style( 'ecommerce-account-css', get_template_directory_uri() . '/assets/css/my-account.css' );
     
     wp_enqueue_style('google-fonts-poppins', 'https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap', false, null);
     // Enqueue Swiper CSS (for logo slider)
@@ -26,15 +27,6 @@ add_action( 'wp_enqueue_scripts', 'ecommerce_enqueue_assets' );
 // Add support for post thumbnails (featured images)
 add_theme_support( 'post-thumbnails' );
 
-// Register navigation menu
-function my_theme_register_menus() {
-    register_nav_menus(
-        array(
-            'main_menu' => __( 'Main Menu', 'my_theme' )  // Standard menu
-        )
-    );
-}
-add_action( 'init', 'my_theme_register_menus' );
 
 // Enqueue custom JS for admin area (for category image upload)
 function ecommerce_admin_assets() {
@@ -431,7 +423,25 @@ function woocommerce_ajax_add_to_cart() {
     wp_die();
 }
 
+function remove_my_account_menu_items( $items ) {
+    // Remove the Dashboard and Downloads menu items
+    unset( $items['dashboard'] );   // Removes the 'Dashboard' menu item
+    unset( $items['downloads'] );   // Removes the 'Downloads' menu item
+
+    return $items;
+}
+add_filter( 'woocommerce_account_menu_items', 'remove_my_account_menu_items' );
 
 
 
+  
+// Register navigation menu
+function my_theme_register_menus() {
+    register_nav_menus(
+        array(
+            'main_menu' => __( 'Main Menu', 'my_theme' )  // Standard menu
+        )
+    );
+}
+add_action( 'init', 'my_theme_register_menus' );
 ?>
