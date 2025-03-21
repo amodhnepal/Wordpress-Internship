@@ -18,8 +18,10 @@
 
     <div class="footer-main">
         <div class="footer-section">
-            <h4 class="footer-logo"><?php echo get_theme_mod('footer_logo_text', 'PLASHOE'); ?></h4>
-            <p><?php echo get_theme_mod('footer_description', 'Your store description here.'); ?></p>
+            <h4 class="footer-logo"><?php echo get_theme_mod('footer_logo_text', 'TRENDSOLE'); ?></h4>
+            <p><?php echo get_theme_mod('footer_description', 'TrendSole – Elevate Your Every Step
+
+TrendSole brings you the perfect blend of style, comfort, and performance. Designed for athletes and trendsetters alike, our sports shoes deliver superior support, durability, and a sleek, modern look. Whether you\'re hitting the gym, running the streets, or making a fashion statement, TrendSole keeps you moving with confidence.'); ?></p>
             <div class="footer-social">
                 <a href="<?php echo esc_url(get_theme_mod('instagram_link', '#')); ?>"><i class="fab fa-instagram"></i></a>
                 <a href="<?php echo esc_url(get_theme_mod('pinterest_link', '#')); ?>"><i class="fab fa-pinterest"></i></a>
@@ -28,7 +30,7 @@
             </div>
         </div>
 
-        <div class="footer-section">
+        <!-- <div class="footer-section">
             <h4>Shop</h4>
             <?php
             wp_nav_menu([
@@ -37,7 +39,7 @@
                 'menu_class' => 'footer-menu'
             ]);
             ?>
-        </div>
+        </div> -->
 
         <div class="footer-section">
             <h4>About</h4>
